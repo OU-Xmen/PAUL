@@ -1,7 +1,20 @@
 import pygame
+from logger import *
+
+'''
+Will be added when game run logic is set up.
+try:
+    import slide_puzzle.Game
+    import asteroids.main
+    import AlienInvasion.alien_invasion
+except ImportError:
+    print("One or more modules failed to load.")
+    quit()
+'''
 
 # Initialize pygame and set up window
 pygame.init()
+log("Pygame initialized", 1)
 screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("P.A.U.L. - Main Menu")
 
@@ -18,10 +31,12 @@ splash_image = pygame.transform.scale(splash_image, (800, 600))
 pygame.display.set_icon(splash_image)
 
 slide_image = pygame.image.load("assets/img/slide_puzzle.png")
+log("Images loaded", 1)
 
 # Load sounds
 paul_sound = pygame.mixer.Sound("assets/sounds/paul.mp3")
 music = pygame.mixer.Sound("assets/sounds/fallen_down.ogg")
+log("Sounds loaded", 1)
 
 # Define where the buttons will go
 button_rects = [
@@ -36,9 +51,40 @@ button_rects = [
 
 # Button Labels
 games = [
-    "Puzzle", "Asteroids", "Aliens", "Game 4", "Game 5", "Game 6", "Scoreboard"
+    "Puzzle", "Asteroids", "Space Invaders", "Game 4", "Game 5", "Game 6", "Scoreboard"
 ]
 
+
+def game_runner(i):
+    game_to_run = games[i]
+    
+    print(f"{game_to_run} was clicked")
+
+    if game_to_run == "Puzzle":
+        print("Running Slide Puzzle") # run Slide Puzzle script
+        log(f"Preparing to run {game_to_run}")
+    elif game_to_run == "Asteroids":
+        print("Running Asteroids") # run Asteroids
+        log(f"Preparing to run {game_to_run}")
+    elif game_to_run == "Space Invaders":
+        print("Running Space Invader") # run Space Invaders 
+        log(f"Preparing to run {game_to_run}")
+    elif game_to_run == "Game 4":
+        print("Running Game 4") # run whatever game 4 is
+        log(f"Preparing to run {game_to_run}")
+    elif game_to_run == "Game 5":
+        print("Running Game 5") # run whatever game 5 is
+        log(f"Preparing to run {game_to_run}")
+    elif game_to_run == "Game 6":
+        print("Running Game 6") # run whatever game 6 is
+        log(f"Preparing to run {game_to_run}")
+    elif game_to_run == "Scoreboard":
+        print("Switching to Scoreboard") # Show scoreboard
+        log(f"Preparing to run {game_to_run}")
+    else:
+        log(f"Game selection not valid", 2)
+        raise Exception("No valid game selection made.")
+        
 
 # Splash screen flag
 splash = True
@@ -53,7 +99,8 @@ while running:
             # Check if any button was clicked
             for i, rect in enumerate(button_rects):
                 if rect.collidepoint(event.pos):
-                    print(f"{games[i]} was clicked")
+                    game_runner(i)
+
 
     # Clear screen
     screen.fill(WHITE)
@@ -63,10 +110,12 @@ while running:
         screen.blit(splash_image, (0, 0))
         pygame.display.update()
         paul_sound.play()
+        log("Running splash screen")
         pygame.time.wait(3000)  # Show splash screen for 3 seconds
         music.play(loops=-1) # loop music forever
         music.set_volume(.5)
         splash = False
+        log("Running main menu")
     else:
         # Draw buttons
         for i, rect in enumerate(button_rects):
@@ -79,3 +128,4 @@ while running:
 
 # Quit pygame
 pygame.quit()
+log("Program terminated\n\n")
