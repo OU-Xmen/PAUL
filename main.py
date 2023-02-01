@@ -1,5 +1,15 @@
 import pygame
 from logger import *
+from importlib.machinery import SourceFileLoader
+from tkinter import messagebox
+import os
+
+main_dir = os.path.dirname(os.path.abspath(__file__))
+
+print("Loading games...")
+#log("Loading games...")
+
+
 
 '''
 Will be added when game run logic is set up.
@@ -54,6 +64,12 @@ games = [
     "Puzzle", "Asteroids", "Space Invaders", "Game 4", "Game 5", "Game 6", "Scoreboard"
 ]
 
+def errorHandler(error, i=4):
+    log(error, i)
+    messagebox.showerror("Error", f"P.A.U.L. has encountered an error:\n{error}\nProgram will now quit.")
+    cleanup()
+    quit()
+
 
 def game_runner(i):
     game_to_run = games[i]
@@ -62,13 +78,33 @@ def game_runner(i):
 
     if game_to_run == "Puzzle":
         print("Running Slide Puzzle") # run Slide Puzzle script
-        log(f"Preparing to run {game_to_run}")
+        log(f"Preparing to run {game_to_run}.")
+        try:
+            music.stop()
+            slide_puzzle = SourceFileLoader('Slide puzzle', os.path.join(main_dir, 'Slide puzzle\SlideGame.py')).load_module()
+            slide_puzzle.main()
+        except Exception as e:
+            errorHandler(e)
+
     elif game_to_run == "Asteroids":
         print("Running Asteroids") # run Asteroids
-        log(f"Preparing to run {game_to_run}")
+        log(f"Preparing to run {game_to_run}.")
+        try:
+            music.stop()
+            asteroids = SourceFileLoader('asteroids', os.path.join(main_dir, 'asteroids\main.py')).load_module()
+            asteroids.main()
+            log("Astroids successfully loaded.")
+        except Exception as e:
+            errorHandler(e)
+            
     elif game_to_run == "Space Invaders":
         print("Running Space Invader") # run Space Invaders 
         log(f"Preparing to run {game_to_run}")
+        try:
+            space_invaders = SourceFileLoader('AlienInvasion', os.path.join(main_dir, 'AlienInvasion\\alien_invasion.py')).load_module()
+            space_invaders.main()
+        except Exception as e:
+            errorHandler(e)
     elif game_to_run == "Game 4":
         print("Running Game 4") # run whatever game 4 is
         log(f"Preparing to run {game_to_run}")
@@ -87,45 +123,54 @@ def game_runner(i):
         
 
 # Splash screen flag
-splash = True
+def main():
+    splash = True
 
-# Main game loop
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        if event.type == pygame.MOUSEBUTTONUP:
-            # Check if any button was clicked
+    # Main game loop
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.MOUSEBUTTONUP:
+                # Check if any button was clicked
+                for i, rect in enumerate(button_rects):
+                    if rect.collidepoint(event.pos):
+                        game_runner(i)
+
+
+        # Clear screen
+        screen.fill(WHITE)
+
+        if splash:
+            # Draw splash screen
+            screen.blit(splash_image, (0, 0))
+            pygame.display.update()
+            paul_sound.play()
+            log("Running splash screen")
+            pygame.time.wait(3000)  # Show splash screen for 3 seconds
+            music.play(loops=-1) # loop music forever
+            splash = False
+            #TODO Make splash a variable stored in 'splash.status' so it doesn't play the splash screen on instance of the main menu.
+            log("Running main menu")
+        else:
+            # Draw buttons
+            music.set_volume(.5)
             for i, rect in enumerate(button_rects):
-                if rect.collidepoint(event.pos):
-                    game_runner(i)
+                pygame.draw.rect(screen, pygame.Color("darkred"), rect)
+                button_text = font.render(f"{games[i]}", True, BLACK)
+                screen.blit(button_text, (rect.x + 25, rect.y + 75))
+            
 
-
-    # Clear screen
-    screen.fill(WHITE)
-
-    if splash:
-        # Draw splash screen
-        screen.blit(splash_image, (0, 0))
         pygame.display.update()
-        paul_sound.play()
-        log("Running splash screen")
-        pygame.time.wait(3000)  # Show splash screen for 3 seconds
-        music.play(loops=-1) # loop music forever
-        music.set_volume(.5)
-        splash = False
-        log("Running main menu")
-    else:
-        # Draw buttons
-        for i, rect in enumerate(button_rects):
-            pygame.draw.rect(screen, pygame.Color("darkred"), rect)
-            button_text = font.render(f"{games[i]}", True, BLACK)
-            screen.blit(button_text, (rect.x + 25, rect.y + 75))
-        
 
-    pygame.display.update()
+def cleanup():
+    try:
+        pygame.quit()
+        log("Program terminated\n\n")
+    except:
+        pass
+    
 
-# Quit pygame
-pygame.quit()
-log("Program terminated\n\n")
+if __name__ == '__main__':
+    main()

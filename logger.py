@@ -1,4 +1,10 @@
 import datetime as dt
+import os
+
+timestamp = dt.datetime.now()
+date = timestamp.date()
+
+
 
 def log(message = None, Type = 1):
     if Type == 1:
@@ -9,8 +15,6 @@ def log(message = None, Type = 1):
         Type = "WARNING"
     elif Type == 4:
         Type = "CRITICAL"
-    timestamp = dt.datetime.now()
-    date = timestamp.date()
     f = open(f"logs/PAUL {date}.log", "a")
     f.write(f"[{Type}] [{timestamp}] {message}\n")
     f.close()

@@ -1,4 +1,7 @@
 import pygame
+import os
+
+main_dir = os.path.dirname(os.path.abspath(__file__))
 class Settings:
     """A class to store all settings for ALien Invasion."""
 
@@ -7,7 +10,7 @@ class Settings:
         #Screen settings
         self.screen_width = 800
         self.screen_height = 600
-        self.bg_color = pygame.image.load("space.png")
+        self.bg_color = pygame.image.load(os.path.join(main_dir, "space.png"))
 
         #ship settings
         #self.ship_speed = 2.5

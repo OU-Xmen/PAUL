@@ -1,6 +1,9 @@
 import pygame
 from settings import Settings
 from pygame.sprite import Sprite
+import os
+
+main_dir = os.path.dirname(os.path.abspath(__file__))
 
 class Ship(Sprite):
     """A class to manage the game"""
@@ -13,7 +16,7 @@ class Ship(Sprite):
         self.screen_rect = ai_game.screen.get_rect()
 
         #Load the ship image and get its rect.
-        self.image = pygame.image.load('ship.png').convert()
+        self.image = pygame.image.load(os.path.join(main_dir,'ship.png')).convert()
         #make ship smaller
         self.image = pygame.transform.scale(self.image, (30,30))
         self.rect = self.image.get_rect()

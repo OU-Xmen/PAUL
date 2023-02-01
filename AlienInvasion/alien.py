@@ -1,5 +1,8 @@
 import pygame
 from pygame.sprite import Sprite
+import os
+
+main_dir = os.path.dirname(os.path.abspath(__file__))
 
 class Alien(Sprite):
     """A class to represent a single alien in the fleet."""
@@ -9,7 +12,7 @@ class Alien(Sprite):
         self.screen = ai_game.screen
         self.settings = ai_game.settings
         #load the alien image and set its rect attribute.
-        self.image = pygame.image.load("alienpic.png").convert()
+        self.image = pygame.image.load(os.path.join(main_dir, "alienpic.png")).convert()
         #make alien smaller
         self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect()

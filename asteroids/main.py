@@ -17,6 +17,14 @@
 import pygame
 import math
 import random
+import os
+from importlib.machinery import SourceFileLoader
+
+main_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print(main_dir)
+
+logger = SourceFileLoader('logger', os.path.join(main_dir, "logger.py")).load_module()
+main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
 
 # Initializing PyGame
 pygame.init()
@@ -42,12 +50,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 
 # Initializing game values
-game_over = False
-lives = 3
-score = 0
-rapidFire  = False
-rapid_start = -1
-asteroid_count = 0
+
 
 
 class Player(object): # Controls attributes of the player's spacecraft
@@ -222,6 +225,7 @@ class AlienBullet(object): # Pertains to the UFO's bullets, most of this is iden
         pygame.draw.rect(screen, (255, 0, 0), [self.x, self.y, self.w, self.h])
 
 def redraw_game_window(): # Updates the game window after every action
+
     screen.blit(background, (0,0))
     font = pygame.font.SysFont('comicsans', 30)
     life_counter_text = font.render('Lives: ' + str(lives), 1, (255, 255, 255))
@@ -257,142 +261,159 @@ power_up = []
 aliens = []
 alien_bullets = []
 
-running = True # Main game loop
-while running:
+def main():
+    global asteroid_count, rapid_start, game_over, lives, score, rapidFire
+    game_over = False
+    lives = 3
+    score = 0
+    rapidFire  = False
+    rapid_start = -1
+    asteroid_count = 0
 
-    clock.tick(60) # Sets the FPS
-    asteroid_count += 1 # Internal timer
+    running = True # Main game loop
+    while running:
 
-    if not game_over: 
-        if asteroid_count % 50 == 0: # One asteroid every 50 ticks
-            rand = random.choice([1, 1, 1, 2, 2, 3]) # Tells the game which asteroid to choose
-            asteroids.append(Asteroid(rand)) # 50% chance for a small one, 1/3 chance for medium, 1/6 chance for large
-        if asteroid_count % 5000 == 0: # One power-up every 5000 ticks
-            power_up.append(PowerUp())
-        if asteroid_count % 3750 == 0: # One UFO every 3750 ticks
-            aliens.append(Alien())
+        clock.tick(60) # Sets the FPS
+        asteroid_count += 1 # Internal timer
 
-        for i, alien in enumerate(aliens): # Handles the collision in regard to the UFO
-            alien.x += alien.xv
-            alien.y += alien.yv
-            if alien.x > SCREEN_WIDTH + 150 or alien.x + alien.w < -100 or alien.y > SCREEN_HEIGHT + 1550 or alien.y + alien.h < -100:
-                aliens.pop(i) # Screen collision, gets rid of the UFO if it goes off-screen
-            if asteroid_count % 60 == 0:
-                alien_bullets.append(AlienBullet(alien.x + alien.w//2, alien.y + alien.h//2))
-            for bullets in player_bullets: # Deletes the UFO and awards points when you hit it with a bullet
-                if (bullets.x >= alien.x and bullets.x <= alien.x + alien.w) or bullets.x + bullets.w >= alien.x and bullets.x + bullets.w <= alien.x + alien.w:
-                    if (bullets.y >= alien.y and bullets.y <= alien.y + alien.h) or bullets.y + bullets.h >= alien.y and bullets.y + bullets.h <= alien.y + alien.h:
-                        aliens.pop(i)
-                        score += 1000
+        if not game_over: 
+            if asteroid_count % 50 == 0: # One asteroid every 50 ticks
+                rand = random.choice([1, 1, 1, 2, 2, 3]) # Tells the game which asteroid to choose
+                asteroids.append(Asteroid(rand)) # 50% chance for a small one, 1/3 chance for medium, 1/6 chance for large
+            if asteroid_count % 5000 == 0: # One power-up every 5000 ticks
+                power_up.append(PowerUp())
+            if asteroid_count % 3750 == 0: # One UFO every 3750 ticks
+                aliens.append(Alien())
 
-        for i, bullets in enumerate(alien_bullets):
-            bullets.x += bullets.xv # Handles player collision with a UFO bullet
-            bullets.y += bullets.yv
-            if (bullets.x >= player.x - player.w//2 and bullets.x <= player.x + player.w//2) or bullets.x + bullets.w >= player.x - player.w//2 and bullets.x + bullets.w <= player.x + player.w//2:
-                if (bullets.y >= player.y - player.h//2 and bullets.y <= player.y + player.h//2) or bullets.y + bullets.h >= player.y - player.h//2 and bullets.y + bullets.h <= player.y + player.h//2:
-                    lives -= 1
-                    alien_bullets.pop(i)
-                    break
+            for i, alien in enumerate(aliens): # Handles the collision in regard to the UFO
+                alien.x += alien.xv
+                alien.y += alien.yv
+                if alien.x > SCREEN_WIDTH + 150 or alien.x + alien.w < -100 or alien.y > SCREEN_HEIGHT + 1550 or alien.y + alien.h < -100:
+                    aliens.pop(i) # Screen collision, gets rid of the UFO if it goes off-screen
+                if asteroid_count % 60 == 0:
+                    alien_bullets.append(AlienBullet(alien.x + alien.w//2, alien.y + alien.h//2))
+                for bullets in player_bullets: # Deletes the UFO and awards points when you hit it with a bullet
+                    if (bullets.x >= alien.x and bullets.x <= alien.x + alien.w) or bullets.x + bullets.w >= alien.x and bullets.x + bullets.w <= alien.x + alien.w:
+                        if (bullets.y >= alien.y and bullets.y <= alien.y + alien.h) or bullets.y + bullets.h >= alien.y and bullets.y + bullets.h <= alien.y + alien.h:
+                            aliens.pop(i)
+                            score += 1000
 
-        player.teleporting_check() # This is how the game wraps the screen around
-        for bullets in player_bullets:
-            bullets.move()
-            if bullets.remove_offscreen_bullets():
-                player_bullets.pop(player_bullets.index(bullets))
+            for i, bullets in enumerate(alien_bullets):
+                bullets.x += bullets.xv # Handles player collision with a UFO bullet
+                bullets.y += bullets.yv
+                if (bullets.x >= player.x - player.w//2 and bullets.x <= player.x + player.w//2) or bullets.x + bullets.w >= player.x - player.w//2 and bullets.x + bullets.w <= player.x + player.w//2:
+                    if (bullets.y >= player.y - player.h//2 and bullets.y <= player.y + player.h//2) or bullets.y + bullets.h >= player.y - player.h//2 and bullets.y + bullets.h <= player.y + player.h//2:
+                        lives -= 1
+                        alien_bullets.pop(i)
+                        break
 
-        for asteroid in asteroids: # Gives the asteroids the abilty to move indefinitely
-            asteroid.x += asteroid.xv
-            asteroid.y += asteroid.yv
-            
-           # Checks for collision for players running into asteroids
-            if (asteroid.x >= player.x - player.w // 2 and asteroid.x <= player.x + player.w // 2) or (asteroid.x + asteroid.w <= player.x + player.w // 2 and asteroid.x + asteroid.w >= player.x - player.w // 2):
-                if(asteroid.y >= player.y - player.h // 2 and asteroid.y <= player.y + player.h // 2) or (asteroid.y + asteroid.h >= player.y - player.h // 2 and asteroid.y + asteroid.h <= player.y + player.h // 2):
-                    lives -=1
-                    asteroids.pop(asteroids.index(asteroid))
-                    break
-
-            # Checks bullet collision for asteroids
+            player.teleporting_check() # This is how the game wraps the screen around
             for bullets in player_bullets:
-                if (bullets.x >= asteroid.x and bullets.x <= asteroid.x + asteroid.w) or bullets.x + bullets.w >= asteroid.x and bullets.x + bullets.w <= asteroid.x + asteroid.w:
-                    if (bullets.y >= asteroid.y and bullets.y <= asteroid.y + asteroid.h) or bullets.y + bullets.h >= asteroid.y and bullets.y + bullets.h <= asteroid.y + asteroid.h:
-                        if asteroid.size == 3: # Each asteroid is given a different score.
-                            score += 20 
-                            new_asteroid_1 = Asteroid(2)
-                            new_asteroid_2 = Asteroid(2) # These if statements allow the game to spawn two smaller asteroids
-                            new_asteroid_1.x = asteroid.x # When a bigger one is destroyed
-                            new_asteroid_2.x = asteroid.x
-                            new_asteroid_1.y = asteroid.y
-                            new_asteroid_2.y = asteroid.y
-                            asteroids.append(new_asteroid_1)
-                            asteroids.append(new_asteroid_2)
-                        elif asteroid.size == 2:
-                            score += 50
-                            new_asteroid_1 = Asteroid(1)
-                            new_asteroid_2 = Asteroid(1)
-                            new_asteroid_1.x = asteroid.x
-                            new_asteroid_2.x = asteroid.x
-                            new_asteroid_1.y = asteroid.y
-                            new_asteroid_2.y = asteroid.y
-                            asteroids.append(new_asteroid_1)
-                            asteroids.append(new_asteroid_2)
-                        else:
-                            score += 100
+                bullets.move()
+                if bullets.remove_offscreen_bullets():
+                    player_bullets.pop(player_bullets.index(bullets))
+
+            for asteroid in asteroids: # Gives the asteroids the abilty to move indefinitely
+                asteroid.x += asteroid.xv
+                asteroid.y += asteroid.yv
+                
+            # Checks for collision for players running into asteroids
+                if (asteroid.x >= player.x - player.w // 2 and asteroid.x <= player.x + player.w // 2) or (asteroid.x + asteroid.w <= player.x + player.w // 2 and asteroid.x + asteroid.w >= player.x - player.w // 2):
+                    if(asteroid.y >= player.y - player.h // 2 and asteroid.y <= player.y + player.h // 2) or (asteroid.y + asteroid.h >= player.y - player.h // 2 and asteroid.y + asteroid.h <= player.y + player.h // 2):
+                        lives -=1
                         asteroids.pop(asteroids.index(asteroid))
-                        player_bullets.pop(player_bullets.index(bullets))
                         break
 
-        for powerup in power_up: # Gives the power-up collision with bullets so the game knows when to activate it
-            powerup.x += powerup.xv
-            powerup.y += powerup.yv
-            if powerup.x < -100 or  powerup.x > SCREEN_WIDTH + 100 or powerup.y > SCREEN_HEIGHT + 100 or powerup.y < -100 - SCREEN_HEIGHT:
-                power_up.pop(power_up.index(powerup))
-                break
-            for bullets in player_bullets:
-                if (bullets.x >= powerup.x and bullets.x <= powerup.x + powerup.w) or bullets.x + bullets.w >= powerup.x and bullets.x + bullets.w <= powerup.x + powerup.w:
-                    if (bullets.y >= powerup.y and bullets.y <= powerup.y + powerup.h) or bullets.y + bullets.h >= powerup.y and bullets.y + bullets.h <= powerup.y + powerup.h: 
-                        rapidFire = True
-                        rapid_start = asteroid_count
-                        power_up.pop(power_up.index(powerup))
-                        player_bullets.pop(player_bullets.index(bullets))
-                        break
+                # Checks bullet collision for asteroids
+                for bullets in player_bullets:
+                    if (bullets.x >= asteroid.x and bullets.x <= asteroid.x + asteroid.w) or bullets.x + bullets.w >= asteroid.x and bullets.x + bullets.w <= asteroid.x + asteroid.w:
+                        if (bullets.y >= asteroid.y and bullets.y <= asteroid.y + asteroid.h) or bullets.y + bullets.h >= asteroid.y and bullets.y + bullets.h <= asteroid.y + asteroid.h:
+                            if asteroid.size == 3: # Each asteroid is given a different score.
+                                score += 20 
+                                new_asteroid_1 = Asteroid(2)
+                                new_asteroid_2 = Asteroid(2) # These if statements allow the game to spawn two smaller asteroids
+                                new_asteroid_1.x = asteroid.x # When a bigger one is destroyed
+                                new_asteroid_2.x = asteroid.x
+                                new_asteroid_1.y = asteroid.y
+                                new_asteroid_2.y = asteroid.y
+                                asteroids.append(new_asteroid_1)
+                                asteroids.append(new_asteroid_2)
+                            elif asteroid.size == 2:
+                                score += 50
+                                new_asteroid_1 = Asteroid(1)
+                                new_asteroid_2 = Asteroid(1)
+                                new_asteroid_1.x = asteroid.x
+                                new_asteroid_2.x = asteroid.x
+                                new_asteroid_1.y = asteroid.y
+                                new_asteroid_2.y = asteroid.y
+                                asteroids.append(new_asteroid_1)
+                                asteroids.append(new_asteroid_2)
+                            else:
+                                score += 100
+                            asteroids.pop(asteroids.index(asteroid))
+                            player_bullets.pop(player_bullets.index(bullets))
+                            break
 
-        if lives <= 0: # Starts the game over sequence
-            game_over = True
+            for powerup in power_up: # Gives the power-up collision with bullets so the game knows when to activate it
+                powerup.x += powerup.xv
+                powerup.y += powerup.yv
+                if powerup.x < -100 or  powerup.x > SCREEN_WIDTH + 100 or powerup.y > SCREEN_HEIGHT + 100 or powerup.y < -100 - SCREEN_HEIGHT:
+                    power_up.pop(power_up.index(powerup))
+                    break
+                for bullets in player_bullets:
+                    if (bullets.x >= powerup.x and bullets.x <= powerup.x + powerup.w) or bullets.x + bullets.w >= powerup.x and bullets.x + bullets.w <= powerup.x + powerup.w:
+                        if (bullets.y >= powerup.y and bullets.y <= powerup.y + powerup.h) or bullets.y + bullets.h >= powerup.y and bullets.y + bullets.h <= powerup.y + powerup.h: 
+                            rapidFire = True
+                            rapid_start = asteroid_count
+                            power_up.pop(power_up.index(powerup))
+                            player_bullets.pop(player_bullets.index(bullets))
+                            break
 
-        if rapid_start != -1: # Handles the timer of the power-up
-            if asteroid_count - rapid_start > 500:
-                rapidFire = False
-                rapid_start = -1
- 
-        keys = pygame.key.get_pressed() # These are the controls
-        if keys[pygame.K_LEFT]: 
-            player.turnLeft()
-        if keys[pygame.K_RIGHT]:
-            player.turnRight()
-        if keys[pygame.K_UP]:
-            player.moveForward()
-        if keys[pygame.K_SPACE]:
-            if rapidFire:
-                player_bullets.append(Bullet())
+            if lives <= 0: # Starts the game over sequence
+                game_over = True
 
-    for event in pygame.event.get(): # Ends the game if the window is closed
-        if event.type == pygame.QUIT:
-            running = False
-        if event.type == pygame.KEYDOWN: # This stops the game from shooting indefinitely without 
-            if event.key == pygame.K_SPACE: # the power-up active if the spacebar is held down
-                if not game_over:
-                    if not rapidFire:
-                        player_bullets.append(Bullet())
-                else: # Resets the game values
-                    game_over = False
-                    lives = 3
-                    score = 0
-                    asteroids.clear()
-                    aliens.clear()
-                    alien_bullets.clear()
-                    asteroid_count = 0
-                    power_up.clear()
+            if rapid_start != -1: # Handles the timer of the power-up
+                if asteroid_count - rapid_start > 500:
                     rapidFire = False
+                    rapid_start = -1
+    
+            keys = pygame.key.get_pressed() # These are the controls
+            if keys[pygame.K_LEFT]: 
+                player.turnLeft()
+            if keys[pygame.K_RIGHT]:
+                player.turnRight()
+            if keys[pygame.K_UP]:
+                player.moveForward()
+            if keys[pygame.K_SPACE]:
+                if rapidFire:
+                    player_bullets.append(Bullet())
 
-    redraw_game_window() # Updates the screen at the end of every iteration
-pygame.quit() # Closes the game
+        for event in pygame.event.get(): # Ends the game if the window is closed
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN: # This stops the game from shooting indefinitely without 
+                if event.key == pygame.K_SPACE: # the power-up active if the spacebar is held down
+                    if not game_over:
+                        if not rapidFire:
+                            player_bullets.append(Bullet())
+                    else: # Resets the game values
+                        game_over = False
+                        lives = 3
+                        score = 0
+                        asteroids.clear()
+                        aliens.clear()
+                        alien_bullets.clear()
+                        asteroid_count = 0
+                        power_up.clear()
+                        rapidFire = False
+                if event.key == pygame.K_ESCAPE:
+                    logger.log("Returning to main menu.")
+                    main_menu.main()
+                    
+
+
+        redraw_game_window() # Updates the screen at the end of every iteration
+    pygame.quit() # Closes the game
+
+if __name__ == '__main__':
+    main()
