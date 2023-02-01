@@ -1,5 +1,3 @@
-# TODO: 
-
 try:
     import pygame
     import os
@@ -7,9 +5,7 @@ try:
     import time
     import random
     from importlib.machinery import SourceFileLoader
-    # set directory to wherever SlideGame.py is located
     maindirectory = os.path.dirname(os.path.abspath(__file__))
-    # TODO: remove recursive import while being able to exit to Main.py from SlideGame.py
     T = SourceFileLoader('Tile', os.path.join(maindirectory, 'Tile.py')).load_module() # effectively imports Tile as T
     pygame.init()
 except ImportError:
@@ -26,7 +22,7 @@ icon = pygame.image.load(os.path.join(tiledirectory, 'icon32.png'))
 pygame.display.set_icon(icon)
 
 # initialize font and text objects
-pause_color = (255, 127, 0)
+pause_color = (200, 0, 0)
 haha_funny = pygame.font.SysFont('comicsansms', 50)
 def init_words(text, center_x, center_y, color):
     temp_rend = pygame.font.Font.render(haha_funny, text, True, color)
@@ -39,32 +35,6 @@ resume_rend, resume_rect = init_words('Resume', width-140, 180, pause_color)
 goal_rend, goal_rect = init_words('Goal:', width/2, 100, pause_color)
 quit_rend, quit_rect = init_words('Quit', width-140, 260, pause_color)
 play_again_rend, play_again_rect = init_words('Play Again', width-140, 180, pause_color)
-
-def scramble(to_scramble, empty): #TODO: rewrite this function
-    empty_x, empty_y = empty.get_coords()
-    swaps = []
-    if empty_x > 280:
-        swaps.append([empty_x-80, empty_y])
-    if empty_x < 440:
-        swaps.append([empty_x+80, empty_y])
-    if empty_y > 180:
-        swaps.append([empty_x, empty_y-80])
-    if empty_y < 340:
-        swaps.append([empty_x, empty_y+80])
-
-    zx, zy = swaps[random.randint(0, len(swaps)-1)]
-    
-    mx = (empty_x-280)//80
-    my = (empty_y-180)//80
-    empty_location = 3*mx + my
-    to_scramble[empty_location].set_coords(zx, zy)
-
-    mx = (zx-280)//80
-    my = (zy-180)//80
-    new_location = 3*mx + my
-    to_scramble[new_location].set_coords(empty_x, empty_y)
-
-    to_scramble[empty_location], to_scramble[new_location] = to_scramble[new_location], to_scramble[empty_location]
 
 def mouse_adj_to_empty(coords, empty):
     x, y = empty.get_coords()
@@ -118,7 +88,7 @@ def pause_menu():
                 quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if resume_rect.collidepoint(mouse):
-                    return
+                    return False
                 if quit_rect.collidepoint(mouse):
                     return True
 
@@ -138,9 +108,9 @@ def play_again_menu():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if play_again_rect.collidepoint(mouse):
                     # restart the game
-                    main()
-                if quit_rect.collidepoint(mouse):
                     return True
+                if quit_rect.collidepoint(mouse):
+                    return False
 
 # initialize tiles
 big_face = pygame.image.load(os.path.join(tiledirectory, 'icon.png'))
@@ -160,12 +130,19 @@ def main():
     # initialize lists for win condition
     face_list = [face0, face1, face2, face3, face4, face5, face6, face7, face8]
     solved_face = [face0, face1, face2, face3, face4, face5, face6, face7, face8]
-    a = False
+    a = None
+    is_won = False
+    break_flag = False
     
     pygame.display.set_caption('Slide Puzzle')
     screen.fill('black')
-    for i in range(301): #scramble each time main() is ran
-        scramble(face_list, face0)
+    #scramble each time main() is ran
+    bruh = list(range(1,9))
+    for i in range(4):
+        temp_a = bruh.pop(random.randint(0, len(bruh)-1))
+        temp_b = bruh.pop(random.randint(0, len(bruh)-1))
+        face_list[temp_a], face_list[temp_b] = face_list[temp_b], face_list[temp_a]
+
 
     while True: # game loop
         mouse = pygame.mouse.get_pos()
@@ -175,13 +152,12 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if mouse_adj_to_empty(mouse, face0) and tile_to_swap != None:
+            if event.type == pygame.MOUSEBUTTONDOWN and mouse_adj_to_empty(mouse, face0) and tile_to_swap != None:
                     better_swap(tile_to_swap, face0, face_list)
-                if pause_rect.collidepoint(mouse):
-                    a = pause_menu()
+            if event.type == pygame.MOUSEBUTTONDOWN and pause_rect.collidepoint(mouse):
+                break_flag = pause_menu()
         
-        if a:
+        if break_flag:
             break
 
         screen.fill('black')
@@ -202,6 +178,7 @@ def main():
         pygame.display.flip()
 
         if face_list == solved_face:
+            is_won = True
             screen.blit(win_rend, win_rect)
             for i in range(128):
                 time.sleep(1/200)
@@ -209,10 +186,12 @@ def main():
                 screen.blit(big_face, big_face_rect)
                 pygame.display.flip()
             time.sleep(0.5)
-            a = play_again_menu()
-
-        if a:
             break
+
+    if is_won:
+        a = play_again_menu()
+    if a:
+        main()
 
 if __name__ == '__main__':
     main()
