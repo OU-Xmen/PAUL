@@ -8,6 +8,37 @@ def save(text):
             madlib.write('\n')
     print()
 
+def saveclear():
+    clear = input('Would you like to clear the list? (y/n) ')
+    if clear.upper() == 'Y':
+        f = open('mad_libs/assets/obituary.txt', 'w')
+        f.truncate(0)
+        f.close()
+    
+        print()
+        print('Done! Have a nice day!')
+        print()
+    
+    else: 
+        print()
+        print('Have a nice day!')
+        print()
+
+
+def savedump():
+    dump = input('Would you like to view previous mad libs? (y/n) ')
+
+    print()
+
+    if dump.upper() == 'Y':
+        with open('mad_libs/assets/obituary.txt', 'r') as save:
+            contents = save.read()
+            print(contents)
+    else:
+        print()
+
+    saveclear()
+
 def story_one(file):
     
     f = open(file)
@@ -90,17 +121,17 @@ def story_one(file):
     save(text)
     f.close()
 
-def story_two(file):
-    f
+# def story_two(file):
+#     f
 
-def story_three(file):
-    f
+# def story_three(file):
+#     f
 
-def story_four(file):
-    f
+# def story_four(file):
+#     f
 
-def story_five(file):
-    f
+# def story_five(file):
+#     f
 
 def main():
     
@@ -118,19 +149,20 @@ def main():
         if file == 'mad_libs/assets/madlibs_story1.txt':
             story_one(file)
             print('Thank you for playing!')
-        elif file == 'mad_libs/assets/madlibs_story2.txt':
-            story_two(file)
-            print('Thank you for playing!')
-        elif file == 'mad_libs/assets/madlibs_story3.txt':
-            story_three(file)
-            print('Thank you for playing!')
-        elif file == 'mad_libs/assets/madlibs_story4.txt':
-            story_four(file)
-            print('Thank you for playing!')
-        elif file == 'mad_libs/assets/madlibs_story5.txt':
-            story_five(file)
-            print('Thank you for playing!')
+        # elif file == 'mad_libs/assets/madlibs_story2.txt':
+        #     story_two(file)
+        #     print('Thank you for playing!')
+        # elif file == 'mad_libs/assets/madlibs_story3.txt':
+        #     story_three(file)
+        #     print('Thank you for playing!')
+        # elif file == 'mad_libs/assets/madlibs_story4.txt':
+        #     story_four(file)
+        #     print('Thank you for playing!')
+        # elif file == 'mad_libs/assets/madlibs_story5.txt':
+        #     story_five(file)
+        #     print('Thank you for playing!')
             
     print()
+    savedump()
 
 main()
