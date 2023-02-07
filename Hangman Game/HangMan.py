@@ -1,84 +1,91 @@
 import pygame
 import random
+import os
 
-# initialize pygame
-pygame.init()
+def main():
+    main_dir = os.path.dirname(os.path.abspath(__file__))
 
-# set window size
-window_size = (800, 600)
+    # initialize pygame
+    pygame.init()
 
-# initialize the window
-screen = pygame.display.set_mode(window_size)
+    # set window size
+    window_size = (800, 600)
 
-# set title
-pygame.display.set_caption("Hangman Game")
+    # initialize the window
+    screen = pygame.display.set_mode(window_size)
 
-# define colors
-white = (255, 255, 255)
-black = (0, 0, 0)
-red = (255, 0, 0)
+    # set title
+    pygame.display.set_caption("Hangman Game")
 
-# load font
-font = pygame.font.Font(None, 30)
+    # define colors
+    white = (255, 255, 255)
+    black = (0, 0, 0)
+    red = (255, 0, 0)
 
-# load the hangman images
-images = []
-for i in range(7):
-    image = pygame.image.load("hangman" + str(i) + ".png")
-    images.append(image)
+    # load font
+    font = pygame.font.Font(None, 30)
 
-# list of words
-words = ["python", "apple", "orange", "computer", "science"]
+    # load the hangman images
+    images = []
+    for i in range(7):
+        image = pygame.image.load(f"{main_dir}\hangman" + str(i) + ".png")
+        images.append(image)
 
-# select a random word
-word = random.choice(words)
+    # list of words
+    words = ["python", "apple", "orange", "computer", "science"]
 
-# set initial variables
-hangman_status = 0
-guessed_letters = []
-word_to_guess = ["_"] * len(word)
+    # select a random word
+    word = random.choice(words)
 
-# main game loop
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+    # set initial variables
+    hangman_status = 0
+    guessed_letters = []
+    word_to_guess = ["_"] * len(word)
+
+    # main game loop
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+            if event.type == pygame.KEYDOWN:
+                # check if the key pressed is a letter
+                if event.unicode.isalpha():
+                    letter = event.unicode.lower()
+
+                    if letter in word and letter not in guessed_letters:
+                        # replace underscores with the correctly guessed letter
+                        for i in range(len(word)):
+                            if word[i] == letter:
+                                word_to_guess[i] = letter
+
+                    elif letter not in guessed_letters:
+                        # increment hangman status
+                        hangman_status += 1
+                        guessed_letters.append(letter)
+
+        screen.fill(white)
+
+        # draw hangman
+        screen.blit(images[hangman_status], (100, 100))
+
+        # draw word
+        word_text = font.render(" ".join(word_to_guess), True, black)
+        screen.blit(word_text, (250, 350))
+
+        # draw wrong letters
+        wrong_text = font.render("Wrong letters: " + " ".join(guessed_letters), True, red)
+        screen.blit(wrong_text, (250, 400))
+
+        pygame.display.update()
+
+        # check if the game is over
+        if "_" not in word_to_guess or hangman_status == 6:
             running = False
 
-        if event.type == pygame.KEYDOWN:
-            # check if the key pressed is a letter
-            if event.unicode.isalpha():
-                letter = event.unicode.lower()
+    # deinitialize pygame
+    pygame.quit()# Write your code here :-)
 
-                if letter in word and letter not in guessed_letters:
-                    # replace underscores with the correctly guessed letter
-                    for i in range(len(word)):
-                        if word[i] == letter:
-                            word_to_guess[i] = letter
-
-                elif letter not in guessed_letters:
-                    # increment hangman status
-                    hangman_status += 1
-                    guessed_letters.append(letter)
-
-    screen.fill(white)
-
-    # draw hangman
-    screen.blit(images[hangman_status], (100, 100))
-
-    # draw word
-    word_text = font.render(" ".join(word_to_guess), True, black)
-    screen.blit(word_text, (250, 350))
-
-    # draw wrong letters
-    wrong_text = font.render("Wrong letters: " + " ".join(guessed_letters), True, red)
-    screen.blit(wrong_text, (250, 400))
-
-    pygame.display.update()
-
-    # check if the game is over
-    if "_" not in word_to_guess or hangman_status == 6:
-        running = False
-
-# deinitialize pygame
-pygame.quit()# Write your code here :-)
+if __name__ == "__main__":
+    main()

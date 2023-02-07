@@ -27,7 +27,7 @@ logger = SourceFileLoader('logger', os.path.join(main_dir, "logger.py")).load_mo
 main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
 
 # Initializing PyGame
-pygame.init()
+#pygame.init()
 
 # Setting Resolution
 SCREEN_WIDTH = 800

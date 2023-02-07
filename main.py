@@ -61,7 +61,7 @@ button_rects = [
 
 # Button Labels
 games = [
-    "Puzzle", "Asteroids", "Space Invaders", "Game 4", "Game 5", "Game 6", "Scoreboard"
+    "Puzzle", "Asteroids", "Tetris", "Pong", "Hangman", "Mad Libs", "Scoreboard"
 ]
 
 def errorHandler(error, i=4):
@@ -97,23 +97,42 @@ def game_runner(i):
         except Exception as e:
             errorHandler(e)
             
-    elif game_to_run == "Space Invaders":
-        print("Running Space Invader") # run Space Invaders 
+    elif game_to_run == "Tetris":
+        print("Running Tetris") # run Space Invaders 
         log(f"Preparing to run {game_to_run}")
         try:
-            space_invaders = SourceFileLoader('AlienInvasion', os.path.join(main_dir, 'AlienInvasion\\alien_invasion.py')).load_module()
-            space_invaders.main()
+            music.stop()
+            tetris = SourceFileLoader('tetris', os.path.join(main_dir, 'tetris\\main.py')).load_module()
+            tetris.main()
         except Exception as e:
             errorHandler(e)
-    elif game_to_run == "Game 4":
-        print("Running Game 4") # run whatever game 4 is
+    elif game_to_run == "Pong":
+        print("Running Pong") # run whatever game 4 is
         log(f"Preparing to run {game_to_run}")
-    elif game_to_run == "Game 5":
-        print("Running Game 5") # run whatever game 5 is
+        try:
+            music.stop()
+            Pong = SourceFileLoader('Pong', os.path.join(main_dir, 'Pong\\Pong.py')).load_module()
+            Pong.main()
+        except Exception as e:
+            errorHandler(e)
+    elif game_to_run == "Hangman":
+        print("Hangman") # run whatever game 5 is
         log(f"Preparing to run {game_to_run}")
-    elif game_to_run == "Game 6":
-        print("Running Game 6") # run whatever game 6 is
+        try:
+            music.stop()
+            hangman = SourceFileLoader('Hangman Game', os.path.join(main_dir, 'Hangman Game\\HangMan.py')).load_module()
+            hangman.main()
+        except Exception as e:
+            errorHandler(e)
+    elif game_to_run == "Mad Libs":
+        print("Running Mad Libs") # run whatever game 6 is
         log(f"Preparing to run {game_to_run}")
+        try:
+            music.stop()
+            mad_libs = SourceFileLoader('mad_libs', os.path.join(main_dir, 'mad_libs\\code\\mad_libs.py')).load_module()
+            mad_libs.main()
+        except Exception as e:
+            errorHandler(e)
     elif game_to_run == "Scoreboard":
         print("Switching to Scoreboard") # Show scoreboard
         log(f"Preparing to run {game_to_run}")
@@ -173,4 +192,7 @@ def cleanup():
     
 
 if __name__ == '__main__':
-    main()
+    try: 
+        main()
+    except Exception as e:
+        cleanup()
