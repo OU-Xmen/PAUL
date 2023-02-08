@@ -9,7 +9,8 @@ Likes:
 Python (the programming language)  
 pythons (the snakes)  
 the dreary days that nobody likes (P.A.U.L. feeds on CS students' negative emotions during this time)  
-lime cucumber Gatorade    
+lime cucumber Gatorade  
+burger patties with cream cheese  
 Dislikes:  
 God  
 NetBeans  
