@@ -1,5 +1,6 @@
 try:
     import pygame
+    import json
     import os
     import sys
     import time
@@ -8,6 +9,10 @@ try:
     maindirectory = os.path.dirname(os.path.abspath(__file__))
     T = SourceFileLoader('Tile', os.path.join(maindirectory, 'Tile.py')).load_module() # effectively imports Tile as T
     pygame.init()
+
+    with (open(os.path.join(maindirectory, 'assets', 'leaderboard.json'), "r")) as jasonfile:
+        # read from the json file into the variable called jason
+        jason = json.load(jasonfile)
 except ImportError:
     print("One or more modules failed to load")
     quit()
@@ -35,6 +40,7 @@ resume_rend, resume_rect = init_words('Resume', width-140, 180, pause_color)
 goal_rend, goal_rect = init_words('Goal:', width/2, 100, pause_color)
 quit_rend, quit_rect = init_words('Quit', width-140, 260, pause_color)
 play_again_rend, play_again_rect = init_words('Play Again', width-140, 180, pause_color)
+high_score_rend, high_score_rect = init_words('High Score!', width/2, 80, 'white')
 global time_rend, time_rect
 
 def time_convert(sec):
@@ -96,13 +102,23 @@ def pause_menu():
                 if quit_rect.collidepoint(mouse):
                     return True
 
-def play_again_menu():
+def play_again_menu(time_score):
+    matt = False
     while True:
         mouse = pygame.mouse.get_pos()
 
         screen.fill('black')
         screen.blit(big_face, big_face_rect)
-        screen.blit(win_rend, win_rect)
+        if time_score < jason['slide_puzzle_score']:
+            matt = True
+            jason['slide_puzzle_score'] = time_score
+            with (open(os.path.join(maindirectory, 'scores.json'), "w")) as jasonfile:
+                # dump the jason variable into the file
+                json.dump(jason, jasonfile)
+        if matt:
+            screen.blit(high_score_rend, high_score_rect)
+        else:
+            screen.blit(win_rend, win_rect)
         screen.blit(time_rend, time_rect)
         screen.blit(play_again_rend, play_again_rect)
         screen.blit(quit_rend, quit_rect)
@@ -207,7 +223,7 @@ def main():
             break
 
     if is_won:
-        a = play_again_menu()
+        a = play_again_menu(val_time)
     if a:
         main()
 
