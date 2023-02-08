@@ -12,7 +12,7 @@ except ImportError:
     print("One or more modules failed to load")
     quit()
 
-tiledirectory = os.path.join(maindirectory, 'tiles')
+tiledirectory = os.path.join(maindirectory, 'assets')
 
 # create 800x600 window
 size = width, height = 800, 600
@@ -35,6 +35,10 @@ resume_rend, resume_rect = init_words('Resume', width-140, 180, pause_color)
 goal_rend, goal_rect = init_words('Goal:', width/2, 100, pause_color)
 quit_rend, quit_rect = init_words('Quit', width-140, 260, pause_color)
 play_again_rend, play_again_rect = init_words('Play Again', width-140, 180, pause_color)
+global time_rend, time_rect
+
+def time_convert(sec):
+    return f"Time: {format(sec, '.2f')}"
 
 def mouse_adj_to_empty(coords, empty):
     x, y = empty.get_coords()
@@ -99,6 +103,7 @@ def play_again_menu():
         screen.fill('black')
         screen.blit(big_face, big_face_rect)
         screen.blit(win_rend, win_rect)
+        screen.blit(time_rend, time_rect)
         screen.blit(play_again_rend, play_again_rect)
         screen.blit(quit_rend, quit_rect)
         pygame.display.flip()
@@ -143,9 +148,11 @@ def main():
         temp_b = bruh.pop(random.randint(0, len(bruh)-1))
         face_list[temp_a], face_list[temp_b] = face_list[temp_b], face_list[temp_a]
 
-
+    start_time = time.time()
+    val_float = 0
     while True: # game loop
         mouse = pygame.mouse.get_pos()
+        val_time = time.time() - start_time - val_float
 
         tile_to_swap = mouse_hovering_over(mouse, face_list)
 
@@ -155,13 +162,20 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN and mouse_adj_to_empty(mouse, face0) and tile_to_swap != None:
                     better_swap(tile_to_swap, face0, face_list)
             if event.type == pygame.MOUSEBUTTONDOWN and pause_rect.collidepoint(mouse):
+                pause_time = time.time()
                 break_flag = pause_menu()
+                val_float += time.time() - pause_time
         
         if break_flag:
             break
 
         screen.fill('black')
         screen.blit(pause_rend, pause_rect)
+        
+        # blit timer to screen
+        global time_rend, time_rect
+        time_rend, time_rect = init_words(time_convert(val_time), width/2, 520, 'white')
+        screen.blit(time_rend, time_rect) # bruh: timer continues to run during pause_menu
 
         face_increment = 0
         for y in [180, 260, 340]:
@@ -178,6 +192,10 @@ def main():
         pygame.display.flip()
 
         if face_list == solved_face:
+            time_words = time_convert(val_time)
+            time_rend, time_rect = init_words(time_words, 400, 520, 'white')
+            screen.blit(time_rend, time_rect)
+
             is_won = True
             screen.blit(win_rend, win_rect)
             for i in range(128):
