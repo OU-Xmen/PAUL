@@ -13,6 +13,7 @@ lime cucumber Gatorade
 burger patties with cream cheese  
 Dislikes:  
 God  
+Dave  
 NetBeans  
 boring README files  
 his ex-wife Linda-Shannon  
