@@ -121,8 +121,66 @@ def story_one(file):
     save(text)
     f.close()
 
-# def story_two(file):
-#     f
+def story_two(file):
+    f = open(file)
+    text = f.read()
+
+    search_text = 'adjective1'
+    replace_text = input('Enter an adjective: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'holiday'
+    replace_text = input('Enter a holiday (capitalize): ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'adjective2'
+    replace_text = input('Enter another adjective: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'verb'
+    replace_text = input('Enter a verb: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'beverage'
+    replace_text = input('Enter a type of drink: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'bodypart1'
+    replace_text = input('Enter a body part: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'derogatory_saying'
+    replace_text = input('Enter a derogatory saying (proper capitalization and punctuation suggested): ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'adjective3'
+    replace_text = input('Enter another adjective: ')
+    text = text.replace(search_text, replace_text)  
+
+    search_text = 'bodypart2'
+    replace_text = input('Enter another body part: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'food'
+    replace_text = input('Enter a type of food: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'place'
+    replace_text = input('Enter a place: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'adjective4'
+    replace_text = input('Enter another adjective: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'number'
+    replace_text = input('Enter a number (add a rank suffix, e.g. -st, -nd, -rd, -th): ')
+    text = text.replace(search_text, replace_text)
+
+    print()
+    print(text)
+    save(text)
+    f.close()
 
 # def story_three(file):
 #     f
@@ -149,18 +207,18 @@ def main():
         if file == 'mad_libs/assets/madlibs_story1.txt':
             story_one(file)
             print('Thank you for playing!')
-        # elif file == 'mad_libs/assets/madlibs_story2.txt':
-        #     story_two(file)
-        #     print('Thank you for playing!')
-        # elif file == 'mad_libs/assets/madlibs_story3.txt':
+        elif file == 'mad_libs/assets/madlibs_story2.txt':
+            story_two(file)
+            print('Thank you for playing!')
+        elif file == 'mad_libs/assets/madlibs_story3.txt':
         #     story_three(file)
-        #     print('Thank you for playing!')
-        # elif file == 'mad_libs/assets/madlibs_story4.txt':
+            print('Thank you for playing!')
+        elif file == 'mad_libs/assets/madlibs_story4.txt':
         #     story_four(file)
-        #     print('Thank you for playing!')
-        # elif file == 'mad_libs/assets/madlibs_story5.txt':
+            print('Thank you for playing!')
+        elif file == 'mad_libs/assets/madlibs_story5.txt':
         #     story_five(file)
-        #     print('Thank you for playing!')
+            print('Thank you for playing!')
             
     print()
     savedump()
