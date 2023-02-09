@@ -27,7 +27,7 @@ logger = SourceFileLoader('logger', os.path.join(main_dir, "logger.py")).load_mo
 main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
 
 # Initializing PyGame
-#pygame.init()
+pygame.init()
 
 # Setting Resolution
 SCREEN_WIDTH = 800
@@ -231,6 +231,7 @@ def redraw_game_window(): # Updates the game window after every action
     life_counter_text = font.render('Lives: ' + str(lives), 1, (255, 255, 255))
     play_again_text = font.render('Press SPACE to Play Again', 1, (255, 255, 255))
     score_text = font.render('Score: ' + str(score), 1, (255, 255, 255))
+    screen.blit(pause_rend, pause_rect)
     
     player.draw(screen) # Draws everything each time the screen updates
     for asteroid in asteroids:
@@ -261,6 +262,31 @@ power_up = []
 aliens = []
 alien_bullets = []
 
+pause_color = (200, 0, 0)
+haha_funny = pygame.font.SysFont('comicsansms', 50)
+
+def init_words(text, center_x, center_y, color):
+    temp_rend = pygame.font.Font.render(haha_funny, text, True, color)
+    temp_rect = temp_rend.get_rect(center = (center_x, center_y))
+    return temp_rend, temp_rect
+
+pause_rend, pause_rect = init_words('Pause', SCREEN_WIDTH-140, 80, pause_color)
+resume_rend, resume_rect = init_words('Resume', SCREEN_WIDTH-140, 180, pause_color)
+
+def pause_menu():
+    while True:
+        mouse = pygame.mouse.get_pos()
+        screen.fill('black')
+        screen.blit(resume_rend, resume_rect)
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if resume_rect.collidepoint(mouse):
+                    return False
+
 def main():
     global asteroid_count, rapid_start, game_over, lives, score, rapidFire
     game_over = False
@@ -272,6 +298,7 @@ def main():
 
     running = True # Main game loop
     while running:
+        mouse = pygame.mouse.get_pos()
 
         clock.tick(60) # Sets the FPS
         asteroid_count += 1 # Internal timer
@@ -391,6 +418,8 @@ def main():
         for event in pygame.event.get(): # Ends the game if the window is closed
             if event.type == pygame.QUIT:
                 running = False
+            if event.type == pygame.MOUSEBUTTONDOWN and pause_rect.collidepoint(mouse):
+                break_flag = pause_menu()
             if event.type == pygame.KEYDOWN: # This stops the game from shooting indefinitely without 
                 if event.key == pygame.K_SPACE: # the power-up active if the spacebar is held down
                     if not game_over:
@@ -405,11 +434,10 @@ def main():
                         alien_bullets.clear()
                         asteroid_count = 0
                         power_up.clear()
-                        rapidFire = False
+                        rapidFire = False  
                 if event.key == pygame.K_ESCAPE:
                     logger.log("Returning to main menu.")
                     main_menu.main()
-                    
 
 
         redraw_game_window() # Updates the screen at the end of every iteration
