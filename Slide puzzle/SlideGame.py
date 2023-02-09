@@ -111,9 +111,9 @@ def play_again_menu(time_score):
         screen.blit(big_face, big_face_rect)
         if time_score < jason['slide_puzzle_score']:
             matt = True
-            jason['slide_puzzle_score'] = time_score
-            with (open(os.path.join(maindirectory, 'scores.json'), "w")) as jasonfile:
-                # dump the jason variable into the file
+            andrew =  float(f"{format(time_score, '.2f')}")
+            jason['slide_puzzle_score'] = andrew
+            with (open(os.path.join(maindirectory, 'assets', 'leaderboard.json'), "w")) as jasonfile:
                 json.dump(jason, jasonfile)
         if matt:
             screen.blit(high_score_rend, high_score_rect)
