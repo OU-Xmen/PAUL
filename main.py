@@ -142,8 +142,7 @@ def game_runner(i):
         
 
 # Splash screen flag
-def main():
-    splash = True
+def main(splash):
 
     # Main game loop
     running = True
@@ -170,7 +169,6 @@ def main():
             pygame.time.wait(3000)  # Show splash screen for 3 seconds
             music.play(loops=-1) # loop music forever
             splash = False
-            #TODO Make splash a variable stored in 'splash.status' so it doesn't play the splash screen on instance of the main menu.
             log("Running main menu")
         else:
             # Draw buttons
@@ -193,6 +191,6 @@ def cleanup():
 
 if __name__ == '__main__':
     try: 
-        main()
+        main(True)
     except Exception as e:
         cleanup()
