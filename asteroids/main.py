@@ -231,6 +231,7 @@ def redraw_game_window(): # Updates the game window after every action
     life_counter_text = font.render('Lives: ' + str(lives), 1, (255, 255, 255))
     play_again_text = font.render('Press SPACE to Play Again', 1, (255, 255, 255))
     score_text = font.render('Score: ' + str(score), 1, (255, 255, 255))
+    highscore_text = font.render('High Score: ' + str(highscore), 1, (255, 255, 255))
     screen.blit(pause_rend, pause_rect)
     
     player.draw(screen) # Draws everything each time the screen updates
@@ -252,6 +253,7 @@ def redraw_game_window(): # Updates the game window after every action
     if game_over: # Displays the game-over screen
         screen.blit(play_again_text, (SCREEN_WIDTH//2 - play_again_text.get_width()//2, SCREEN_HEIGHT//2 - play_again_text.get_height()//2))
     screen.blit(score_text, (25, 65))
+    screen.blit(highscore_text, (25, 105))
     pygame.display.update()
     
 
@@ -288,10 +290,11 @@ def pause_menu():
                     return False
 
 def main():
-    global asteroid_count, rapid_start, game_over, lives, score, rapidFire
+    global asteroid_count, rapid_start, game_over, lives, score, highscore, rapidFire
     game_over = False
     lives = 3
     score = 0
+    highscore = 0
     rapidFire  = False
     rapid_start = -1
     asteroid_count = 0
@@ -304,6 +307,15 @@ def main():
         asteroid_count += 1 # Internal timer
 
         if not game_over: 
+           
+            with open('asteroids/assets/highscore.txt', 'r') as f:
+                highscore = int(f.read())
+                if highscore < score:
+                    highscore = score
+                    with open('asteroids/assets/highscore.txt', 'w') as f:
+                        f.write(str(highscore))
+
+
             if asteroid_count % 50 == 0: # One asteroid every 50 ticks
                 rand = random.choice([1, 1, 1, 2, 2, 3]) # Tells the game which asteroid to choose
                 asteroids.append(Asteroid(rand)) # 50% chance for a small one, 1/3 chance for medium, 1/6 chance for large
