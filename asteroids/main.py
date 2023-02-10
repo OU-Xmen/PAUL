@@ -449,7 +449,8 @@ def main():
                         rapidFire = False  
                 if event.key == pygame.K_ESCAPE:
                     logger.log("Returning to main menu.")
-                    main_menu.main()
+                    main_menu.main(False)
+                    
 
 
         redraw_game_window() # Updates the screen at the end of every iteration

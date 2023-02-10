@@ -146,11 +146,12 @@ def main(splash):
 
     # Main game loop
     running = True
+    tunes = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            if event.type == pygame.MOUSEBUTTONUP:
+            if event.type == pygame.MOUSEBUTTONDOWN:
                 # Check if any button was clicked
                 for i, rect in enumerate(button_rects):
                     if rect.collidepoint(event.pos):
@@ -167,18 +168,18 @@ def main(splash):
             paul_sound.play()
             log("Running splash screen")
             pygame.time.wait(3000)  # Show splash screen for 3 seconds
-            music.play(loops=-1) # loop music forever
             splash = False
             log("Running main menu")
+        elif tunes: 
+            music.play(loops=-1) # loop music forever
+            tunes = False
         else:
-            # Draw buttons
             music.set_volume(.5)
             for i, rect in enumerate(button_rects):
                 pygame.draw.rect(screen, pygame.Color("darkred"), rect)
                 button_text = font.render(f"{games[i]}", True, BLACK)
                 screen.blit(button_text, (rect.x + 25, rect.y + 75))
             
-
         pygame.display.update()
 
 def cleanup():
