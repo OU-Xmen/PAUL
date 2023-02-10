@@ -44,8 +44,8 @@ slide_image = pygame.image.load("assets/img/slide_puzzle.png")
 log("Images loaded", 1)
 
 # Load sounds
-paul_sound = pygame.mixer.Sound("assets/sounds/paul.mp3")
-music = pygame.mixer.Sound("assets/sounds/fallen_down.ogg")
+paul_sound = pygame.mixer.Sound("assets/sounds/paul.wav")
+music = pygame.mixer.Sound("assets/sounds/fallen_down.wav")
 log("Sounds loaded", 1)
 
 # Define where the buttons will go
