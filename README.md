@@ -11,10 +11,20 @@ pythons (the snakes)
 the dreary days that nobody likes (P.A.U.L. feeds on CS students' negative emotions during this time)  
 lime cucumber Gatorade  
 burger patties with cream cheese  
+giving Valerie Heart Attacks
+
 Dislikes:  
 God  
 Dave  
 NetBeans  
 boring README files  
 his ex-wife Linda-Shannon  
-healthy eating  
+healthy eating
+the Dow Jones
+ZyBooks and all associated properties
+Pranks about forgetting important dates
+Freddie Warren
+
+
+Survivor Log: February 13th, 2023
+  P.A.U.L. is introduced to the world. The P.A.U.L. containment team has shown steady progress towards restoring P.A.U.L. to His former glory. His progress was met with substantial approval.
