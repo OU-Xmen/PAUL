@@ -19,11 +19,11 @@ Dave
 NetBeans  
 boring README files  
 his ex-wife Linda-Shannon  
-healthy eating
-the Dow Jones
-ZyBooks and all associated properties
-Pranks about forgetting important dates
-Freddie Warren
+healthy eating  
+the Dow Jones  
+ZyBooks and all associated properties  
+Pranks about forgetting important dates  
+Freddie Warren  
 
 
 Survivor Log: February 13th, 2023
