@@ -43,7 +43,7 @@ def story_one(file):
     
     f = open(file)
     text = f.read()
-
+    print('Mad Lib: What is Paul?')
     search_text = 'noun1'
     replace_text = input('Enter a noun (plural): ')
     text = text.replace(search_text, replace_text)
@@ -124,7 +124,8 @@ def story_one(file):
 def story_two(file):
     f = open(file)
     text = f.read()
-
+    print('Holiday Party Gone Wrong (NOT CLICKBAIT)')
+    
     search_text = 'adjective1'
     replace_text = input('Enter an adjective: ')
     text = text.replace(search_text, replace_text)
@@ -185,7 +186,8 @@ def story_two(file):
 def story_three(file):
     f = open(file)
     text = f.read()
-
+    print('My First Performance!')
+    
     search_text = 'adjective1'
     replace_text = input('Enter an adjective: ')
     text = text.replace(search_text, replace_text)
@@ -226,12 +228,7 @@ def story_three(file):
     print(text)
     save(text)
     f.close()
-
-# def story_four(file):
-#     f
-
-# def story_five(file):
-#     f
+    
 
 def main():
     
@@ -254,12 +251,6 @@ def main():
             print('Thank you for playing!')
         elif file == 'mad_libs/assets/madlibs_story3.txt':
             story_three(file)
-            print('Thank you for playing!')
-        elif file == 'mad_libs/assets/madlibs_story4.txt':
-        #     story_four(file)
-            print('Thank you for playing!')
-        elif file == 'mad_libs/assets/madlibs_story5.txt':
-        #     story_five(file)
             print('Thank you for playing!')
             
     print()
