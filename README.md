@@ -27,4 +27,4 @@ Freddie Warren
 
 
 Survivor Log: February 13th, 2023
-  P.A.U.L. is introduced to the world. The P.A.U.L. containment team has shown steady progress towards restoring P.A.U.L. to His former glory. His progress was met with substantial approval.
+P.A.U.L. is introduced to the world. The P.A.U.L. containment team has shown steady progress towards restoring P.A.U.L. to His former glory. His progress was met with substantial approval.
