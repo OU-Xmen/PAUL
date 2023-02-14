@@ -182,8 +182,50 @@ def story_two(file):
     save(text)
     f.close()
 
-# def story_three(file):
-#     f
+def story_three(file):
+    f = open(file)
+    text = f.read()
+
+    search_text = 'adjective1'
+    replace_text = input('Enter an adjective: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'action'
+    replace_text = input('Enter an action: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'verb1'
+    replace_text = input('Enter a verb ending in -ing: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'noun1'
+    replace_text = input('Enter a noun: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'number'
+    replace_text = input('Enter a number between 1 and 12: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'noun2'
+    replace_text = input('Enter a plural noun: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'adjective2'
+    replace_text = input('Enter another adjective: ')
+    text = text.replace(search_text, replace_text)
+
+    search_text = 'verb2'
+    replace_text = input('Enter another verb: ')
+    text = text.replace(search_text, replace_text)  
+
+    search_text = 'noun3'
+    replace_text = input('Enter another noun: ')
+    text = text.replace(search_text, replace_text)
+
+    print()
+    print(text)
+    save(text)
+    f.close()
 
 # def story_four(file):
 #     f
@@ -211,7 +253,7 @@ def main():
             story_two(file)
             print('Thank you for playing!')
         elif file == 'mad_libs/assets/madlibs_story3.txt':
-        #     story_three(file)
+            story_three(file)
             print('Thank you for playing!')
         elif file == 'mad_libs/assets/madlibs_story4.txt':
         #     story_four(file)
@@ -223,4 +265,4 @@ def main():
     print()
     savedump()
 
-main() 
+main()
