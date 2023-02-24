@@ -5,10 +5,13 @@ try:
     import sys
     import time
     import random
-    import ChessBoard as B
-    import ChessPiece as CP
+    from importlib.machinery import SourceFileLoader
+    # import ChessBoard as B
+    # import ChessPiece as CP
     maindirectory = os.path.dirname(os.path.abspath(__file__))
     assetdirectory = os.path.join(maindirectory, 'assets')
+    B = SourceFileLoader("ChessBoard", os.path.join(maindirectory, "ChessBoard.py")).load_module()
+
 except ImportError:
     print("One or more modules failed to load")
     quit()

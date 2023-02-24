@@ -1,5 +1,10 @@
-import ChessPiece as CP
+from importlib.machinery import SourceFileLoader
 import pygame
+import os
+maindirectory = os.path.dirname(__file__)
+
+CP = SourceFileLoader("ChessPiece", os.path.join(maindirectory, "ChessPiece.py")).load_module()
+
 pygame.init()
 
 class Board:
