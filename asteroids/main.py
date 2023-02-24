@@ -449,6 +449,7 @@ def main():
                         rapidFire = False  
                 if event.key == pygame.K_ESCAPE:
                     logger.log("Returning to main menu.")
+                    running = False
                     main_menu.main(False)
                     
 

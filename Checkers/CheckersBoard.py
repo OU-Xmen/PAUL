@@ -1,4 +1,10 @@
-import CheckersPiece as CP
+from importlib.machinery import SourceFileLoader
+import os
+maindirectory = os.path.dirname(os.path.abspath(__file__))
+
+#import CheckersPiece as CP
+CP = SourceFileLoader('CheckersPiece', os.path.join(maindirectory, 'CheckersPiece.py')).load_module()
+
 
 class Board:
     def __init__(self):

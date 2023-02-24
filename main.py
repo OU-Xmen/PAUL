@@ -9,7 +9,7 @@ main_dir = os.path.dirname(os.path.abspath(__file__))
 print("Loading games...")
 #log("Loading games...")
 
-
+page = 1
 
 '''
 Will be added when game run logic is set up.
@@ -25,7 +25,11 @@ except ImportError:
 # Initialize pygame and set up window
 pygame.init()
 log("Pygame initialized", 1)
-screen = pygame.display.set_mode((800, 600))
+
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+
+screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("P.A.U.L. - Main Menu")
 
 # Define colors
@@ -48,6 +52,13 @@ paul_sound = pygame.mixer.Sound("assets/sounds/paul.wav")
 music = pygame.mixer.Sound("assets/sounds/fallen_down.wav")
 log("Sounds loaded", 1)
 
+
+BUTTON_WIDTH = 100
+BUTTON_HEIGHT = 50
+
+HORIZONTAL_SPACING = (WINDOW_WIDTH - (5 * BUTTON_WIDTH)) / 6
+VERTICAL_SPACING = (WINDOW_HEIGHT - (3 * BUTTON_HEIGHT)) / 4
+
 # Define where the buttons will go
 button_rects = [
     pygame.Rect(150, 150, 150, 75),
@@ -59,20 +70,56 @@ button_rects = [
     pygame.Rect(150, 350, 500, 75)
 ]
 
+
 # Button Labels
-games = [
-    "Puzzle", "Asteroids", "Tetris", "Pong", "Hangman", "Mad Libs", "Scoreboard"
-]
+d_games = {
+    1: ["Puzzle", "Asteroids", "Tetris", "Pong", "Hangman", "Mad Libs", "Scoreboard"],
+    2: ["Checkers", "Game 8", "Game 9", "Game 10", "Game 11", "Game 12", "Scoreboard"]
+}
+
+
+
+    
 
 def errorHandler(error, i=4):
     log(error, i)
     messagebox.showerror("Error", f"P.A.U.L. has encountered an error:\n{error}\nProgram will now quit.")
     cleanup()
     quit()
+    
+def current_page(pagenum):
+    try:
+        pagenum += 0
+    except TypeError as e:
+        errorHandler(e)
+    current_games = d_games.get(pagenum)
+    #print(current_games)
+    return current_games
+
+def next_page(pagenum):
+    try:
+        pagenum += 0
+    except TypeError as e:
+        errorHandler(e)
+    
+    page = pagenum + 1
+    return page
+
+def previous_page(pagenum):
+    try:
+        pagenum += 0
+    except TypeError as e:
+        errorHandler(e)
+
+    page = pagenum - 1
+    return page
+
+
 
 
 def game_runner(i):
     game_to_run = games[i]
+    print(game_to_run)
     
     print(f"{game_to_run} was clicked")
 
@@ -133,12 +180,21 @@ def game_runner(i):
             mad_libs.main()
         except Exception as e:
             errorHandler(e)
+
+    elif game_to_run == "Checkers":
+        print("Running Checkers")
+        log(f"Preparing to run {game_to_run}")
+        try:
+            music.stop()
+            checkers = SourceFileLoader('checkers', os.path.join(main_dir, 'Checkers\\Checkers.py')).load_module()
+            checkers.main()
+        except Exception as e:
+            errorHandler(e)
     elif game_to_run == "Scoreboard":
         print("Switching to Scoreboard") # Show scoreboard
         log(f"Preparing to run {game_to_run}")
     else:
-        log(f"Game selection not valid", 2)
-        raise Exception("No valid game selection made.")
+        log(f"{game_to_run} is not a valid option", 2)
         
 
 # Splash screen flag
@@ -147,7 +203,14 @@ def main(splash):
     # Main game loop
     running = True
     tunes = True
+    page = 1
+    next_page_rect = pygame.Rect(500, 500, 150, 75)
+    previous_page_rect = pygame.Rect(150, 500, 150, 75)
+   
+
+
     while running:
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -157,6 +220,15 @@ def main(splash):
                     if rect.collidepoint(event.pos):
                         game_runner(i)
 
+                if next_page_rect.collidepoint(event.pos):
+                    if show_next is True:
+                        page = next_page(page)
+                if previous_page_rect.collidepoint(event.pos):
+                    if show_previous is True:
+                        page = previous_page(page)
+
+        show_next = False
+        show_previous = False
 
         # Clear screen
         screen.fill(WHITE)
@@ -175,10 +247,25 @@ def main(splash):
             tunes = False
         else:
             music.set_volume(.5)
+            global games
+            games = current_page(page)
+            #print(games)
             for i, rect in enumerate(button_rects):
                 pygame.draw.rect(screen, pygame.Color("darkred"), rect)
                 button_text = font.render(f"{games[i]}", True, BLACK)
                 screen.blit(button_text, (rect.x + 25, rect.y + 75))
+            if page < 2:
+                show_next = True
+                pygame.draw.rect(screen, pygame.Color("purple"), next_page_rect)
+                button_text = font.render("Next Page", True, BLACK)
+                screen.blit(button_text, (next_page_rect.x + 25, next_page_rect.y + 75))
+
+            if page > 1:
+                show_previous = True
+                pygame.draw.rect(screen, pygame.Color("purple"), previous_page_rect)
+                button_text = font.render("Previous Page", True, BLACK)
+                screen.blit(button_text, (previous_page_rect.x-10, previous_page_rect.y + 75))
+            
             
         pygame.display.update()
 
@@ -188,7 +275,7 @@ def cleanup():
         log("Program terminated\n\n")
     except:
         pass
-    
+
 
 if __name__ == '__main__':
     try: 

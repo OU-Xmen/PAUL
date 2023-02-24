@@ -1,10 +1,15 @@
 import pygame
+import os
+from importlib.machinery import SourceFileLoader
+
 pygame.init()
 
 WIDTH, HEIGHT = 800, 600
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Pong")
 
+main_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+logger = SourceFileLoader('logger', os.path.join(main_dir, "logger.py"))
 FPS = 60
 
 WHITE = (255, 255, 255)
@@ -36,9 +41,9 @@ class Paddle:
         else:
             self.y += self.VEL
 
-        def reset(self):
-            self.x = self.original_x
-            self.y = self.original_y
+    def reset(self):
+        self.x = self.original_x
+        self.y = self.original_y
 
 class Ball:
     MAX_VEL = 5

@@ -1,14 +1,19 @@
 try:
     import pygame
+    from importlib.machinery import SourceFileLoader
     pygame.init()
     import os
     import sys
     import time
     import random
-    import CheckersBoard as B
-    import CheckersPiece as CP
+    
     maindirectory = os.path.dirname(os.path.abspath(__file__))
     assetdirectory = os.path.join(maindirectory, 'assets')
+
+    B = SourceFileLoader('CheckersBoard', os.path.join(maindirectory, 'CheckersBoard.py')).load_module()
+
+    #import CheckersBoard as B
+    import CheckersPiece as CP
 except ImportError:
     print("One or more modules failed to load")
     quit()
