@@ -2,6 +2,7 @@ import pygame, os
 pygame.init()
 maindirectory = os.path.dirname(os.path.abspath(__file__))
 assetdirectory = os.path.join(maindirectory, 'assets')
+piecedirectory = os.path.join(assetdirectory, 'myset')
 
 def dupe(i, j, id, color):
     if id == 'P':
@@ -28,7 +29,7 @@ class Empty:
         self.y = 60*(1+i)
         self.id = None
         self.color = None
-        self.img = pygame.image.load(os.path.join(assetdirectory, 'empty_tile.png'))
+        self.img = pygame.image.load(os.path.join(piecedirectory, 'empty_tile.png'))
     
     def draw_piece(self, screen):
         screen.blit(self.img, (self.x, self.y))
@@ -48,11 +49,11 @@ class Pawn:
         if color == 'black':
             self.color = 'black'
             self.forward = 1
-            self.img = pygame.image.load(os.path.join(assetdirectory, 'black_pawn.png'))
+            self.img = pygame.image.load(os.path.join(piecedirectory, 'black_pawn.png'))
         else:
             self.color = 'white'
             self.forward = -1
-            self.img = pygame.image.load(os.path.join(assetdirectory, 'white_pawn.png'))
+            self.img = pygame.image.load(os.path.join(piecedirectory, 'white_pawn.png'))
 
         '''
         x | y
@@ -87,7 +88,9 @@ class Pawn:
         last_piece = board[last_move[0]][last_move[1]]
         next_to_last = last_move[0] == self.i and last_move[1] in [self.j-1, self.j+1]
         last_was_pawn = last_piece.id == "P" and last_piece.color != self.color
-        if next_to_last and last_was_pawn:
+        white_flag = last_piece.color == 'white' and last_move[0] == 4
+        black_flag = last_piece.color == 'black' and last_move[0] == 3
+        if next_to_last and last_was_pawn and (white_flag or black_flag):
             legal_moves.append((self.i + self.forward, last_move[1]))
 
         return legal_moves
@@ -103,10 +106,10 @@ class Knight:
         self.id = 'N'
         if color == 'black':
             self.color = 'black'
-            self.img = pygame.image.load(os.path.join(assetdirectory, 'black_knight.png'))
+            self.img = pygame.image.load(os.path.join(piecedirectory, 'black_knight.png'))
         else:
             self.color = 'white'
-            self.img = pygame.image.load(os.path.join(assetdirectory, 'white_knight.png'))
+            self.img = pygame.image.load(os.path.join(piecedirectory, 'white_knight.png'))
     
     def draw_piece(self, screen):
         screen.blit(self.img, (self.x, self.y))
@@ -139,10 +142,10 @@ class Bishop:
         self.id = 'B'
         if color == 'black':
             self.color = 'black'
-            self.img = pygame.image.load(os.path.join(assetdirectory, 'black_bishop.png'))
+            self.img = pygame.image.load(os.path.join(piecedirectory, 'black_bishop.png'))
         else:
             self.color = 'white'
-            self.img = pygame.image.load(os.path.join(assetdirectory, 'white_bishop.png'))
+            self.img = pygame.image.load(os.path.join(piecedirectory, 'white_bishop.png'))
     
     def draw_piece(self, screen):
         screen.blit(self.img, (self.x, self.y))
@@ -192,10 +195,10 @@ class Rook:
         self.has_moved = has_moved
         if color == 'black':
             self.color = 'black'
-            self.img = pygame.image.load(os.path.join(assetdirectory, 'black_rook.png'))
+            self.img = pygame.image.load(os.path.join(piecedirectory, 'black_rook.png'))
         else:
             self.color = 'white'
-            self.img = pygame.image.load(os.path.join(assetdirectory, 'white_rook.png'))
+            self.img = pygame.image.load(os.path.join(piecedirectory, 'white_rook.png'))
     
     def draw_piece(self, screen):
         screen.blit(self.img, (self.x, self.y))
@@ -245,10 +248,10 @@ class Queen:
         self.id = 'Q'
         if color == 'black':
             self.color = 'black'
-            self.img = pygame.image.load(os.path.join(assetdirectory, 'black_queen.png'))
+            self.img = pygame.image.load(os.path.join(piecedirectory, 'black_queen.png'))
         else:
             self.color = 'white'
-            self.img = pygame.image.load(os.path.join(assetdirectory, 'white_queen.png'))
+            self.img = pygame.image.load(os.path.join(piecedirectory, 'white_queen.png'))
     
     def draw_piece(self, screen):
         screen.blit(self.img, (self.x, self.y))
@@ -268,10 +271,10 @@ class King:
         self.has_moved = has_moved
         if color == 'black':
             self.color = 'black'
-            self.img = pygame.image.load(os.path.join(assetdirectory, 'black_king.png'))
+            self.img = pygame.image.load(os.path.join(piecedirectory, 'black_king.png'))
         else:
             self.color = 'white'
-            self.img = pygame.image.load(os.path.join(assetdirectory, 'white_king.png'))
+            self.img = pygame.image.load(os.path.join(piecedirectory, 'white_king.png'))
     
     def draw_piece(self, screen):
         screen.blit(self.img, (self.x, self.y))

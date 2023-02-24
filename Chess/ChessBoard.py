@@ -1,10 +1,5 @@
-from importlib.machinery import SourceFileLoader
+import ChessPiece as CP
 import pygame
-import os
-maindirectory = os.path.dirname(__file__)
-
-CP = SourceFileLoader("ChessPiece", os.path.join(maindirectory, "ChessPiece.py")).load_module()
-
 pygame.init()
 
 class Board:
@@ -96,8 +91,8 @@ class Board:
                         return False
             
             for a, b in legal_moves:
-                pygame.draw.circle(screen, (0, 0, 0), [60*(1.5+b), 60*(1.5+a)], 10)
-                pygame.draw.circle(screen, (255, 255, 255), [60*(1.5+b), 60*(1.5+a)], 8)
+                pygame.draw.circle(screen, (0, 0, 0), [60*(1.5+b), 60*(1.5+a)], 8)
+                pygame.draw.circle(screen, (255, 255, 255), [60*(1.5+b), 60*(1.5+a)], 7)
             pygame.display.flip()
     
     def game_is_over(self):
