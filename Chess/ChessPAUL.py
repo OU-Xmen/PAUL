@@ -6,8 +6,8 @@ try:
     import time
     import random
     from importlib.machinery import SourceFileLoader
-    import ChessBoard as B
-    import ChessPiece as CP
+    # import ChessBoard as B
+    # import ChessPiece as CP
     maindirectory = os.path.dirname(os.path.abspath(__file__))
     assetdirectory = os.path.join(maindirectory, 'assets')
     B = SourceFileLoader('ChessBoard', os.path.join(maindirectory, 'ChessBoard.py')).load_module()
