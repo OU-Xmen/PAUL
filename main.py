@@ -1,5 +1,6 @@
 import pygame
 from logger import *
+import themes as t
 from importlib.machinery import SourceFileLoader
 from tkinter import messagebox
 import os
@@ -9,18 +10,8 @@ main_dir = os.path.dirname(os.path.abspath(__file__))
 print("Loading games...")
 #log("Loading games...")
 
-page = 1
 
-'''
-Will be added when game run logic is set up.
-try:
-    import slide_puzzle.Game
-    import asteroids.main
-    import AlienInvasion.alien_invasion
-except ImportError:
-    print("One or more modules failed to load.")
-    quit()
-'''
+page = 1
 
 # Initialize pygame and set up window
 pygame.init()
@@ -31,10 +22,6 @@ WINDOW_HEIGHT = 600
 
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("P.A.U.L. - Main Menu")
-
-# Define colors
-WHITE = pygame.Color(255, 255, 255)
-BLACK = pygame.Color(0, 0, 0)
 
 # Load font
 font = pygame.font.Font(None, 36)
@@ -218,6 +205,7 @@ def main(splash):
     page = 1
     next_page_rect = pygame.Rect(500, 500, 150, 75)
     previous_page_rect = pygame.Rect(150, 500, 150, 75)
+    settings_rect = pygame.Rect(500, 25, 150, 75)
    
 
 
@@ -238,12 +226,15 @@ def main(splash):
                 if previous_page_rect.collidepoint(event.pos):
                     if show_previous is True:
                         page = previous_page(page)
+                if settings_rect.collidepoint(event.pos):
+                    music.stop()
+                    settings = SourceFileLoader('settings', 'settings.py').load_module()
 
         show_next = False
         show_previous = False
 
         # Clear screen
-        screen.fill(WHITE)
+        screen.fill(t.BACKGROUND)
 
         if splash:
             # Draw splash screen
@@ -263,20 +254,25 @@ def main(splash):
             games = current_page(page)
             #print(games)
             for i, rect in enumerate(button_rects):
-                pygame.draw.rect(screen, pygame.Color("darkred"), rect)
-                button_text = font.render(f"{games[i]}", True, BLACK)
+                pygame.draw.rect(screen, t.GAME_BUTTONS, rect)
+                button_text = font.render(f"{games[i]}", True, t.TEXT)
                 screen.blit(button_text, (rect.x + 25, rect.y + 75))
             if page < 2:
                 show_next = True
-                pygame.draw.rect(screen, pygame.Color("purple"), next_page_rect)
-                button_text = font.render("Next Page", True, BLACK)
+                pygame.draw.rect(screen, t.PAGE_BUTTONS, next_page_rect)
+                button_text = font.render("Next Page", True, t.TEXT)
                 screen.blit(button_text, (next_page_rect.x + 25, next_page_rect.y + 75))
-
             if page > 1:
                 show_previous = True
-                pygame.draw.rect(screen, pygame.Color("purple"), previous_page_rect)
-                button_text = font.render("Previous Page", True, BLACK)
+                pygame.draw.rect(screen, t.PAGE_BUTTONS, previous_page_rect)
+                button_text = font.render("Previous Page", True, t.TEXT)
                 screen.blit(button_text, (previous_page_rect.x-10, previous_page_rect.y + 75))
+
+            pygame.draw.rect(screen, t.PAGE_BUTTONS, settings_rect)
+            button_text = font.render("Settings", True, t.TEXT)
+            screen.blit(button_text, (settings_rect.x, settings_rect.y + 75))
+
+            
             
             
         pygame.display.update()
