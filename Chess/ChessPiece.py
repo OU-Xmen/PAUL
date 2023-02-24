@@ -2,6 +2,7 @@ import pygame, os
 pygame.init()
 maindirectory = os.path.dirname(os.path.abspath(__file__))
 assetdirectory = os.path.join(maindirectory, 'assets')
+# piece sets: 'letters', 'myset'
 piecedirectory = os.path.join(assetdirectory, 'myset')
 
 def dupe(i, j, id, color):
@@ -84,7 +85,6 @@ class Pawn:
                 legal_moves.append((self.i + self.forward, self.j + d))
         
         # find en passant
-        print(last_move)
         last_piece = board[last_move[0]][last_move[1]]
         next_to_last = last_move[0] == self.i and last_move[1] in [self.j-1, self.j+1]
         last_was_pawn = last_piece.id == "P" and last_piece.color != self.color
