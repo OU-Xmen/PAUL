@@ -22,6 +22,8 @@ def main():
     pygame.display.set_icon(icon)
 
     game_board = B.Board()
+    legal_moves_flag = False
+    made_move = []
     whose_turn = 0 # start with white
 
     while True: # game loop
@@ -36,12 +38,23 @@ def main():
             if event.type == pygame.QUIT:
                 quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if mouse_on_board:
-                    print(game_board.board[mouse_ij[0]][mouse_ij[1]].get_legal_moves(game_board.board))
-                    print(f"{game_board.board[mouse_ij[0]][mouse_ij[1]].color} {game_board.board[mouse_ij[0]][mouse_ij[1]].id}")
+                if mouse_on_board and game_board.board[mouse_ij[0]][mouse_ij[1]].id and game_board.board[mouse_ij[0]][mouse_ij[1]].color == ('white','black')[whose_turn]:
+                    if game_board.board[mouse_ij[0]][mouse_ij[1]].id == "P":
+                        made_move = game_board.clicked_on(mouse_ij[0], mouse_ij[1], screen)
+                    else:
+                        made_move = game_board.clicked_on(mouse_ij[0], mouse_ij[1], screen)
+                    if made_move:
+                        whose_turn = 1 - whose_turn
                 else:
                     print("No")
 
         pygame.display.flip()
+
+        break_flag = False
+        winner = game_board.game_is_over()
+        if winner:
+            print(f"{winner} wins!")
+            break_flag = True
+        if break_flag: break
 
 if __name__ == "__main__": main()

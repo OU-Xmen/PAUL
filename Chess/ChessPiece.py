@@ -3,6 +3,21 @@ pygame.init()
 maindirectory = os.path.dirname(os.path.abspath(__file__))
 assetdirectory = os.path.join(maindirectory, 'assets')
 
+def dupe(i, j, id, color):
+    if id == 'P':
+        return Pawn(i, j, color, True)
+    elif id == 'N':
+        return Knight(i, j, color)
+    elif id == 'B':
+        return Bishop(i, j, color)
+    elif id == 'R':
+        return Rook(i, j, color, True)
+    elif id == 'Q':
+        return Queen(i, j, color)
+    elif id == 'K':
+        return King(i, j, color, True)
+    return
+
 class Empty:
     def __init__(self, i, j):
         # [i][j] denote place in actual board
@@ -13,9 +28,15 @@ class Empty:
         self.y = 60*(1+i)
         self.id = None
         self.color = None
+        self.img = pygame.image.load(os.path.join(assetdirectory, 'empty_tile.png'))
+    
+    def draw_piece(self, screen):
+        screen.blit(self.img, (self.x, self.y))
+    
+    def get_legal_moves(self, board): return []
 
 class Pawn:
-    def __init__(self, i, j, color):
+    def __init__(self, i, j, color, has_moved = False):
         # [i][j] denote place in actual board
         self.i = i
         self.j = j
@@ -23,7 +44,7 @@ class Pawn:
         self.x = 60*(1+j)
         self.y = 60*(1+i)
         self.id = 'P'
-        self.has_moved = False
+        self.has_moved = has_moved
         if color == 'black':
             self.color = 'black'
             self.forward = 1
@@ -32,11 +53,19 @@ class Pawn:
             self.color = 'white'
             self.forward = -1
             self.img = pygame.image.load(os.path.join(assetdirectory, 'white_pawn.png'))
+
+        '''
+        x | y
+        -1| 6
+        1 | 1
+        y = (-5/2)x + 3.5
+        '''
+
     
     def draw_piece(self, screen):
         screen.blit(self.img, (self.x, self.y))
     
-    def get_legal_moves(self, board):
+    def get_legal_moves(self, board, last_move = [0, 0]):
         legal_moves = []
         scope = lambda x: board[self.i + self.forward][self.j + x]
 
@@ -45,14 +74,22 @@ class Pawn:
             legal_moves.append((self.i + self.forward, self.j))
 
             # find legal double move
-            if not self.has_moved and board[self.i + 2*self.forward][self.j]:
+            if (not self.has_moved) and board[self.i + 2*self.forward][self.j]:
                 legal_moves.append((self.i + 2*self.forward, self.j))
 
         # find legal jumps
         for d in [-1, 1]:
-            if (self.j+d in range(8)) and scope(0).color != scope(d).color and scope(d).color:
+            if (self.j+d in range(8)) and (self.color != scope(d).color) and scope(d).color:
                 legal_moves.append((self.i + self.forward, self.j + d))
         
+        # find en passant
+        print(last_move)
+        last_piece = board[last_move[0]][last_move[1]]
+        next_to_last = last_move[0] == self.i and last_move[1] in [self.j-1, self.j+1]
+        last_was_pawn = last_piece.id == "P" and last_piece.color != self.color
+        if next_to_last and last_was_pawn:
+            legal_moves.append((self.i + self.forward, last_move[1]))
+
         return legal_moves
 
 class Knight:
@@ -140,13 +177,11 @@ class Bishop:
                     else:
                         legal_moves.append((self.i + za, self.j + zb))
                         break
-            else:
-                break
         
         return legal_moves
 
 class Rook:
-    def __init__(self, i, j, color):
+    def __init__(self, i, j, color, has_moved = False):
         # [i][j] denote place in actual board
         self.i = i
         self.j = j
@@ -154,6 +189,7 @@ class Rook:
         self.x = 60*(1+j)
         self.y = 60*(1+i)
         self.id = 'R'
+        self.has_moved = has_moved
         if color == 'black':
             self.color = 'black'
             self.img = pygame.image.load(os.path.join(assetdirectory, 'black_rook.png'))
@@ -194,8 +230,6 @@ class Rook:
                     else:
                         legal_moves.append((self.i + za, self.j + zb))
                         break
-            else:
-                break
         
         return legal_moves
 
@@ -223,7 +257,7 @@ class Queen:
         return Rook.get_legal_moves(self, board) + Bishop.get_legal_moves(self, board)
 
 class King:
-    def __init__(self, i, j, color):
+    def __init__(self, i, j, color, has_moved = False):
         # [i][j] denote place in actual board
         self.i = i
         self.j = j
@@ -231,6 +265,7 @@ class King:
         self.x = 60*(1+j)
         self.y = 60*(1+i)
         self.id = 'K'
+        self.has_moved = has_moved
         if color == 'black':
             self.color = 'black'
             self.img = pygame.image.load(os.path.join(assetdirectory, 'black_king.png'))
@@ -245,11 +280,21 @@ class King:
         legal_moves = []
         scope = lambda zi, zj: board[self.i + zi][self.j + zj]
 
+        # find normal moves
         for a in [-1, 0, 1]:
             for b in [-1, 0, 1]:
                 in_bounds = (self.i+a in range(8)) and (self.j+b in range(8))
                 if (a != 0 or b != 0) and in_bounds:
                     if scope(a, b).color != self.color:
                         legal_moves.append((self.i + a, self.j + b))
+        
+        # find castles
+        if not self.has_moved:
+            long_empty = not (board[self.i][1].id or board[self.i][2].id or board[self.i][3].id)
+            short_empty = not (board[self.i][5].id or board[self.i][6].id)
+            if board[self.i][0].id == 'R' and (not board[self.i][0].has_moved) and long_empty:
+                legal_moves.append((self.i, 2))
+            if board[self.i][7].id == 'R' and (not board[self.i][7].has_moved) and short_empty:
+                legal_moves.append((self.i, 6))
         
         return legal_moves
