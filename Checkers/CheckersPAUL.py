@@ -34,16 +34,26 @@ def main():
         screen.fill("black")
         game_board.draw_board(screen)
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                quit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                piece_clicked = game_board.board[mouse_ij[0]][mouse_ij[1]]
-                if mouse_on_board and piece_clicked.id and piece_clicked.id == ('B', 'R')[whose_turn]:
-                    made_move = game_board.clicked_on(mouse_ij[0], mouse_ij[1], screen)
-                    if made_move:
-                        bruh = game_board.test_for_win()
-                        whose_turn = 1 - whose_turn
+        if whose_turn == 0:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    quit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    piece_clicked = game_board.board[mouse_ij[0]][mouse_ij[1]]
+                    if mouse_on_board and piece_clicked.id and piece_clicked.id == 'B':
+                        made_move = game_board.clicked_on(mouse_ij[0], mouse_ij[1], screen)
+                        if made_move:
+                            bruh = game_board.test_for_win()
+                            whose_turn = 1 - whose_turn
+        else:
+            black_pieces = game_board.find_pieces('R')
+            paul_i, paul_j = black_pieces[random.randint(0, len(black_pieces) - 1)]
+            while not game_board.board[paul_i][paul_j].get_legal_moves(game_board.board):
+                paul_i, paul_j = black_pieces[random.randint(0, len(black_pieces) - 1)]
+            paul_moves = game_board.board[paul_i][paul_j].get_legal_moves(game_board.board)
+            paul_move = paul_moves[random.randint(0, len(paul_moves) - 1)]
+            game_board.make_move(paul_move, paul_i, paul_j)
+            whose_turn = 0
         
         pygame.display.flip()
 
