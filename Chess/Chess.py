@@ -6,8 +6,6 @@ try:
     import time
     import random
     from importlib.machinery import SourceFileLoader
-    # import ChessBoard as B
-    # import ChessPiece as CP
     maindirectory = os.path.dirname(os.path.abspath(__file__))
     assetdirectory = os.path.join(maindirectory, 'assets')
     B = SourceFileLoader('ChessBoard', os.path.join(maindirectory, 'ChessBoard.py')).load_module()
@@ -22,6 +20,7 @@ def main():
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption('Chess')
     icon = pygame.image.load(os.path.join(assetdirectory, 'icon32.png'))
+    background = pygame.image.load(os.path.join(assetdirectory, 'background.png'))
     pygame.display.set_icon(icon)
 
     game_board = B.Board()
@@ -34,7 +33,7 @@ def main():
         mouse_ij = ((mouse[1]-60)//60, (mouse[0]-60)//60)
         mouse_on_board = mouse_ij[0] in range(8) and mouse_ij[1] in range(8)
 
-        screen.fill("black")
+        screen.blit(background, (0, 0))
         game_board.draw_board(screen)
 
         for event in pygame.event.get():

@@ -1,10 +1,20 @@
-# import ChessPiece as CP
-from importlib.machinery import SourceFileLoader
-import pygame
+import ChessPiece as CP
 import os
+import pygame
 pygame.init()
-maindirectory = os.path.dirname(__file__)
-CP = SourceFileLoader('ChessPiece', os.path.join(maindirectory, 'ChessPiece.py')).load_module()
+pygame.mixer.init()
+sounddirectory = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'sounds')
+capture_sound = pygame.mixer.Sound(os.path.join(sounddirectory, 'capture.wav'))
+music = pygame.mixer.Sound(os.path.join(sounddirectory, 'music.wav'))
+promote_sound = pygame.mixer.Sound(os.path.join(sounddirectory, 'promote.wav'))
+move_sound = pygame.mixer.Sound(os.path.join(sounddirectory, 'move.wav'))
+castle_sound = pygame.mixer.Sound(os.path.join(sounddirectory, 'castle.wav'))
+
+sfx_channel = pygame.mixer.Channel(1)
+sfx_channel.set_volume(0.4)
+song_channel = pygame.mixer.Channel(2)
+song_channel.set_volume(0.7)
+boom_channel = pygame.mixer.Channel(3)
 
 class Board:
     def __init__(self):
@@ -48,6 +58,9 @@ class Board:
         
         # initialize last move
         self.last_move = [0, 0]
+
+        # play music
+        song_channel.play(music)
     
     def draw_board(self, screen):
         for i in range(8):
@@ -79,6 +92,13 @@ class Board:
             pygame.display.flip()
     
     def make_move(self, mouse_ij, i, j):
+        en_passant_flag = False
+        capture_flag = False
+        castle_flag = False
+
+        if self.board[mouse_ij[0]][mouse_ij[1]].id:
+            capture_flag = True
+
         self.board[mouse_ij[0]][mouse_ij[1]] = CP.dupe(mouse_ij[0], mouse_ij[1], self.board[i][j].id, self.board[i][j].color)
         self.board[i][j] = CP.Empty(i, j)
         
@@ -89,16 +109,34 @@ class Board:
         if both_pawns and pawns_in_line and different_colors:
             pawn_passed = self.board[mouse_ij[0] - self.board[mouse_ij[0]][mouse_ij[1]].forward][mouse_ij[1]] is self.board[self.last_move[0]][self.last_move[1]]
             if pawn_passed:
+                en_passant_flag = True
                 self.board[self.last_move[0]][self.last_move[1]] = CP.Empty(self.last_move[0], self.last_move[1])
-        
+
         # account for castling
         if self.board[mouse_ij[0]][mouse_ij[1]].id == 'K' and (abs(j - mouse_ij[1]) > 1):
+            castle_flag = True
             self.board[i][int((j + mouse_ij[1])/2)] = CP.Rook(i, int((j + mouse_ij[1])/2), self.board[mouse_ij[0]][mouse_ij[1]].color)
             if mouse_ij[1] == 6:
                 self.board[i][7] = CP.Empty(i, 7)
             elif mouse_ij[1] == 2:
                 self.board[i][0] = CP.Empty(i, 0)
         self.last_move = mouse_ij
+
+        # account for promotion
+        if self.board[mouse_ij[0]][mouse_ij[1]].id == 'P' and mouse_ij[0] in (0, 7):
+            self.board[mouse_ij[0]][mouse_ij[1]] = CP.Queen(mouse_ij[0], mouse_ij[1], self.board[mouse_ij[0]][mouse_ij[1]].color)
+
+        # play sound if capture move was played
+        if en_passant_flag or capture_flag:
+            sfx_channel.stop()
+            sfx_channel.play(capture_sound)
+        elif castle_flag:
+            sfx_channel.stop()
+            sfx_channel.play(castle_sound)
+        else:
+            sfx_channel.stop()
+            sfx_channel.play(move_sound)
+
         return True
 
     def game_is_over(self):

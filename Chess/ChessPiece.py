@@ -2,8 +2,8 @@ import pygame, os
 pygame.init()
 maindirectory = os.path.dirname(os.path.abspath(__file__))
 assetdirectory = os.path.join(maindirectory, 'assets')
-# piece sets: 'letters', 'myset'
-piecedirectory = os.path.join(assetdirectory, 'myset')
+# piece sets: 'letters', 'myset', 'myset_transparent'
+piecedirectory = os.path.join(assetdirectory, 'myset_transparent')
 
 def dupe(i, j, id, color):
     if id == 'P':
@@ -30,7 +30,9 @@ class Empty:
         self.y = 60*(1+i)
         self.id = None
         self.color = None
-        self.img = pygame.image.load(os.path.join(piecedirectory, 'empty_tile.png'))
+        self.img = pygame.image.load(os.path.join(piecedirectory, 'empty_tile.png')).convert_alpha()
+        if piecedirectory == os.path.join(assetdirectory, 'myset_transparent'):
+            self.img.set_colorkey((255, 0, 0))
     
     def draw_piece(self, screen):
         screen.blit(self.img, (self.x, self.y))
@@ -55,6 +57,8 @@ class Pawn:
             self.color = 'white'
             self.forward = -1
             self.img = pygame.image.load(os.path.join(piecedirectory, 'white_pawn.png'))
+        if piecedirectory == os.path.join(assetdirectory, 'myset_transparent'):
+            self.img.set_colorkey((255, 0, 0))
 
         '''
         x | y
@@ -110,6 +114,8 @@ class Knight:
         else:
             self.color = 'white'
             self.img = pygame.image.load(os.path.join(piecedirectory, 'white_knight.png'))
+        if piecedirectory == os.path.join(assetdirectory, 'myset_transparent'):
+            self.img.set_colorkey((255, 0, 0))
     
     def draw_piece(self, screen):
         screen.blit(self.img, (self.x, self.y))
@@ -146,6 +152,8 @@ class Bishop:
         else:
             self.color = 'white'
             self.img = pygame.image.load(os.path.join(piecedirectory, 'white_bishop.png'))
+        if piecedirectory == os.path.join(assetdirectory, 'myset_transparent'):
+            self.img.set_colorkey((255, 0, 0))
     
     def draw_piece(self, screen):
         screen.blit(self.img, (self.x, self.y))
@@ -199,6 +207,8 @@ class Rook:
         else:
             self.color = 'white'
             self.img = pygame.image.load(os.path.join(piecedirectory, 'white_rook.png'))
+        if piecedirectory == os.path.join(assetdirectory, 'myset_transparent'):
+            self.img.set_colorkey((255, 0, 0))
     
     def draw_piece(self, screen):
         screen.blit(self.img, (self.x, self.y))
@@ -252,6 +262,8 @@ class Queen:
         else:
             self.color = 'white'
             self.img = pygame.image.load(os.path.join(piecedirectory, 'white_queen.png'))
+        if piecedirectory == os.path.join(assetdirectory, 'myset_transparent'):
+            self.img.set_colorkey((255, 0, 0))
     
     def draw_piece(self, screen):
         screen.blit(self.img, (self.x, self.y))
@@ -275,6 +287,8 @@ class King:
         else:
             self.color = 'white'
             self.img = pygame.image.load(os.path.join(piecedirectory, 'white_king.png'))
+        if piecedirectory == os.path.join(assetdirectory, 'myset_transparent'):
+            self.img.set_colorkey((255, 0, 0))
     
     def draw_piece(self, screen):
         screen.blit(self.img, (self.x, self.y))
