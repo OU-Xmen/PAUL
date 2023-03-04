@@ -80,7 +80,7 @@ class Pawn:
             legal_moves.append((self.i + self.forward, self.j))
 
             # find legal double move
-            if (not self.has_moved) and board[self.i + 2*self.forward][self.j]:
+            if (not self.has_moved) and (not board[self.i + 2*self.forward][self.j].id):
                 legal_moves.append((self.i + 2*self.forward, self.j))
 
         # find legal jumps
