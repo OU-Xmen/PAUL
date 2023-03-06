@@ -1,5 +1,7 @@
 import sys
 from time import sleep
+import os
+from importlib.machinery import SourceFileLoader
 
 import pygame
 
@@ -10,6 +12,10 @@ from button import Button
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
+
+maindir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print(maindir)
+main = SourceFileLoader("main", os.path.join(maindir, "main.py")).load_module()
 
 class AlienInvasion:
     """overall class to manage game assets and behavior"""
@@ -183,6 +189,7 @@ class AlienInvasion:
         #watch for keyboard and mouse event
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                main.main(False)
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 self._check_keydown_events(event)   
@@ -266,4 +273,3 @@ if __name__ == '__main__':
     #Make a game instance, run the game
     ai = AlienInvasion()
     ai.run_game()
-
