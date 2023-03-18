@@ -1,6 +1,14 @@
 import pygame
 import random
 import os
+from importlib.machinery import SourceFileLoader
+
+da_main_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print(da_main_dir)
+
+logger = SourceFileLoader('logger', os.path.join(da_main_dir, "logger.py")).load_module()
+main_menu = SourceFileLoader('main', os.path.join(da_main_dir, "main.py")).load_module()
+
 
 def main():
     main_dir = os.path.dirname(os.path.abspath(__file__))
@@ -53,6 +61,8 @@ def main():
                 # check if the key pressed is a letter
                 if event.unicode.isalpha():
                     letter = event.unicode.lower()
+                elif event.key == pygame.K_ESCAPE:
+                    pass
 
                     if letter in word and letter not in guessed_letters:
                         # replace underscores with the correctly guessed letter
@@ -85,7 +95,8 @@ def main():
             running = False
 
     # deinitialize pygame
-    pygame.quit()# Write your code here :-)
+    main_menu.main(False)
+    return
 
 if __name__ == "__main__":
     main()

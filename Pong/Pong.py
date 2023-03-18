@@ -2,6 +2,13 @@ import pygame
 import os
 from importlib.machinery import SourceFileLoader
 
+main_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print(main_dir)
+
+logger = SourceFileLoader('logger', os.path.join(main_dir, "logger.py")).load_module()
+main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
+
+
 pygame.init()
 
 WIDTH, HEIGHT = 800, 600
@@ -150,6 +157,10 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
                 break
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    run = False
+                    main_menu.main(False)
 
         keys = pygame.key.get_pressed()
         handle_paddle_movement(keys, left_paddle, right_paddle)

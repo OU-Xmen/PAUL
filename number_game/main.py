@@ -1,5 +1,10 @@
 import pygame
 import random
+from importlib.machinery import SourceFileLoader
+import os
+
+main_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+main = SourceFileLoader('main', os.path.join(main_dir, ("main.py"))).load_module()
 
 # Initialize Pygame
 pygame.init()
@@ -78,6 +83,9 @@ while running:
             elif event.key == pygame.K_BACKSPACE:
                 # Remove the last character from the input text
                 input_text = input_text[:-1]
+            elif event.key == pygame.K_ESCAPE:
+                running = False
+                main.main(False)
 
     # Fill the screen with white
     screen.fill(WHITE)

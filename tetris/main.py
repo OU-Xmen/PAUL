@@ -1,5 +1,14 @@
 import pygame
 import random
+import os
+from importlib.machinery import SourceFileLoader
+
+main_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print(main_dir)
+
+logger = SourceFileLoader('logger', os.path.join(main_dir, "logger.py")).load_module()
+paul_main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
+
 
 pygame.font.init()
 
@@ -345,6 +354,10 @@ def main(win):  # *
                     current_piece.rotation += 1
                     if not(valid_space(current_piece, grid)):
                         current_piece.rotation -= 1
+                if event.key == pygame.K_ESCAPE:
+                    paul_main_menu.main(False)
+                    run = False
+                    return
 
         shape_pos = convert_shape_format(current_piece)
 
