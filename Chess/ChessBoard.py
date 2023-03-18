@@ -1,11 +1,14 @@
-import ChessPiece as CP
+#import ChessPiece as CP
 import os
 import pygame
+from importlib.machinery import SourceFileLoader
+main_dir = os.path.dirname(__file__)
+CP = SourceFileLoader("ChessPiece", os.path.join(main_dir, "ChessPiece.py")).load_module()
 pygame.init()
 pygame.mixer.init()
 sounddirectory = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'sounds')
 capture_sound = pygame.mixer.Sound(os.path.join(sounddirectory, 'capture.wav'))
-music = pygame.mixer.Sound(os.path.join(sounddirectory, 'music.wav'))
+music = pygame.mixer.Sound(os.path.join(sounddirectory, 'Chess and Checkers.wav'))
 promote_sound = pygame.mixer.Sound(os.path.join(sounddirectory, 'promote.wav'))
 move_sound = pygame.mixer.Sound(os.path.join(sounddirectory, 'move.wav'))
 castle_sound = pygame.mixer.Sound(os.path.join(sounddirectory, 'castle.wav'))

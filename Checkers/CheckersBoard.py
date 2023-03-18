@@ -1,5 +1,8 @@
-import CheckersPiece as CP
 import pygame
+from importlib.machinery import SourceFileLoader
+import os
+main_dir = os.path.dirname(__file__)
+CP = SourceFileLoader("CheckersPiece", os.path.join(main_dir, "CheckersPiece.py")).load_module()
 pygame.init()
 
 class Board:
