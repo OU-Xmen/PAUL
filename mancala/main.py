@@ -3,8 +3,10 @@ try:
     pygame.init()
     import os
     import time
+    from importlib.machinery import SourceFileLoader
     maindirectory = os.path.dirname(os.path.abspath(__file__))
     assetdirectory = os.path.join(maindirectory, 'assets')
+    main_menu = SourceFileLoader("main", os.path.join(maindirectory, 'main.py')).load_module()
 except ImportError:
     print("One or more modules failed to load. Please try again.")
     quit()
@@ -250,9 +252,6 @@ while running: # game loop
     elif not playerOne and messageCode == -1:
         message = "You must choose a non-empty bin, Player Two."
 
-
-    
-
     message_text = font.render(message, True, WHITE)
     screen.blit(message_text, (screen_width // 6, screen_height // 6))
 
@@ -271,4 +270,4 @@ win_text = font.render(win_message, True, WHITE)
 screen.blit(win_text, (screen_width // 6, screen_height * 5 // 6))
 
 time.sleep(5)
-pygame.quit()
+main_menu.main(False)

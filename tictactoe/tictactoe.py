@@ -3,6 +3,8 @@ import numpy as np
 from importlib.machinery import SourceFileLoader
 import os
 
+main_dir =  os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
 pygame.init()
 
 
@@ -159,6 +161,6 @@ while True:
 				player = 1
 				game_over = False
 			elif event.key == pygame.K_ESCAPE:
-				pass
+				main_menu.main(False)
 
 	pygame.display.update()

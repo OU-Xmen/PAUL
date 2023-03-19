@@ -9,6 +9,8 @@ try:
     assetdirectory = os.path.join(maindirectory, 'assets')
     B = SourceFileLoader('ChessBoard', os.path.join(maindirectory, 'ChessBoard.py')).load_module()
     CP = SourceFileLoader('ChessPiece', os.path.join(maindirectory, 'ChessPiece.py')).load_module()
+    main_menu = SourceFileLoader('main', os.path.join(os.path.dirname(maindirectory), 'main.py')).load_module()
+
 except ImportError:
     print("One or more modules failed to load")
     quit()
@@ -102,6 +104,10 @@ def main():
                     made_move = game_board.clicked_on(mouse_ij[0], mouse_ij[1], screen)
                     if made_move:
                         whose_turn = 1 - whose_turn
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    main_menu.main(False)
+                    break
 
         if what_to_do: break
 

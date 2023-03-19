@@ -2,6 +2,13 @@ import numpy as np
 import pygame
 import sys
 import math
+import os
+from importlib.machinery import SourceFileLoader
+
+main_dir =  os.path.dirname(__file__)
+print(main_dir)
+main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
+
  
 BLUE = (0,0,255)
 BLACK = (0,0,0)
@@ -99,8 +106,8 @@ while not game_over:
  
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            sys.exit()
- 
+            game_over = True
+            main_menu.main(False)
         if event.type == pygame.MOUSEMOTION:
             pygame.draw.rect(screen, BLACK, (0,0, width, SQUARESIZE))
             posx = event.pos[0]

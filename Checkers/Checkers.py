@@ -10,6 +10,8 @@ try:
     assetdirectory = os.path.join(maindirectory, 'assets')
     B = SourceFileLoader('CheckersBoard', os.path.join(maindirectory, 'CheckersBoard.py')).load_module()
     CP = SourceFileLoader('CheckersPiece', os.path.join(maindirectory, 'CheckersPiece.py')).load_module()
+    main_menu = SourceFileLoader('main', os.path.join(os.path.dirname(maindirectory), 'main.py')).load_module()
+
 except ImportError:
     print("One or more modules failed to load")
     quit()
@@ -44,6 +46,10 @@ def main():
                     if made_move:
                         bruh = game_board.test_for_win()
                         whose_turn = 1 - whose_turn
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    main_menu.main(False)
+                    break
         
         pygame.display.flip()
 

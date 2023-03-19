@@ -1,6 +1,11 @@
 import pygame
 import time
 import random
+from importlib.machinery import SourceFileLoader
+import os
+
+main_dir =  os.path.dirname(__file__)
+main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
 
 pygame.init()
 
@@ -60,6 +65,7 @@ def gameLoop():
                     if event.key == pygame.K_q:
                         game_over = True
                         game_close = False
+                        main_menu.main(False)
                     if event.key == pygame.K_c:
                         gameLoop()
         for event in pygame.event.get():
@@ -78,6 +84,9 @@ def gameLoop():
                 elif event.key == pygame.K_DOWN:
                     y1_change = snake_block
                     x1_change = 0
+                elif event.key == pygame.K_ESCAPE:
+                    main_menu.main(False)
+                    break
         if x1 >= dis_width or x1 < 0 or y1 >= dis_height or y1 < 0:
             game_close = True
         x1 += x1_change
