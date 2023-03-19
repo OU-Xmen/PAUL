@@ -15,6 +15,9 @@ def log(message = None, Type = 1):
         Type = "WARNING"
     elif Type == 4:
         Type = "CRITICAL"
-    f = open(f"logs/PAUL {date}.log", "a")
-    f.write(f"[{Type}] [{timestamp}] {message}\n")
-    f.close()
+    try:
+        f = open(f"logs/PAUL {date}.log", "a")
+        f.write(f"[{Type}] [{timestamp}] {message}\n")
+        f.close()
+    except FileNotFoundError:
+        os.mkdir("logs")
