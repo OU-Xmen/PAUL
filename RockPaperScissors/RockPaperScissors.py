@@ -114,6 +114,8 @@ def main():
                         message ="P.A.U.L. Wins!"
                     elif comparison == "tie":
                         message = "It's a tie!"
+                        
+                paul = paul_choice()
                     
 
         screen.fill(WHITE)
