@@ -1,11 +1,6 @@
 import pygame
 import time
 import random
-from importlib.machinery import SourceFileLoader
-import os
-
-main_dir =  os.path.dirname(__file__)
-main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
 
 pygame.init()
 
@@ -52,6 +47,10 @@ def gameLoop():
     Length_of_snake = 1
     foodx = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
     foody = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
+    Left = False
+    Right = False
+    Up = False
+    Down = False
 
     while not game_over:
 
@@ -65,7 +64,6 @@ def gameLoop():
                     if event.key == pygame.K_q:
                         game_over = True
                         game_close = False
-                        main_menu.main(False)
                     if event.key == pygame.K_c:
                         gameLoop()
         for event in pygame.event.get():
@@ -75,18 +73,44 @@ def gameLoop():
                 if event.key == pygame.K_LEFT:
                     x1_change = -snake_block
                     y1_change = 0
+                    if Right:
+                        x1_change = snake_block
+                        y1_change = 0
+                    Left = True
+                    Up = False
+                    Down = False
+                    Right = False
                 elif event.key == pygame.K_RIGHT:
                     x1_change = snake_block
                     y1_change = 0
+                    if Left:
+                        x1_change = -snake_block
+                        y1_change = 0
+                    Left = False
+                    Up = False
+                    Down = False
+                    Right = True
+                    
                 elif event.key == pygame.K_UP:
                     y1_change = -snake_block
                     x1_change = 0
+                    if Down:
+                        x1_change = 0
+                        y1_change = snake_block
+                    Left = False
+                    Up = True
+                    Down = False
+                    Right = False
                 elif event.key == pygame.K_DOWN:
                     y1_change = snake_block
                     x1_change = 0
-                elif event.key == pygame.K_ESCAPE:
-                    main_menu.main(False)
-                    break
+                    if Up:
+                        x1_change = 0
+                        y1_change = -snake_block
+                    Left = False
+                    Up = False
+                    Down = True
+                    Right = False
         if x1 >= dis_width or x1 < 0 or y1 >= dis_height or y1 < 0:
             game_close = True
         x1 += x1_change
