@@ -4,6 +4,8 @@ try:
     import os
     import time
     import random
+    import pyttsx3
+    import threading
     from importlib.machinery import SourceFileLoader
     maindirectory = os.path.dirname(os.path.abspath(__file__))
     assetdirectory = os.path.join(maindirectory, 'assets')
@@ -13,6 +15,9 @@ try:
 except ImportError:
     print("One or more modules failed to load")
     quit()
+
+# initialize speech
+tts = pyttsx3.init()
 
 # PAUL phrases
 paul_plays_a_move = [
@@ -30,7 +35,7 @@ paul_plays_a_move = [
 
 paul_loses = [
     'bruh',
-    'Erm, that just happened...',
+    'Um, that just happened...',
     'Well, this just got awkward.',
 ]
 
@@ -41,9 +46,9 @@ paul_wins = [
 ]
 
 def talking_donkey(list):
-    fiona = list[random.randint(0, len(list)-1)]
-    shrek = f'PAUL: {fiona}'
-    return shrek
+    shrek = list[random.randint(0, len(list)-1)]
+    fiona = f"PAUL: {shrek}"
+    return fiona
 
 # create 800x600 window
 size = width, height = 800, 600
@@ -110,7 +115,6 @@ def play_again_menu(paul_face, winner):
 
 def main():
     game_board = B.Board()
-    legal_moves_flag = False
     made_move = []
     whose_turn = 0 # start with white
     what_to_do = False
@@ -135,6 +139,7 @@ def main():
         if whose_turn == 0: # white player makes a move
             paul_face = paul_faces('idle')
             screen.blit(paul_face, (630, 90))
+            
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     quit()
@@ -157,11 +162,22 @@ def main():
             paul_moves = game_board.board[paul_i][paul_j].get_legal_moves(game_board.board)
             paul_move = paul_moves[random.randint(0, len(paul_moves) - 1)]
             game_board.make_move(paul_move, paul_i, paul_j)
+
+            screen.blit(background, (0, 0))
+            game_board.draw_board(screen)
+            screen.blit(pause_rend, pause_rect)
+            paul_face = paul_faces('idle')
+            screen.blit(paul_face, (630, 90))
+            pygame.display.flip()
             print(talking_donkey(paul_plays_a_move))
+            
             whose_turn = 0
 
         if what_to_do: break
 
+        screen.blit(background, (0, 0))
+        game_board.draw_board(screen)
+        screen.blit(pause_rend, pause_rect)
         pygame.display.flip()
 
         break_flag = False
@@ -169,15 +185,15 @@ def main():
         if winner:
             if winner == 'White':
                 paul_face = paul_faces('lose')
-                print(talking_donkey(paul_loses))
+                fiona = paul_loses
             elif winner == 'Black':
                 paul_face = paul_faces('win')
-                print(talking_donkey(paul_wins))
-            screen.blit(background, (0, 0))
-            game_board.draw_board(screen)
-            screen.blit(paul_face, (630, 90))
-            pygame.display.flip()
-            time.sleep(1.5)
+                fiona = paul_wins
+            # screen.blit(background, (0, 0))
+            # game_board.draw_board(screen)
+            # screen.blit(paul_face, (630, 90))
+            # pygame.display.flip()
+            print(talking_donkey(fiona))
             break_flag = play_again_menu(paul_face, winner)
             break
     if break_flag: main()
