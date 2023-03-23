@@ -24,6 +24,7 @@ class Empty:
     def __init__(self, i, j):
         self.id = None
         self.img = pygame.image.load(os.path.join(assetdirectory, 'empty_tile.png'))
+        self.img.set_colorkey((255, 0, 0))
         # [i][j] denote place in actual board
         self.i = i
         self.j = j
