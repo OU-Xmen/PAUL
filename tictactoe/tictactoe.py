@@ -1,166 +1,125 @@
+import sys
 import pygame
-import numpy as np
-from importlib.machinery import SourceFileLoader
+from pygame.locals import *
 import os
 
-main_dir =  os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
+main_dir = os.path.dirname(os.path.abspath(__file__))
+assets_dir = os.path.join(main_dir, "assets") 
 pygame.init()
-
+FPS = 60
+fpsClock = pygame.time.Clock()
 
 WIDTH = 800
-HEIGHT = 800
-LINE_WIDTH = 15
-WIN_LINE_WIDTH = 15
-BOARD_ROWS = 3
-BOARD_COLS = 3
-SQUARE_SIZE = 266
-CIRCLE_RADIUS = 60
-CIRCLE_WIDTH = 15
-CROSS_WIDTH = 25
-SPACE = 55
+HEIGHT = 600
+DISPLAY = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Tic Tac Toe")
 
-RED = (255, 0, 0)
-BG_COLOR = (28, 170, 156)
-LINE_COLOR = (23, 145, 135)
-CIRCLE_COLOR = (239, 231, 200)
-CROSS_COLOR = (66, 66, 66)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+LINE_COLOR = (50, 50, 50)
+board = [[None, None, None], [None, None, None], [None, None, None]]
 
+pygame.font.init()
+FONT = pygame.font.Font(None, 40)
 
-screen = pygame.display.set_mode( (WIDTH, HEIGHT) )
-pygame.display.set_caption( 'TIC TAC TOE' )
-screen.fill( BG_COLOR )
+x_sound = pygame.mixer.Sound(os.path.join(main_dir,"assets/x.wav"))
+o_sound = pygame.mixer.Sound(os.path.join(main_dir,"assets/o.wav"))
+music = pygame.mixer.Sound(os.path.join(main_dir,"assets/3am.wav"))
 
-board = np.zeros( (BOARD_ROWS, BOARD_COLS) )
-
-def draw_lines():
-	pygame.draw.line( screen, LINE_COLOR, (0, SQUARE_SIZE), (WIDTH, SQUARE_SIZE), LINE_WIDTH )
-	pygame.draw.line( screen, LINE_COLOR, (0, 2 * SQUARE_SIZE), (WIDTH, 2 * SQUARE_SIZE), LINE_WIDTH )
-
-	pygame.draw.line( screen, LINE_COLOR, (SQUARE_SIZE, 0), (SQUARE_SIZE, HEIGHT), LINE_WIDTH )
-	pygame.draw.line( screen, LINE_COLOR, (2 * SQUARE_SIZE, 0), (2 * SQUARE_SIZE, HEIGHT), LINE_WIDTH )
-
-def draw_figures():
-	for row in range(BOARD_ROWS):
-		for col in range(BOARD_COLS):
-			if board[row][col] == 1:
-				pygame.draw.circle( screen, CIRCLE_COLOR, (int( col * SQUARE_SIZE + SQUARE_SIZE//2 ), int( row * SQUARE_SIZE + SQUARE_SIZE//2 )), CIRCLE_RADIUS, CIRCLE_WIDTH )
-			elif board[row][col] == 2:
-				pygame.draw.line( screen, CROSS_COLOR, (col * SQUARE_SIZE + SPACE, row * SQUARE_SIZE + SQUARE_SIZE - SPACE), (col * SQUARE_SIZE + SQUARE_SIZE - SPACE, row * SQUARE_SIZE + SPACE), CROSS_WIDTH )	
-				pygame.draw.line( screen, CROSS_COLOR, (col * SQUARE_SIZE + SPACE, row * SQUARE_SIZE + SPACE), (col * SQUARE_SIZE + SQUARE_SIZE - SPACE, row * SQUARE_SIZE + SQUARE_SIZE - SPACE), CROSS_WIDTH )
-
-def mark_square(row, col, player):
-	board[row][col] = player
-
-def available_square(row, col):
-	return board[row][col] == 0
-
-def is_board_full():
-	for row in range(BOARD_ROWS):
-		for col in range(BOARD_COLS):
-			if board[row][col] == 0:
-				return False
-
-	return True
-
-def check_win(player):
-	for col in range(BOARD_COLS):
-		if board[0][col] == player and board[1][col] == player and board[2][col] == player:
-			draw_vertical_winning_line(col, player)
-			return True
-
-	for row in range(BOARD_ROWS):
-		if board[row][0] == player and board[row][1] == player and board[row][2] == player:
-			draw_horizontal_winning_line(row, player)
-			return True
-
-	if board[2][0] == player and board[1][1] == player and board[0][2] == player:
-		draw_asc_diagonal(player)
-		return True
-
-	if board[0][0] == player and board[1][1] == player and board[2][2] == player:
-		draw_desc_diagonal(player)
-		return True
-
-	return False
-
-def draw_vertical_winning_line(col, player):
-	posX = col * SQUARE_SIZE + SQUARE_SIZE//2
-
-	if player == 1:
-		color = CIRCLE_COLOR
-	elif player == 2:
-		color = CROSS_COLOR
-
-	pygame.draw.line( screen, color, (posX, 15), (posX, HEIGHT - 15), LINE_WIDTH )
-
-def draw_horizontal_winning_line(row, player):
-	posY = row * SQUARE_SIZE + SQUARE_SIZE//2
-
-	if player == 1:
-		color = CIRCLE_COLOR
-	elif player == 2:
-		color = CROSS_COLOR
-
-	pygame.draw.line( screen, color, (15, posY), (WIDTH - 15, posY), WIN_LINE_WIDTH )
-
-def draw_asc_diagonal(player):
-	if player == 1:
-		color = CIRCLE_COLOR
-	elif player == 2:
-		color = CROSS_COLOR
-
-	pygame.draw.line( screen, color, (15, HEIGHT - 15), (WIDTH - 15, 15), WIN_LINE_WIDTH )
-
-def draw_desc_diagonal(player):
-	if player == 1:
-		color = CIRCLE_COLOR
-	elif player == 2:
-		color = CROSS_COLOR
-
-	pygame.draw.line( screen, color, (15, 15), (WIDTH - 15, HEIGHT - 15), WIN_LINE_WIDTH )
-
-def restart():
-	screen.fill( BG_COLOR )
-	draw_lines()
-	for row in range(BOARD_ROWS):
-		for col in range(BOARD_COLS):
-			board[row][col] = 0
-
-draw_lines()
+def display_text(text, x, y, color=BLACK, bg_color=WHITE):
+    rendered_text = FONT.render(text, True, color)
+    text_rect = rendered_text.get_rect()
+    text_rect.center = (x, y)
+    
+    # Draw a white rectangle behind the text
+    bg_rect = pygame.Rect(text_rect.left - 10, text_rect.top - 10, text_rect.width + 20, text_rect.height + 20)
+    pygame.draw.rect(DISPLAY, bg_color, bg_rect)
+    
+    DISPLAY.blit(rendered_text, text_rect)
 
 
-player = 1
-game_over = False
 
-while True:
-	for event in pygame.event.get():
-		if event.type == pygame.QUIT:
-			pass
+def check_win(board):
+    for row in range(3):
+        if board[row][0] == board[row][1] == board[row][2] and board[row][0] is not None:
+            return board[row][0]
+    for col in range(3):
+        if board[0][col] == board[1][col] == board[2][col] and board[0][col] is not None:
+            return board[0][col]
+    if board[0][0] == board[1][1] == board[2][2] and board[0][0] is not None:
+        return board[0][0]
+    if board[0][2] == board[1][1] == board[2][0] and board[0][2] is not None:
+        return board[0][2]
+    return None
 
-		if event.type == pygame.MOUSEBUTTONDOWN and not game_over:
+def check_draw(board):
+    for row in range(3):
+        for col in range(3):
+            if board[row][col] is None:
+                return False
+    return True
 
-			mouseX = event.pos[0] # x
-			mouseY = event.pos[1] # y
+def draw_board():
+    for i in range(1, 3):
+        pygame.draw.line(DISPLAY, LINE_COLOR, (WIDTH // 3 * i, 0), (WIDTH // 3 * i, HEIGHT), 5)
+        pygame.draw.line(DISPLAY, LINE_COLOR, (0, HEIGHT // 3 * i), (WIDTH, HEIGHT // 3 * i), 5)
 
-			clicked_row = int(mouseY // SQUARE_SIZE)
-			clicked_col = int(mouseX // SQUARE_SIZE)
+def draw_xo(row, col, player):
+    x = col * WIDTH // 3 + WIDTH // 6
+    y = row * HEIGHT // 3 + HEIGHT // 6
+    if player == "X":
+        x_sound.play()
+        pygame.draw.line(DISPLAY, BLACK, (x - 50, y - 50), (x + 50, y + 50), 10)
+        pygame.draw.line(DISPLAY, BLACK, (x + 50, y - 50), (x - 50, y + 50), 10)
+    elif player == "O":
+        o_sound.play()
+        pygame.draw.circle(DISPLAY, BLACK, (x, y), 60, 10)
 
-			if available_square( clicked_row, clicked_col ):
+def main():
+    pygame.init()
+    game_over = False
+    player_turn = "X"
+    winner = None
+    DISPLAY.fill(WHITE)
 
-				mark_square( clicked_row, clicked_col, player )
-				if check_win( player ):
-					game_over = True
-				player = player % 2 + 1
 
-				draw_figures()
+    while not game_over:
+        draw_board()
 
-		if event.type == pygame.KEYDOWN:
-			if event.key == pygame.K_r:
-				restart()
-				player = 1
-				game_over = False
-			elif event.key == pygame.K_ESCAPE:
-				main_menu.main(False)
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == MOUSEBUTTONDOWN and not game_over:
+                x, y = event.pos
+                row, col = y // (HEIGHT // 3), x // (WIDTH // 3)
 
-	pygame.display.update()
+                if board[row][col] is None:
+                    draw_xo(row, col, player_turn)
+                    board[row][col] = player_turn
+
+                    winner = check_win(board)
+                    if winner:
+                        game_over = True
+                    elif check_draw(board):
+                        winner = "DRAW"
+                        game_over = True
+                    else:
+                        player_turn = "O" if player_turn == "X" else "X"
+
+        if game_over:
+            if winner == "DRAW":
+                display_text("It's a draw!", WIDTH // 2, HEIGHT // 2)
+            else:
+                display_text(f"{winner} wins!", WIDTH // 2, HEIGHT // 2)
+            pygame.display.update()
+            pygame.time.delay(5000)  # Delay for 5000 milliseconds (5 seconds)
+
+        pygame.display.update()
+        fpsClock.tick(FPS)
+
+
+
+if __name__ == "__main__":
+    music.play(loops=-1)
+    main()
