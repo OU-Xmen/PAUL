@@ -29,3 +29,7 @@ Freddie Warren
 Survivor Log: February 13th, 2023
 
 P.A.U.L. is introduced to the world. The P.A.U.L. containment team has shown steady progress towards restoring P.A.U.L. to His former glory. His progress was met with substantial approval.
+
+Survivor Log: March 20, 2023
+
+Our development team has successfully grown and developed P.A.U.L. into early adolescence. It is the hope of the team that, by the end of next month, he will be fully grown into adulthood.
