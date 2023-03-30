@@ -59,12 +59,14 @@ def main():
                 main_menu.main(False)
 
             if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    running = False
+                    main_menu.main(False)
+                    
                 # check if the key pressed is a letter
                 if event.unicode.isalpha():
                     letter = event.unicode.lower()
-                elif event.key == pygame.K_ESCAPE:
-                    running = False
-                    main_menu.main(False)
+                
 
                     if letter in word and letter not in guessed_letters:
                         # replace underscores with the correctly guessed letter
