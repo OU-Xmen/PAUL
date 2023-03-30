@@ -273,13 +273,15 @@ def init_words(text, center_x, center_y, color):
     return temp_rend, temp_rect
 
 pause_rend, pause_rect = init_words('Pause', SCREEN_WIDTH-140, 80, pause_color)
-resume_rend, resume_rect = init_words('Resume', SCREEN_WIDTH-140, 180, pause_color)
+resume_rend, resume_rect = init_words('Resume', SCREEN_WIDTH-140, 80, pause_color)
+quit_rend, quit_rect = init_words('Quit', SCREEN_WIDTH-140, 180, pause_color)
 
 def pause_menu():
     while True:
         mouse = pygame.mouse.get_pos()
         screen.fill('black')
         screen.blit(resume_rend, resume_rect)
+        screen.blit(quit_rend, quit_rect)
         pygame.display.flip()
 
         for event in pygame.event.get():
@@ -288,7 +290,11 @@ def pause_menu():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if resume_rect.collidepoint(mouse):
                     return False
-
+                if quit_rect.collidepoint(mouse):
+                    logger.log("Returning to main menu.")
+                    main_menu.main(False)
+                    pygame.quit()
+                
 def main():
     global asteroid_count, rapid_start, game_over, lives, score, highscore, rapidFire
     game_over = False
