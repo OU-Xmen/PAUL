@@ -16,17 +16,17 @@ class Player:
     def blit_player(self, screen):
         screen.blit(self.img, self.img_rect)
     
-    def set_img_rect(self, x, y, w = 60, h = 60):
+    def set_img_rect(self, x, y, w = 34, h = 38):
         self.x = x
         self.y = y
         self.w = w
         self.h = h
-        self.img_rect = pygame.Rect(self.x, self.y, self.w, self.h)
+        self.img_rect = pygame.Rect((x, y, w, h))
     
     def get_img_rect(self):
         return self.img_rect
     
-    def move(self, direction, speed = 5):
+    def move(self, direction, speed = 2):
         match direction:
             case 'right':
                 self.set_img_rect(self.x+speed, self.y, self.w, self.h)
@@ -36,11 +36,11 @@ class Player:
     def jump(self, dist_to_ceiling):
         if self.gravity == False:
             self.gravity = True
-            if dist_to_ceiling < 13:
+            if dist_to_ceiling < 5.8:
                 self.gravity_velocity = 0
                 self.set_img_rect(self.x, self.y-dist_to_ceiling, self.w, self.h)
             else:
-                self.gravity_velocity = -13
+                self.gravity_velocity = -5.8
                 self.set_img_rect(self.x, self.y+self.gravity_velocity, self.w, self.h)
 
     def set_gravity(self, gravity, dist_to_floor, dist_to_ceiling):
@@ -52,7 +52,7 @@ class Player:
             self.set_img_rect(self.x, self.y-dist_to_ceiling, self.w, self.h)
             return
         else:
-            self.gravity_velocity += 1
+            self.gravity_velocity += .2
             self.set_img_rect(self.x, self.y+min(self.gravity_velocity, dist_to_floor), self.w, self.h)
             return
     
