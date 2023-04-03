@@ -9,10 +9,10 @@ import subprocess
 main_dir = os.path.dirname(os.path.abspath(__file__))
 
 print("Loading games...")
-#log("Loading games...")
+log("Loading games...")
 
-# logger = SourceFileLoader("logger", os.path.join(main_dir, "py")).load_module()
-# t = SourceFileLoader("themes", os.path.join(main_dir, "themes.py")).load_module()
+logger = SourceFileLoader("logger", os.path.join(main_dir, "py")).load_module()
+t = SourceFileLoader("themes", os.path.join(main_dir, "themes.py")).load_module()
 
 page = 1
 
@@ -156,8 +156,8 @@ def game_runner(i):
         print("Running Mad Libs") # run whatever game 6 is
         log(f"Preparing to run {game_to_run}")
         try:
-            mad_libs = SourceFileLoader('mad_libs', os.path.join(main_dir, 'mad_libs\\code\\mad_libs.py')).load_module()
-            mad_libs.main()
+            madlibs = SourceFileLoader('madlibs', os.path.join(main_dir, 'mad_libs\\madlibs.py')).load_module()
+            madlibs.main()
         except Exception as e:
             errorHandler(e)
 
@@ -243,6 +243,8 @@ def game_runner(i):
 
 # Splash screen flag
 def main(splash):
+
+    pygame.display.set_caption("P.A.U.L. - Main Menu")
 
     # Main game loop
     running = True
