@@ -59,15 +59,9 @@ def main():
                 main_menu.main(False)
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    running = False
-                    main_menu.main(False)
-                    
                 # check if the key pressed is a letter
                 if event.unicode.isalpha():
                     letter = event.unicode.lower()
-                
-
                     if letter in word and letter not in guessed_letters:
                         # replace underscores with the correctly guessed letter
                         for i in range(len(word)):
@@ -78,6 +72,10 @@ def main():
                         # increment hangman status
                         hangman_status += 1
                         guessed_letters.append(letter)
+                        
+                if event.key == pygame.K_ESCAPE:
+                    running = False
+                    main_menu.main(False)
 
         screen.fill(white)
 
