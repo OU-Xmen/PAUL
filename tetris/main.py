@@ -129,6 +129,7 @@ T = [['.....',
 
 shapes = [S, Z, I, O, J, L, T]
 shape_colors = [(0, 255, 0), (255, 0, 0), (0, 255, 255), (255, 255, 0), (255, 165, 0), (0, 0, 255), (128, 0, 128)]
+shape_archive = [S, Z, I, O, J, L, T]
 # index 0 - 6 represent shape
 
 
@@ -185,9 +186,15 @@ def check_lost(positions):
 
     return False
 
-def get_shape():
-    return Piece(5, 0, random.choice(shapes))
-
+def get_shape(): # S Z I O J L T
+    
+    if len(shape_archive) > 0:
+        shape = random.choice(shape_archive)
+        shape_archive.remove(shape)
+        if len(shape_archive) == 0:
+            shape_archive.extend(shapes)
+    return Piece(5, 0, shape) 
+        
 
 def draw_text_middle(surface, text, size, color):  
     font = pygame.font.SysFont('comicsans', size, bold = True)
@@ -230,7 +237,7 @@ def clear_rows(grid, locked):
     return inc
 
 def draw_next_shape(shape, surface):
-    font = pygame.font.SysFont('comicsans', 30)
+    font = pygame.font.SysFont('comicsans', 25)
     label = font.render('Next Shape', 1, (255,255,255))
 
     sx = top_left_x + play_width + 50
@@ -284,10 +291,10 @@ def draw_window(surface, grid, score=0, last_score = 0):
     # last score
     label = font.render('High Score: ' + last_score, 1, (255,255,255))
 
-    sx = top_left_x - 200
-    sy = top_left_y + 200
+    sx = top_left_x + play_width + 10
+    sy = top_left_y + play_height/2 - 50
 
-    surface.blit(label, (sx + 20, sy + 160))
+    surface.blit(label, (sx, sy + 160))
 
     for i in range(len(grid)):
         for j in range(len(grid[i])):
@@ -296,7 +303,6 @@ def draw_window(surface, grid, score=0, last_score = 0):
     pygame.draw.rect(surface, (255, 0, 0), (top_left_x, top_left_y, play_width, play_height), 5)
 
     draw_grid(surface, grid)
-    #pygame.display.update()
 
 
 def main(win):  # *
@@ -347,6 +353,7 @@ def main(win):  # *
                     if not(valid_space(current_piece, grid)):
                         current_piece.x -= 1
                 if event.key == pygame.K_DOWN:
+                    pygame.key.set_repeat(500, 100)
                     current_piece.y += 1
                     if not(valid_space(current_piece, grid)):
                         current_piece.y -= 1
