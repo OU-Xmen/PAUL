@@ -11,7 +11,6 @@ main_dir = os.path.dirname(os.path.abspath(__file__))
 print("Loading games...")
 log("Loading games...")
 
-logger = SourceFileLoader("logger", os.path.join(main_dir, "py")).load_module()
 t = SourceFileLoader("themes", os.path.join(main_dir, "themes.py")).load_module()
 
 page = 1
