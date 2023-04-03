@@ -1,9 +1,22 @@
-import pygame
 from importlib.machinery import SourceFileLoader
 import os
-main_dir = os.path.dirname(__file__)
-CP = SourceFileLoader("CheckersPiece", os.path.join(main_dir, "CheckersPiece.py")).load_module()
+import time
+import pygame
+import random
 pygame.init()
+pygame.mixer.init()
+maindirectory = os.path.dirname(os.path.abspath(__file__))
+CP = SourceFileLoader('CheckersPiece', os.path.join(maindirectory, 'CheckersPiece.py')).load_module()
+music = pygame.mixer.Sound(os.path.join(maindirectory, 'assets', 'Chess and Checkers.wav'))
+capture_sound = pygame.mixer.Sound(os.path.join(maindirectory, 'assets', 'capture.wav'))
+capture_sound.set_volume(0.6)
+move_sound = pygame.mixer.Sound(os.path.join(maindirectory, 'assets', 'move.wav'))
+move_sound.set_volume(0.6)
+promote_sound = pygame.mixer.Sound(os.path.join(maindirectory, 'assets', 'promote.wav'))
+promote_sound.set_volume(0.6)
+bruh_channel = pygame.mixer.Channel(1)
+song_channel = pygame.mixer.Channel(2)
+boom_channel = pygame.mixer.Channel(3)
 
 class Board:
     def __init__(self):
@@ -22,10 +35,13 @@ class Board:
             for i in [5, 6, 7]:
                 self.board[i][j+((i+1)%2)] = CP.Pawn(i, j+((i+1)%2), 'B')
 
-        #create 12 red pieces
+        # create 12 red pieces
         for j in [1, 3, 5, 7]:
             for i in [0, 1, 2]:
                 self.board[i][j-(i%2)] = CP.Pawn(i, j-(i%2), 'R')
+        
+        # play music
+        song_channel.play(music, -1)
     
     def draw_board(self, screen):
         for i in range(8):
@@ -45,7 +61,7 @@ class Board:
                     quit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if mouse_ij in legal_moves:
-                        dave = self.make_move(mouse_ij, i, j)
+                        self.make_move(mouse_ij, i, j)
                         if self.board[mouse_ij[0]][mouse_ij[1]].king:
                             kevin = []
                             kevins_dog_also_named_kevin = CP.get_legal_jumps(mouse_ij[0], mouse_ij[1], 'R', self.board)
@@ -68,13 +84,20 @@ class Board:
             pygame.display.flip()
     
     def make_move(self, mouse_ij, i, j):
+        jump_flag = False
+        
         old_piece = self.board[i][j]
         if old_piece.king:
             self.board[mouse_ij[0]][mouse_ij[1]] = CP.King(mouse_ij[0], mouse_ij[1], old_piece.id)
         else:
             self.board[mouse_ij[0]][mouse_ij[1]] = CP.Pawn(mouse_ij[0], mouse_ij[1], old_piece.id)
         self.board[i][j] = CP.Empty(i, j)
+        
+        # handle capture
         if abs(i - mouse_ij[0]) > 1:
+            jump_flag = True
+            bruh_channel.stop()
+            bruh_channel.play(capture_sound)
             statler = int((i + mouse_ij[0])/2)
             waldorf = int((j + mouse_ij[1])/2)
             self.board[statler][waldorf] = CP.Empty(statler, waldorf)
@@ -82,9 +105,16 @@ class Board:
         # handle promotion
         black_at_back_rank = self.board[mouse_ij[0]][mouse_ij[1]].id == 'B' and mouse_ij[0] == 0
         red_at_back_rank = self.board[mouse_ij[0]][mouse_ij[1]].id == 'R' and mouse_ij[0] == 7
-        if red_at_back_rank or black_at_back_rank:
+        if red_at_back_rank or black_at_back_rank and (not self.board[mouse_ij[0]][mouse_ij[1]].king):
+            jump_flag = True
+            boom_channel.stop()
+            boom_channel.play(promote_sound)
             self.board[mouse_ij[0]][mouse_ij[1]] = CP.King(mouse_ij[0], mouse_ij[1], old_piece.id)
 
+        # play move sound
+        if not jump_flag:
+            bruh_channel.stop()
+            bruh_channel.play(move_sound)
         return True
     
     def test_for_win(self):
@@ -95,6 +125,17 @@ class Board:
                 if logan_two and logan_two not in logan:
                     logan.append(logan_two)
         if len(logan) == 1:
+            song_channel.stop()
+            #play lose/win fanfare
+            if logan[0] == 'R':
+                music = pygame.mixer.Sound(os.path.join(maindirectory, 'assets\Lose Fanfare.wav'))
+            else:
+                music = pygame.mixer.Sound(os.path.join(maindirectory, 'assets\Win Fanfare.wav'))
+            boom_channel.play(music)
+            time.sleep(4*(1 + (logan[0] == 'R')))
+            # play end music
+            music = pygame.mixer.Sound(os.path.join(maindirectory, 'assets\music_wii.wav'))
+            song_channel.play(music)
             return logan[0]
         return False
     
