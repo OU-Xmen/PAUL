@@ -6,7 +6,7 @@ try:
     import time
     import random
     from importlib.machinery import SourceFileLoader
-    maindirectory = os.path.dirname(os.path.abspath(__file__))
+    maindirectory = os.path.dirname(os.path.abspath(__file__)) if __name__ == '__main__' else os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Checkers')
     assetdirectory = os.path.join(maindirectory, 'assets')
     B = SourceFileLoader('CheckersBoard', os.path.join(maindirectory, 'CheckersBoard.py')).load_module()
     CP = SourceFileLoader('CheckersPiece', os.path.join(maindirectory, 'CheckersPiece.py')).load_module()

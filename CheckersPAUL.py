@@ -5,9 +5,8 @@ try:
     import sys
     import time
     import random
-    import pyttsx3
     from importlib.machinery import SourceFileLoader
-    maindirectory = os.path.dirname(os.path.abspath(__file__))
+    maindirectory = os.path.dirname(os.path.abspath(__file__)) if __name__ == '__main__' else os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Checkers')
     assetdirectory = os.path.join(maindirectory, 'assets')
     pauldirectory = os.path.join(assetdirectory, 'paul_face')
     B = SourceFileLoader('CheckersBoard', os.path.join(maindirectory, 'CheckersBoard.py')).load_module()
@@ -15,9 +14,6 @@ try:
 except ImportError:
     print("One or more modules failed to load")
     quit()
-
-# initialize speech
-tts = pyttsx3.init()
 
 # PAUL phrases
 paul_plays_a_move = [
