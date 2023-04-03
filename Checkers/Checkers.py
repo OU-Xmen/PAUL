@@ -12,8 +12,8 @@ try:
     CP = SourceFileLoader('CheckersPiece', os.path.join(maindirectory, 'CheckersPiece.py')).load_module()
     main_menu = SourceFileLoader('main', os.path.join(os.path.dirname(maindirectory), 'main.py')).load_module()
 
-except ImportError:
-    print("One or more modules failed to load")
+except ImportError as e:
+    print(f"One or more modules failed to load: {e}")
     quit()
 
 def main():

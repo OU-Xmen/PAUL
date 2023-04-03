@@ -1,15 +1,16 @@
 import pygame
 from importlib.machinery import SourceFileLoader
-from logger import *
-import themes as t
+#from logger import *
+#import themes as t
 from tkinter import messagebox
 import os
 import subprocess
 
 main_dir = os.path.dirname(os.path.abspath(__file__))
+logger = SourceFileLoader("logger", os.path.join(main_dir, "logger.py")).load_module()
 
 print("Loading games...")
-log("Loading games...")
+logger.log("Loading games...")
 
 t = SourceFileLoader("themes", os.path.join(main_dir, "themes.py")).load_module()
 
@@ -17,7 +18,7 @@ page = 1
 
 # Initialize pygame and set up window
 pygame.init()
-log("Pygame initialized", 1)
+logger.log("Pygame initialized", 1)
 
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
@@ -34,12 +35,12 @@ splash_image = pygame.transform.scale(splash_image, (800, 600))
 pygame.display.set_icon(splash_image)
 
 slide_image = pygame.image.load("assets/img/slide_puzzle.png")
-log("Images loaded", 1)
+logger.log("Images loaded", 1)
 
 # Load sounds
 paul_sound = pygame.mixer.Sound("assets/sounds/paul.wav")
 music = pygame.mixer.Sound("assets/sounds/fallen_down.wav")
-log("Sounds loaded", 1)
+logger.log("Sounds loaded", 1)
 
 
 BUTTON_WIDTH = 100
@@ -70,7 +71,7 @@ d_games = {
 
 
 def errorHandler(error, i=4):
-    log(error, i)
+    logger.log(error, i)
     messagebox.showerror("Error", f"P.A.U.L. has encountered an error:\n{error}\nProgram will now quit.")
     cleanup()
     quit()
@@ -110,7 +111,7 @@ def game_runner(i):
 
     if game_to_run == "Puzzle":
         print("Running Slide Puzzle") # run Slide Puzzle script
-        log(f"Preparing to run {game_to_run}.")
+        logger.log(f"Preparing to run {game_to_run}.")
         try:
             slide_puzzle = SourceFileLoader('Slide puzzle', os.path.join(main_dir, 'Slide puzzle\SlideGame.py')).load_module()
             slide_puzzle.main()
@@ -119,17 +120,17 @@ def game_runner(i):
 
     elif game_to_run == "Asteroids":
         print("Running Asteroids") # run Asteroids
-        log(f"Preparing to run {game_to_run}.")
+        logger.log(f"Preparing to run {game_to_run}.")
         try:
             asteroids = SourceFileLoader('asteroids', os.path.join(main_dir, 'asteroids\main.py')).load_module()
             asteroids.main()
-            log("Astroids successfully loaded.")
+            logger.log("Astroids successfully loaded.")
         except Exception as e:
             errorHandler(e)
             
     elif game_to_run == "Tetris":
         print("Running Tetris") # run Space Invaders 
-        log(f"Preparing to run {game_to_run}")
+        logger.log(f"Preparing to run {game_to_run}")
         try:
             tetris = SourceFileLoader('tetris', os.path.join(main_dir, 'tetris\\main.py')).load_module()
             tetris.main()
@@ -137,7 +138,7 @@ def game_runner(i):
             errorHandler(e)
     elif game_to_run == "Pong":
         print("Running Pong") # run whatever game 4 is
-        log(f"Preparing to run {game_to_run}")
+        logger.log(f"Preparing to run {game_to_run}")
         try:
             Pong = SourceFileLoader('Pong', os.path.join(main_dir, 'Pong\\Pong.py')).load_module()
             Pong.main()
@@ -145,7 +146,7 @@ def game_runner(i):
             errorHandler(e)
     elif game_to_run == "Hangman":
         print("Hangman") # run whatever game 5 is
-        log(f"Preparing to run {game_to_run}")
+        logger.log(f"Preparing to run {game_to_run}")
         try:
             hangman = SourceFileLoader('Hangman Game', os.path.join(main_dir, 'Hangman Game\\HangMan.py')).load_module()
             hangman.main()
@@ -153,7 +154,7 @@ def game_runner(i):
             errorHandler(e)
     elif game_to_run == "Mad Libs":
         print("Running Mad Libs") # run whatever game 6 is
-        log(f"Preparing to run {game_to_run}")
+        logger.log(f"Preparing to run {game_to_run}")
         try:
             madlibs = SourceFileLoader('madlibs', os.path.join(main_dir, 'mad_libs\\madlibs.py')).load_module()
             madlibs.main()
@@ -162,7 +163,7 @@ def game_runner(i):
 
     elif game_to_run == "Checkers":
         print("Running Checkers")
-        log(f"Preparing to run {game_to_run}")
+        logger.log(f"Preparing to run {game_to_run}")
         try:
             checkers = SourceFileLoader('checkers', os.path.join(main_dir, 'Checkers\\Checkers.py')).load_module()
             checkers.main()
@@ -171,7 +172,7 @@ def game_runner(i):
 
     elif game_to_run == "Chess":
         print("Running Chess")
-        log(f"Preparing to run {game_to_run}")
+        logger.log(f"Preparing to run {game_to_run}")
         try:
             chess = SourceFileLoader('chess', os.path.join(main_dir, 'Chess\\Chess.py')).load_module()
             chess.main()
@@ -180,7 +181,7 @@ def game_runner(i):
 
     elif game_to_run == "Guess the Number":
         print("Running Guess the Number")
-        log(f"Preparing to run {game_to_run}")
+        logger.log(f"Preparing to run {game_to_run}")
         try:
             nums = SourceFileLoader('number', os.path.join(main_dir, 'number_game\\main.py')).load_module()
             nums.main()
@@ -189,7 +190,7 @@ def game_runner(i):
 
     elif game_to_run == "Snake":
         print(f"Running {game_to_run}")
-        log(f"Preparing to run {game_to_run}")
+        logger.log(f"Preparing to run {game_to_run}")
         try:
             snake = SourceFileLoader('snake', os.path.join(main_dir, 'Snake Game.py')).load_module()
             snake.main()
@@ -198,7 +199,7 @@ def game_runner(i):
 
     elif game_to_run == "Tic Tac Toe":
         print(f"Running {game_to_run}")
-        log(f"Preparing to run {game_to_run}")
+        logger.log(f"Preparing to run {game_to_run}")
         try:
             ttt = SourceFileLoader('tictactoe', os.path.join(main_dir, 'tictactoe\\tictactoe.py')).load_module()
             ttt.main()
@@ -207,7 +208,7 @@ def game_runner(i):
     
     elif game_to_run == "Connect 4":
         print(f"Running {game_to_run}")
-        log(f"Preparing to run {game_to_run}")
+        logger.log(f"Preparing to run {game_to_run}")
         try:
             c4 = SourceFileLoader('connect4', os.path.join(main_dir, 'Connect 4.py')).load_module()
             c4.main()
@@ -216,7 +217,7 @@ def game_runner(i):
     
     elif game_to_run == "R. P. S.":
         print(f"Running {game_to_run}")
-        log(f"Preparing to run {game_to_run}")
+        logger.log(f"Preparing to run {game_to_run}")
         try:
             rps = SourceFileLoader('RockPaperScissors', os.path.join(main_dir, 'RockPaperScissors\\RockPaperScissors.py')).load_module()
             rps.main()
@@ -225,7 +226,7 @@ def game_runner(i):
 
     elif game_to_run == "Mancala":
         print(f"Running {game_to_run}")
-        log(f"Preparing to run {game_to_run}")
+        logger.log(f"Preparing to run {game_to_run}")
         try:
             man = SourceFileLoader('mancala', os.path.join(main_dir, 'mancala\\main.py')).load_module()
             man.main()
@@ -235,9 +236,9 @@ def game_runner(i):
 
     elif game_to_run == "Scoreboard":
         print("Switching to Scoreboard") # Show scoreboard
-        log(f"Preparing to run {game_to_run}")
+        logger.log(f"Preparing to run {game_to_run}")
     else:
-        log(f"{game_to_run} is not a valid option", 2)
+        logger.log(f"{game_to_run} is not a valid option", 2)
         
 
 # Splash screen flag
@@ -287,10 +288,10 @@ def main(splash):
             screen.blit(splash_image, (0, 0))
             pygame.display.update()
             paul_sound.play()
-            log("Running splash screen")
+            logger.log("Running splash screen")
             pygame.time.wait(3000)  # Show splash screen for 3 seconds
             splash = False
-            log("Running main menu")
+            logger.log("Running main menu")
         elif tunes: 
             music.play(loops=-1) # loop music forever
             tunes = False
@@ -326,7 +327,7 @@ def main(splash):
 def cleanup():
     try:
         pygame.quit()
-        log("Program terminated\n\n")
+        logger.log("Program terminated\n\n")
     except:
         pass
 
