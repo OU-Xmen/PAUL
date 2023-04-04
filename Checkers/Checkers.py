@@ -10,8 +10,10 @@ try:
     assetdirectory = os.path.join(maindirectory, 'assets')
     B = SourceFileLoader('CheckersBoard', os.path.join(maindirectory, 'CheckersBoard.py')).load_module()
     CP = SourceFileLoader('CheckersPiece', os.path.join(maindirectory, 'CheckersPiece.py')).load_module()
-except ImportError:
+    main_menu = SourceFileLoader('main', os.path.join(maindirectory, "..", "main.py")).load_module()
+except ImportError as e:
     print("One or more modules failed to load")
+    print(e)
     quit()
 
 # create 800x600 window
@@ -37,7 +39,7 @@ resume_rend, resume_rect = init_words('Resume', width-140, 440, black)
 quit_rend, quit_rect = init_words('Quit', width-140, 520, black)
 play_again_rend, play_again_rect = init_words('Play Again', width-140, 440, black)
 
-def pause_menu():
+def pause_menu(game_board):
     while True:
         mouse = pygame.mouse.get_pos()
         screen.blit(background, (0, 0))
@@ -52,7 +54,9 @@ def pause_menu():
                 if resume_rect.collidepoint(mouse):
                     return False
                 if quit_rect.collidepoint(mouse):
-                    return True
+                    game_board.shut_up()
+                    main_menu.main(False)
+                    quit()
 
 def play_again_menu(winner):
     while True:
@@ -96,7 +100,7 @@ def main():
                 quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pause_rect.collidepoint(mouse):
-                    what_to_do = pause_menu()
+                    what_to_do = pause_menu(game_board)
                 elif mouse_on_board:
                     piece_clicked = game_board.board[mouse_ij[0]][mouse_ij[1]]
                     if piece_clicked.id and piece_clicked.id == ('B', 'R')[whose_turn]:
@@ -123,6 +127,11 @@ def main():
             time.sleep(1.5)
             break_flag = play_again_menu(bruh)
             break
-    if break_flag: main()
+    if break_flag:
+        main()
+    else:
+        game_board.shut_up()
+        main_menu.main(False)
+        quit()
 
 if __name__ == "__main__": main()

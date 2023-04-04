@@ -2,15 +2,15 @@ try:
     import pygame
     pygame.init()
     import os
-    import sys
     import time
     import random
     from importlib.machinery import SourceFileLoader
-    maindirectory = os.path.dirname(os.path.abspath(__file__)) if __name__ == '__main__' else os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Checkers')
+    maindirectory = os.path.dirname(os.path.abspath(__file__))
     assetdirectory = os.path.join(maindirectory, 'assets')
     pauldirectory = os.path.join(assetdirectory, 'paul_face')
     B = SourceFileLoader('CheckersBoard', os.path.join(maindirectory, 'CheckersBoard.py')).load_module()
     CP = SourceFileLoader('CheckersPiece', os.path.join(maindirectory, 'CheckersPiece.py')).load_module()
+    main_menu = SourceFileLoader('main', os.path.join(maindirectory, "..", "main.py")).load_module()
 except ImportError:
     print("One or more modules failed to load")
     quit()
@@ -44,8 +44,6 @@ paul_wins = [
 def talking_donkey(list):
     fiona = list[random.randint(0, len(list)-1)]
     shrek = f'PAUL: {fiona}'
-    # tts.say(fiona)
-    # tts.runAndWait()
     return shrek
 
 # create 800x600 window
@@ -71,7 +69,7 @@ resume_rend, resume_rect = init_words('Resume', width-140, 440, black)
 quit_rend, quit_rect = init_words('Quit', width-140, 520, black)
 play_again_rend, play_again_rect = init_words('Play Again', width-140, 440, black)
 
-def pause_menu():
+def pause_menu(game_board):
     while True:
         mouse = pygame.mouse.get_pos()
         screen.blit(background, (0, 0))
@@ -86,7 +84,9 @@ def pause_menu():
                 if resume_rect.collidepoint(mouse):
                     return False
                 if quit_rect.collidepoint(mouse):
-                    return True
+                    game_board.shut_up()
+                    main_menu.main(False)
+                    quit()
 
 def play_again_menu(paul_face, winner):
     while True:
@@ -143,7 +143,7 @@ def main():
                     quit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if pause_rect.collidepoint(mouse):
-                        what_to_do = pause_menu()
+                        what_to_do = pause_menu(game_board)
                     elif mouse_on_board:
                         piece_clicked = game_board.board[mouse_ij[0]][mouse_ij[1]]
                         if piece_clicked.id and piece_clicked.id == 'B':
@@ -188,11 +188,15 @@ def main():
             screen.blit(background, (0, 0))
             game_board.draw_board(screen)
             screen.blit(paul_face, (630, 90))
-            # blit "You win!"
             pygame.display.flip()
             time.sleep(1.5)
             break_flag = play_again_menu(paul_face, bruh)
             break
-    if break_flag: main()
+    if break_flag:
+        main()
+    else:
+        game_board.shut_up()
+        main_menu.main(False)
+        quit()
 
 if __name__ == "__main__": main()

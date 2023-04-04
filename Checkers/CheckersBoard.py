@@ -6,13 +6,14 @@ import random
 pygame.init()
 pygame.mixer.init()
 maindirectory = os.path.dirname(os.path.abspath(__file__))
+sounddirectory = os.path.join(maindirectory, 'assets', 'sounds')
 CP = SourceFileLoader('CheckersPiece', os.path.join(maindirectory, 'CheckersPiece.py')).load_module()
-music = pygame.mixer.Sound(os.path.join(maindirectory, 'assets', 'Chess and Checkers.wav'))
-capture_sound = pygame.mixer.Sound(os.path.join(maindirectory, 'assets', 'capture.wav'))
+music = pygame.mixer.Sound(os.path.join(sounddirectory, 'Chess and Checkers.wav'))
+capture_sound = pygame.mixer.Sound(os.path.join(sounddirectory, 'capture.wav'))
 capture_sound.set_volume(0.6)
-move_sound = pygame.mixer.Sound(os.path.join(maindirectory, 'assets', 'move.wav'))
+move_sound = pygame.mixer.Sound(os.path.join(sounddirectory, 'move.wav'))
 move_sound.set_volume(0.6)
-promote_sound = pygame.mixer.Sound(os.path.join(maindirectory, 'assets', 'promote.wav'))
+promote_sound = pygame.mixer.Sound(os.path.join(sounddirectory, 'promote.wav'))
 promote_sound.set_volume(0.6)
 bruh_channel = pygame.mixer.Channel(1)
 song_channel = pygame.mixer.Channel(2)
@@ -128,13 +129,13 @@ class Board:
             song_channel.stop()
             #play lose/win fanfare
             if logan[0] == 'R':
-                music = pygame.mixer.Sound(os.path.join(maindirectory, 'assets\Lose Fanfare.wav'))
+                music = pygame.mixer.Sound(os.path.join(sounddirectory, 'Lose Fanfare.wav'))
             else:
-                music = pygame.mixer.Sound(os.path.join(maindirectory, 'assets\Win Fanfare.wav'))
+                music = pygame.mixer.Sound(os.path.join(sounddirectory, 'Win Fanfare.wav'))
             boom_channel.play(music)
             time.sleep(4*(1 + (logan[0] == 'R')))
             # play end music
-            music = pygame.mixer.Sound(os.path.join(maindirectory, 'assets\music_wii.wav'))
+            music = pygame.mixer.Sound(os.path.join(sounddirectory, 'Play Again.wav'))
             song_channel.play(music)
             return logan[0]
         return False
@@ -146,3 +147,6 @@ class Board:
                 if self.board[i][j].id == id:
                     pieces.append((i, j))
         return pieces
+    
+    def shut_up(self):
+        song_channel.stop()
