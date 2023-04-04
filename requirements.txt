@@ -1,3 +1,5 @@
+numpy
 pygame
 keyboard
 pyautogui
+importlib
