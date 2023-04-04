@@ -1,12 +1,12 @@
-#import ChessPiece as CP
-import os
-import pygame
 from importlib.machinery import SourceFileLoader
-main_dir = os.path.dirname(__file__)
-CP = SourceFileLoader("ChessPiece", os.path.join(main_dir, "ChessPiece.py")).load_module()
+import os
+import time
+import pygame
 pygame.init()
 pygame.mixer.init()
-sounddirectory = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'sounds')
+maindirectory = os.path.dirname(os.path.abspath(__file__))
+sounddirectory = os.path.join(maindirectory, 'assets', 'sounds')
+CP = SourceFileLoader('ChessPiece', os.path.join(maindirectory, 'ChessPiece.py')).load_module()
 capture_sound = pygame.mixer.Sound(os.path.join(sounddirectory, 'capture.wav'))
 music = pygame.mixer.Sound(os.path.join(sounddirectory, 'Chess and Checkers.wav'))
 promote_sound = pygame.mixer.Sound(os.path.join(sounddirectory, 'promote.wav'))
@@ -63,7 +63,7 @@ class Board:
         self.last_move = [0, 0]
 
         # play music
-        song_channel.play(music)
+        song_channel.play(music, -1)
     
     def draw_board(self, screen):
         for i in range(8):
@@ -153,6 +153,17 @@ class Board:
         
         xor = lambda a, b: (a or b) and (not (a and b))
         if xor(white_king, black_king):
+            song_channel.stop()
+            #play lose/win fanfare
+            if black_king:
+                music = pygame.mixer.Sound(os.path.join(sounddirectory, 'Lose Fanfare.wav'))
+            else:
+                music = pygame.mixer.Sound(os.path.join(sounddirectory, 'Win Fanfare.wav'))
+            song_channel.play(music)
+            time.sleep(4*(1 + black_king))
+            # play end music
+            music = pygame.mixer.Sound(os.path.join(sounddirectory, 'Play Again.wav'))
+            song_channel.play(music)
             return "White" if white_king else "Black"
         return None
     
@@ -163,3 +174,6 @@ class Board:
                 if self.board[i][j].color == color:
                     pieces.append((i, j))
         return pieces
+    
+    def shut_up(self):
+        song_channel.stop()

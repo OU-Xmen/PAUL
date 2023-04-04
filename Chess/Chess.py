@@ -3,14 +3,12 @@ try:
     pygame.init()
     import os
     import time
-    import random
     from importlib.machinery import SourceFileLoader
     maindirectory = os.path.dirname(os.path.abspath(__file__))
     assetdirectory = os.path.join(maindirectory, 'assets')
     B = SourceFileLoader('ChessBoard', os.path.join(maindirectory, 'ChessBoard.py')).load_module()
     CP = SourceFileLoader('ChessPiece', os.path.join(maindirectory, 'ChessPiece.py')).load_module()
-    main_menu = SourceFileLoader('main', os.path.join(os.path.dirname(maindirectory), 'main.py')).load_module()
-
+    main_menu = SourceFileLoader('main', os.path.join(maindirectory, "..", "main.py")).load_module()
 except ImportError:
     print("One or more modules failed to load")
     quit()
@@ -38,7 +36,7 @@ resume_rend, resume_rect = init_words('Resume', width-140, 440, black)
 quit_rend, quit_rect = init_words('Quit', width-140, 520, black)
 play_again_rend, play_again_rect = init_words('Play Again', width-140, 440, black)
 
-def pause_menu():
+def pause_menu(game_board):
     while True:
         mouse = pygame.mouse.get_pos()
         screen.blit(background, (0, 0))
@@ -53,7 +51,9 @@ def pause_menu():
                 if resume_rect.collidepoint(mouse):
                     return False
                 if quit_rect.collidepoint(mouse):
-                    return True
+                    game_board.shut_up()
+                    main_menu.main(False)
+                    quit()
 
 def play_again_menu(winner):
     matt = False
@@ -98,19 +98,18 @@ def main():
             if event.type == pygame.QUIT:
                 quit()
             if event.type == pygame.MOUSEBUTTONDOWN and pause_rect.collidepoint(mouse):
-                what_to_do = pause_menu()
+                what_to_do = pause_menu(game_board)
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if mouse_on_board and game_board.board[mouse_ij[0]][mouse_ij[1]].id and game_board.board[mouse_ij[0]][mouse_ij[1]].color == ('white','black')[whose_turn]:
                     made_move = game_board.clicked_on(mouse_ij[0], mouse_ij[1], screen)
                     if made_move:
                         whose_turn = 1 - whose_turn
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    main_menu.main(False)
-                    break
 
         if what_to_do: break
 
+        screen.blit(background, (0, 0))
+        game_board.draw_board(screen)
+        screen.blit(pause_rend, pause_rect)
         pygame.display.flip()
 
         break_flag = False
@@ -126,6 +125,11 @@ def main():
             time.sleep(1.5)
             break_flag = play_again_menu(winner)
             break
-    if break_flag: main()
+    if break_flag:
+        main()
+    else:
+        game_board.shut_up()
+        main_menu.main(False)
+        quit()
 
 if __name__ == "__main__": main()
