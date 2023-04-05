@@ -1,0 +1,7 @@
+each of the games as a background for a given level (winner winner chicken dinner)
+
+enemies: yes, who?
+ - goomba type for now
+PAUL: the Bowser of the game?
+
+player: ???
