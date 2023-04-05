@@ -1,6 +1,5 @@
 numpy
 pygame
-logger
 keyboard
 pyautogui
 importlib
