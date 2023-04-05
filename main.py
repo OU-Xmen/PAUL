@@ -28,6 +28,7 @@ pygame.display.set_caption("P.A.U.L. - Main Menu")
 font = pygame.font.Font(None, 36)
 
 # Load image
+# TODO change to comply with #13
 splash_image = pygame.image.load("assets/img/paul.jpg")
 splash_image = pygame.transform.scale(splash_image, (800, 600))
 pygame.display.set_icon(splash_image)
@@ -113,138 +114,7 @@ def game_runner(i):
     except Exception as e:
         errorHandler(e)
 
-'''
-    if game_to_run == "Puzzle":
-        print("Running Slide Puzzle") # run Slide Puzzle script
-        logger.log(f"Preparing to run {game_to_run}.")
-        try:
-            slide_puzzle = SourceFileLoader('Slide puzzle', os.path.join(main_dir, 'Slide puzzle\SlideGame.py')).load_module()
-            slide_puzzle.main()
-        except Exception as e:
-            errorHandler(e)
 
-    elif game_to_run == "Asteroids":
-        print("Running Asteroids") # run Asteroids
-        logger.log(f"Preparing to run {game_to_run}.")
-        try:
-            asteroids = SourceFileLoader('asteroids', os.path.join(main_dir, 'asteroids\main.py')).load_module()
-            asteroids.main()
-            logger.log("Astroids successfully loaded.")
-        except Exception as e:
-            errorHandler(e)
-            
-    elif game_to_run == "Tetris":
-        print("Running Tetris") # run Space Invaders 
-        logger.log(f"Preparing to run {game_to_run}")
-        try:
-            tetris = SourceFileLoader('tetris', os.path.join(main_dir, 'tetris', 'main.py')).load_module()
-            tetris.main()
-        except Exception as e:
-            errorHandler(e)
-    elif game_to_run == "Pong":
-        print("Running Pong") # run whatever game 4 is
-        logger.log(f"Preparing to run {game_to_run}")
-        try:
-            Pong = SourceFileLoader('Pong', os.path.join(main_dir, 'Pong', 'Pong.py')).load_module()
-            Pong.main()
-        except Exception as e:
-            errorHandler(e)
-    elif game_to_run == "Hangman":
-        print("Hangman") # run whatever game 5 is
-        logger.log(f"Preparing to run {game_to_run}")
-        try:
-            hangman = SourceFileLoader('Hangman Game', os.path.join(main_dir, 'Hangman Game', 'HangMan.py')).load_module()
-            hangman.main()
-        except Exception as e:
-            errorHandler(e)
-    elif game_to_run == "Mad Libs":
-        print("Running Mad Libs") # run whatever game 6 is
-        logger.log(f"Preparing to run {game_to_run}")
-        try:
-            madlibs = SourceFileLoader('madlibs', os.path.join(main_dir, 'mad_libs', 'madlibs.py')).load_module()
-            madlibs.main()
-        except Exception as e:
-            errorHandler(e)
-
-    elif game_to_run == "Checkers":
-        print("Running Checkers")
-        logger.log(f"Preparing to run {game_to_run}")
-        try:
-            checkers = SourceFileLoader('checkers', os.path.join(main_dir, 'Checkers', 'CheckersPAUL.py')).load_module()
-            checkers.main()
-        except Exception as e:
-            errorHandler(e)
-
-    elif game_to_run == "Chess":
-        print("Running Chess")
-        logger.log(f"Preparing to run {game_to_run}")
-        try:
-            chess = SourceFileLoader('chess', os.path.join(main_dir, 'Chess', 'ChessPAUL.py')).load_module()
-            chess.main()
-        except Exception as e:
-            errorHandler(e)
-
-    elif game_to_run == "Guess the Number":
-        print("Running Guess the Number")
-        logger.log(f"Preparing to run {game_to_run}")
-        try:
-            nums = SourceFileLoader('number', os.path.join(main_dir, 'number_game', 'main.py')).load_module()
-            nums.main()
-        except Exception as e:
-            errorHandler(e)
-
-    elif game_to_run == "Snake":
-        print(f"Running {game_to_run}")
-        logger.log(f"Preparing to run {game_to_run}")
-        try:
-            snake = SourceFileLoader('snake', os.path.join(main_dir, 'Snake Game.py')).load_module()
-            snake.main()
-        except Exception as e:
-            errorHandler(e)
-
-    elif game_to_run == "Tic Tac Toe":
-        print(f"Running {game_to_run}")
-        logger.log(f"Preparing to run {game_to_run}")
-        try:
-            ttt = SourceFileLoader('tictactoe', os.path.join(main_dir, 'tictactoe', 'tictactoe.py')).load_module()
-            ttt.main()
-        except Exception as e:
-            errorHandler(e)
-    
-    elif game_to_run == "Connect 4":
-        print(f"Running {game_to_run}")
-        logger.log(f"Preparing to run {game_to_run}")
-        try:
-            c4 = SourceFileLoader('connect4', os.path.join(main_dir, 'Connect 4.py')).load_module()
-            c4.main()
-        except Exception as e:
-            errorHandler(e)
-    
-    elif game_to_run == "RPS":
-        print(f"Running {game_to_run}")
-        logger.log(f"Preparing to run {game_to_run}")
-        try:
-            rps = SourceFileLoader('RockPaperScissors', os.path.join(main_dir, 'RockPaperScissors', 'RockPaperScissors.py')).load_module()
-            rps.main()
-        except Exception as e:
-            errorHandler(e)
-
-    elif game_to_run == "Mancala":
-        print(f"Running {game_to_run}")
-        logger.log(f"Preparing to run {game_to_run}")
-        try:
-            man = SourceFileLoader('mancala', os.path.join(main_dir, 'mancala', 'main.py')).load_module()
-            man.main()
-        except Exception as e:
-            errorHandler(e)
-     
-
-    elif game_to_run == "Scoreboard":
-        print("Switching to Scoreboard") # Show scoreboard
-        logger.log(f"Preparing to run {game_to_run}")
-    else:
-        logger.log(f"{game_to_run} is not a valid option", 2)
-'''        
 
 # Splash screen flag
 def main(splash):

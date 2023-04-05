@@ -59,7 +59,7 @@ class Level:
                 self.start_x, self.start_y = 2, 2
                 self.sign_list = [
                     'Hey, you\'re getting the hang of this! See you in the next level!',
-                    'Hey there! I\'m a sign. I\'m here to track you through the PAUL levels.'
+                    'Hey there! I\'m a sign. I\'m here to track you through the PAUL levels.  Press ENTER to continue!'
                 ]
 
             case 2:

@@ -1,19 +1,66 @@
 import os
 import time
 import pygame
+import textwrap
+import sys
 from importlib.machinery import SourceFileLoader
 pygame.init()
 maindir = os.path.abspath(os.path.dirname(__file__))
-bkgrddir = os.path.join(maindir, 'assets/backgrounds')
+bkgrddir = os.path.join(maindir, 'assets','backgrounds')
 L = SourceFileLoader('Levels', os.path.join(maindir, 'Levels.py')).load_module()
 T = SourceFileLoader('Tile', os.path.join(maindir, 'Tile.py')).load_module()
 P = SourceFileLoader('Player', os.path.join(maindir, 'Player.py')).load_module()
+beep = pygame.mixer.Sound(os.path.join(maindir, 'assets', 'beep.wav'))
+beep.set_volume(.25)
+
+font = pygame.font.Font(None, 36)
 
 size = width, height = 800, 600
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Platformer')
 menu_color = (160, 110, 20)
-background_outside = pygame.image.load(os.path.join(maindir, 'assets/background_outside.png'))
+background_outside = pygame.image.load(os.path.join(maindir, 'assets','background_outside.png'))
+text_displayed = False
+
+def textbox(text, x=50, y=500, delay=0.05, background_color=(0, 0, 0), text_color=(255, 255, 255), max_width=50):
+    global text_displayed
+    text_displayed = True
+    wrapped_text = textwrap.wrap(text, max_width)
+    displayed_lines = []
+
+    for line in wrapped_text:
+        displayed_lines.append("")
+        for char in line:
+            displayed_lines[-1] += char
+            text_surface = [font.render(line, True, text_color) for line in displayed_lines]
+
+            # Render a filled rectangle as the background for each line
+            text_background = [pygame.Surface((surface.get_width(), surface.get_height())) for surface in text_surface]
+            for bg in text_background:
+                bg.fill(background_color)
+
+            # Blit the background and the text surface for each line
+            for i, (bg, surface) in enumerate(zip(text_background, text_surface)):
+                screen.blit(bg, (x, y + i * (font.get_height() + 5)))
+                screen.blit(surface, (x, y + i * (font.get_height() + 5)))
+
+            pygame.display.update()
+            beep.play()
+            time.sleep(delay)
+
+    while text_displayed:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                text_displayed = False
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    text_displayed = False
+                    break
+        time.sleep(0.1)
+
+
 
 def game_loop(level):
     current_level = L.Level(level)
@@ -42,6 +89,9 @@ def game_loop(level):
                     read_flag = True
                 if event.key in [pygame.K_UP, pygame.K_SPACE]:
                     jump_flag = True
+                if event.key == pygame.K_RETURN and text_displayed:
+                    text_displayed = False
+
             if event.type == pygame.KEYUP and arr_list:
                 if event.key == pygame.K_RIGHT and 'right' in arr_list:
                     arr_list.remove('right')
@@ -64,6 +114,7 @@ def game_loop(level):
                 dead_collide = dead_collide and level_tiles[i][j].type == 'lava'
                 if level_tiles[i][j].type == 'sign' and pygame.Rect.colliderect(level_tiles[i][j].img_rect, temp):
                     if read_flag:
+                        textbox(level_tiles[i][j].text)
                         print(level_tiles[i][j].text)
                 if level_tiles[i][j].type == 'goal':
                     is_won.append(pygame.Rect.colliderect(level_tiles[i][j].img_rect, temp))
