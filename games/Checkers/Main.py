@@ -5,12 +5,13 @@ try:
     import time
     import random
     from importlib.machinery import SourceFileLoader
-    maindirectory = os.path.dirname(os.path.abspath(__file__))
-    assetdirectory = os.path.join(maindirectory, 'assets')
+    maindirectory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    currentdirectory = os.path.dirname(os.path.abspath(__file__))
+    assetdirectory = os.path.join(currentdirectory, 'assets')
     pauldirectory = os.path.join(assetdirectory, 'paul_face')
-    B = SourceFileLoader('CheckersBoard', os.path.join(maindirectory, 'CheckersBoard.py')).load_module()
-    CP = SourceFileLoader('CheckersPiece', os.path.join(maindirectory, 'CheckersPiece.py')).load_module()
-    main_menu = SourceFileLoader('main', os.path.join(maindirectory, "..", "main.py")).load_module()
+    B = SourceFileLoader('CheckersBoard', os.path.join(currentdirectory, 'CheckersBoard.py')).load_module()
+    CP = SourceFileLoader('CheckersPiece', os.path.join(currentdirectory, 'CheckersPiece.py')).load_module()
+    main_menu = SourceFileLoader('main', os.path.join(maindirectory, "main.py")).load_module()
 except ImportError:
     print("One or more modules failed to load")
     quit()

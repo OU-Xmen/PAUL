@@ -4,8 +4,10 @@ try:
     import os
     import time
     from importlib.machinery import SourceFileLoader
-    maindirectory = os.path.dirname(os.path.abspath(__file__))
-    assetdirectory = os.path.join(maindirectory, 'assets')
+    
+    maindirectory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    currentdirectory = os.path.dirname(os.path.abspath(__file__))
+    assetdirectory = os.path.join(currentdirectory, 'assets')
     main_menu = SourceFileLoader("main", os.path.join(maindirectory, 'main.py')).load_module()
 except ImportError:
     print("One or more modules failed to load. Please try again.")

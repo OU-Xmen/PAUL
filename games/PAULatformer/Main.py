@@ -46,7 +46,7 @@ class TextObj:
     def draw_button(self, mouse):
         self.draw_hover(screen) if mouse_in_box(self.rect, mouse) else self.draw(screen)
 
-if __name__ == '__main__':
+def main():
     size = screen_width, screen_height = 800, 600
     screen = pygame.display.set_mode(size)
 
@@ -78,3 +78,6 @@ if __name__ == '__main__':
         quit_text.draw_button(mouse)
 
         pygame.display.flip()
+        
+if __name__ == '__main__':
+    main()

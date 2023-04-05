@@ -21,7 +21,8 @@ import os
 from importlib.machinery import SourceFileLoader
 
 main_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-assets_dir = os.path.join(main_dir, 'assets')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+assets_dir = os.path.join(current_dir, 'assets')
 
 logger = SourceFileLoader('logger', os.path.join(main_dir, "logger.py")).load_module()
 main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()

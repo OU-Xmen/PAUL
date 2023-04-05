@@ -286,7 +286,11 @@ def main(splash):
         show_previous = False
 
         # Clear screen
-        screen.fill(t.BACKGROUND)
+        try:
+            screen.fill(t.BACKGROUND)
+        except Exception as e:
+            print(e)
+            logger.log(e, 3)
 
         if splash:
             # Draw splash screen

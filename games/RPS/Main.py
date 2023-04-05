@@ -4,8 +4,11 @@ try:
     import random
     import os
     from importlib.machinery import SourceFileLoader
-    maindirectory = os.path.dirname(os.path.abspath(__file__))
-    assetdirectory = os.path.join(maindirectory, "assets")
+    maindirectory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    currentdirectory = os.path.dirname(os.path.abspath(__file__))
+    assetdirectory = os.path.join(currentdirectory, "assets")
+
+    main_menu = SourceFileLoader('main', os.path.join(maindirectory, 'main.py')).load_module()
 except ImportError:
     print("One or more required modules could not be imported. Please try again.")
     quit()
@@ -78,11 +81,19 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+                main_menu.main(False)
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    main_menu.main(False)
+
 
             # check for mouse clicks
             if event.type == pygame.MOUSEBUTTONDOWN:
                 # get mouse pos
                 mouse_pos = pygame.mouse.get_pos()
+            
+            
 
                 # check if mouse is over rock button
                 if rock_button_rect.collidepoint(mouse_pos):

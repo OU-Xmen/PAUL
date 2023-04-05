@@ -6,7 +6,7 @@ from importlib.machinery import SourceFileLoader
 
 main_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 current_dir = os.path.dirname(os.path.abspath(__file__))
-assets_dir = os.path.join(current_dir, 'assets')(__file__)
+assets_dir = os.path.join(current_dir, 'assets')
 
 print(main_dir)
 main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
@@ -162,3 +162,4 @@ while not game_over:
  
             if game_over:
                 pygame.time.wait(3000)
+                main_menu.main(False)  # Returns to main menu after game is over

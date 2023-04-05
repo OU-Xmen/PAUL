@@ -3,9 +3,10 @@ try:
     pygame.init()
     import os
     from importlib.machinery import SourceFileLoader
-    maindirectory = os.path.dirname(os.path.abspath(__file__))
-    assetdirectory = os.path.join(maindirectory, 'assets')
-    main_menu = SourceFileLoader('main', os.path.join(os.path.dirname(maindirectory), 'main.py')).load_module()
+    maindirectory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    currentdirectory = os.path.dirname(os.path.abspath(__file__))
+    assetdirectory = os.path.join(currentdirectory, 'assets')
+    main_menu = SourceFileLoader('main', os.path.join(maindirectory, 'main.py')).load_module() # Updated for issue #14
 except ImportError:
     print('One or more modules failed to import. Please try again.')
     quit()

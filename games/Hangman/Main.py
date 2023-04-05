@@ -3,16 +3,16 @@ import random
 import os
 from importlib.machinery import SourceFileLoader
 
-da_main_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print(da_main_dir)
+main_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+current_dir = os.path.dirname(os.path.abspath(__file__))
+assets_dir = os.path.join(current_dir, 'assets')
 
-logger = SourceFileLoader('logger', os.path.join(da_main_dir, "logger.py")).load_module()
-main_menu = SourceFileLoader('main', os.path.join(da_main_dir, "main.py")).load_module()
+
+logger = SourceFileLoader('logger', os.path.join(main_dir, "logger.py")).load_module()
+main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
 
 
 def main():
-    main_dir = os.path.dirname(os.path.abspath(__file__))
-
     # initialize pygame
     pygame.init()
 
@@ -36,7 +36,7 @@ def main():
     # load the hangman images
     images = []
     for i in range(7):
-        image = pygame.image.load(f"{main_dir}\hangman" + str(i) + ".png")
+        image = pygame.image.load(os.path.join(current_dir, "hangman" + str(i) + ".png"))  # Changing to comply with issue #14
         images.append(image)
 
     # list of words

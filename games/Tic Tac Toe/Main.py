@@ -2,9 +2,13 @@ import sys
 import pygame
 from pygame.locals import *
 import os
+from importlib.machinery import SourceFileLoader
 
-main_dir = os.path.dirname(os.path.abspath(__file__))
-assets_dir = os.path.join(main_dir, "assets") 
+main_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+current_dir = os.path.dirname(os.path.abspath(__file__))
+assets_dir = os.path.join(current_dir, "assets") 
+
+main_menu = SourceFileLoader('main', os.path.join(main_dir, 'main.py')).load_module()
 pygame.init()
 FPS = 60
 fpsClock = pygame.time.Clock()
@@ -22,9 +26,9 @@ board = [[None, None, None], [None, None, None], [None, None, None]]
 pygame.font.init()
 FONT = pygame.font.Font(None, 40)
 
-x_sound = pygame.mixer.Sound(os.path.join(main_dir,"assets/x.wav"))
-o_sound = pygame.mixer.Sound(os.path.join(main_dir,"assets/o.wav"))
-music = pygame.mixer.Sound(os.path.join(main_dir,"assets/3am.wav"))
+x_sound = pygame.mixer.Sound(os.path.join(assets_dir, "x.wav"))
+o_sound = pygame.mixer.Sound(os.path.join(assets_dir, "o.wav"))
+music = pygame.mixer.Sound(os.path.join(assets_dir, "3am.wav"))
 
 def display_text(text, x, y, color=BLACK, bg_color=WHITE):
     rendered_text = FONT.render(text, True, color)
@@ -117,7 +121,7 @@ def main():
 
         pygame.display.update()
         fpsClock.tick(FPS)
-
+    main_menu.main(False)
 
 
 if __name__ == "__main__":
