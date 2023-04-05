@@ -1,6 +1,8 @@
 import pygame
 import time
 import random
+import os
+from importlib.machinery import SourceFileLoader
 
 pygame.init()
 
@@ -8,13 +10,19 @@ white = (255, 255, 255)
 yellow = (255, 255, 102)
 black = (0, 0, 0)
 red = (210, 50, 100)
-blue = (0, 255, 0)
+blue = (50, 255, 100)
 
 dis_width = 800
 dis_height = 600
 
 dis = pygame.display.set_mode((dis_width, dis_height))
 pygame.display.set_caption('Paul\'s Snake Game')
+
+maindirectory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+currentdirectory = os.path.dirname(os.path.abspath(__file__))
+assetdirectory = os.path.join(currentdirectory, "assets")
+
+main_menu = SourceFileLoader('main', os.path.join(maindirectory, 'main.py')).load_module()
 
 clock = pygame.time.Clock()
 
@@ -64,11 +72,14 @@ def gameLoop():
                     if event.key == pygame.K_q:
                         game_over = True
                         game_close = False
+                        main_menu.main(False)
+
                     if event.key == pygame.K_c:
                         gameLoop()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_over = True
+                main_menu.main(False)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     x1_change = -snake_block
@@ -136,5 +147,4 @@ def gameLoop():
             Length_of_snake += 1
         clock.tick(snake_speed)
     pygame.quit()
-    quit()
 gameLoop()

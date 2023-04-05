@@ -13,7 +13,7 @@ P = SourceFileLoader('Player', os.path.join(maindir, 'Player.py')).load_module()
 beep = pygame.mixer.Sound(os.path.join(maindir, 'assets', 'beep.wav'))
 beep.set_volume(.25)
 
-font = pygame.font.Font(None, 36)
+font = pygame.font.SysFont("comicsansms", 30)
 
 size = width, height = 800, 600
 screen = pygame.display.set_mode(size)
