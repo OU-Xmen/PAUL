@@ -1,5 +1,14 @@
 f = open("current.theme", "r")
 theme = f.readline()
+print(theme)
+if theme == "":
+    f = open("current.theme", "w")
+    f.write("dark")
+    BACKGROUND = (10, 10, 10)
+    TEXT = (255, 255, 255)
+    GAME_BUTTONS = (50, 30, 75)
+    PAGE_BUTTONS = (50, 37, 48)
+
 if theme == 'dark':
     BACKGROUND = (10, 10, 10)
     TEXT = (255, 255, 255)

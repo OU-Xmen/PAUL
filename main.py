@@ -83,33 +83,23 @@ def current_page(pagenum):
     current_games = d_games.get(pagenum)
     return current_games
 
-def next_page(pagenum):
+def change_page(pagenum, change):
     try:
-        pagenum += 0
+        pagenum += change
     except TypeError as e:
         errorHandler(e)
-    
-    page = pagenum + 1
-    return page
+    return pagenum
 
-def previous_page(pagenum):
-    try:
-        pagenum += 0
-    except TypeError as e:
-        errorHandler(e)
 
-    page = pagenum - 1
-    return page
-
-def game_runner(i):
+def game_runner(i, games, game_dir):
     game_to_run = games[i]
     print(game_to_run)
     music.stop()
-    print(f"{game_to_run} was clicked")
+    print(f"{games[i]} was clicked")
 
-    logger.log(f"Preparing to run {game_to_run}.")
+    logger.log(f"Preparing to run {games[i]}.")
     try:
-        game = SourceFileLoader('game', os.path.join(game_dir, f'{game_to_run}', 'main.py')).load_module()
+        game = SourceFileLoader('game', os.path.join(game_dir, f'{games[i]}', 'main.py')).load_module()
         game.main()
     except Exception as e:
         errorHandler(e)
@@ -128,7 +118,7 @@ def main(splash):
     next_page_rect = pygame.Rect(500, 500, 150, 75)
     previous_page_rect = pygame.Rect(150, 500, 150, 75)
     settings_rect = pygame.Rect(500, 25, 150, 75)
-   
+
 
 
     while running:
@@ -140,14 +130,15 @@ def main(splash):
                 # Check if any button was clicked
                 for i, rect in enumerate(button_rects):
                     if rect.collidepoint(event.pos):
-                        game_runner(i)
+                        game_runner(i, games, game_dir)
 
                 if next_page_rect.collidepoint(event.pos):
                     if show_next is True:
-                        page = next_page(page)
+                        page = change_page(page, 1)
                 if previous_page_rect.collidepoint(event.pos):
                     if show_previous is True:
-                        page = previous_page(page)
+                        page = change_page(page, -1)
+
                 if settings_rect.collidepoint(event.pos):
                     music.stop()
                     settings = SourceFileLoader('settings', 'settings.py').load_module()
@@ -176,13 +167,14 @@ def main(splash):
             tunes = False
         else:
             music.set_volume(.5)
-            global games
             games = current_page(page)
             #print(games)
             for i, rect in enumerate(button_rects):
-                pygame.draw.rect(screen, t.GAME_BUTTONS, rect)
-                button_text = font.render(f"{games[i]}", True, t.TEXT)
-                screen.blit(button_text, (rect.x + 25, rect.y + 75))
+                if games[i] is not None:
+                    pygame.draw.rect(screen, t.GAME_BUTTONS, rect)
+                    button_text = font.render(games[i], True, t.TEXT)
+                    screen.blit(button_text, (rect.x + 25, rect.y + 75))
+
             if page < 3:
                 show_next = True
                 pygame.draw.rect(screen, t.PAGE_BUTTONS, next_page_rect)
@@ -204,15 +196,13 @@ def main(splash):
         pygame.display.update()
 
 def cleanup():
-    try:
-        pygame.quit()
-        logger.log("Program terminated\n\n")
-    except:
-        pass
+    pygame.quit()
+    logger.log("Program terminated\n\n")
+
 
 
 if __name__ == '__main__':
     try: 
-        main(True)
+        main(False)
     except Exception as e:
         cleanup()
