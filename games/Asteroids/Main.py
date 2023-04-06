@@ -4,9 +4,7 @@
 # Intended for P.A.U.L
 # --------------------------
 # Coded by Matthew Robertson
-# -----------------------------------------------------------------
-# Credit to "EZ Coding" on YouTube for majority of the game's logic
-# -----------------------------------------------------------------
+# -----------------------------
 #          CONTROLS:          |
 #         UP: FORWARD         |
 #       LEFT: TURN LEFT       |
@@ -20,12 +18,10 @@ import random
 import os
 from importlib.machinery import SourceFileLoader
 
-main_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-current_dir = os.path.dirname(os.path.abspath(__file__))
-assets_dir = os.path.join(current_dir, 'assets')
-
-logger = SourceFileLoader('logger', os.path.join(main_dir, "logger.py")).load_module()
-main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
+main_dir = os.path.dirname(os.path.abspath(__file__))
+assetdirectory = os.path.join(main_dir, 'assets')
+logger = SourceFileLoader('logger', "logger.py").load_module()
+main_menu = SourceFileLoader('main', "main.py").load_module()
 
 # Initializing PyGame
 pygame.init()
@@ -34,17 +30,16 @@ pygame.init()
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
-
-# TODO Convert to os.path.join()
 # Loading Assets
-alienImage = pygame.image.load('asteroids/assets/alienImage.png')
-background = pygame.image.load('asteroids/assets/background.png')
-gameIcon = pygame.image.load('asteroids/assets/paulicon.png')
-largeAsteroid = pygame.image.load('asteroids/assets/largeAsteroid.png')
-mediumAsteroid = pygame.image.load('asteroids/assets/mediumAsteroid.png')
-playerImage = pygame.image.load('asteroids/assets/playerImage.png')
-powerupImage = pygame.image.load('asteroids/assets/powerupImage.png')
-smallAsteroid = pygame.image.load('asteroids/assets/smallAsteroid.png')
+alienImage = pygame.image.load(os.path.join(assetdirectory, 'alienImage.png'))
+background = pygame.image.load(os.path.join(assetdirectory, 'background.png'))
+gameIcon = pygame.image.load(os.path.join(assetdirectory, 'gameIcon.png'))
+largeAsteroid = pygame.image.load(os.path.join(assetdirectory, 'largeAsteroid.png'))
+mediumAsteroid = pygame.image.load(os.path.join(assetdirectory, 'mediumAsteroid.png'))
+playerImage = pygame.image.load(os.path.join(assetdirectory, 'playerImage.png'))
+powerupImage = pygame.image.load(os.path.join(assetdirectory, 'powerupImage.png'))
+smallAsteroid = pygame.image.load(os.path.join(assetdirectory, 'smallAsteroid.py'))
+highscore_txt = os.path.join(assetdirectory, 'highscore_txt')
 
 # Modifying the window and initializing the clock
 pygame.display.set_caption('Asteroids')
@@ -317,20 +312,20 @@ def main():
 
         if not game_over: 
            
-            with open('asteroids/assets/highscore.txt', 'r') as f:
+            with open(highscore_txt, 'r') as f:
                 highscore = int(f.read())
                 if highscore < score:
                     highscore = score
-                    with open('asteroids/assets/highscore.txt', 'w') as f:
+                    with open(highscore_txt, 'w') as f:
                         f.write(str(highscore))
 
 
             if asteroid_count % 50 == 0: # One asteroid every 50 ticks
                 rand = random.choice([1, 1, 1, 2, 2, 3]) # Tells the game which asteroid to choose
                 asteroids.append(Asteroid(rand)) # 50% chance for a small one, 1/3 chance for medium, 1/6 chance for large
-            if asteroid_count % 5000 == 0: # One power-up every 5000 ticks
+            if asteroid_count % 2500 == 0: # One power-up every 2500 ticks
                 power_up.append(PowerUp())
-            if asteroid_count % 3750 == 0: # One UFO every 3750 ticks
+            if asteroid_count % 1875 == 0: # One UFO every 1875 ticks
                 aliens.append(Alien())
 
             for i, alien in enumerate(aliens): # Handles the collision in regard to the UFO
