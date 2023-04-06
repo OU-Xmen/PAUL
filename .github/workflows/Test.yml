@@ -5,7 +5,7 @@ name: run main.py
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main.py" ]
   pull_request:
     branches: [ "main.py" ]
 
