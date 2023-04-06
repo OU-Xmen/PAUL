@@ -137,7 +137,7 @@ while running: # game loop
                     binAmount[k + 7] = 0
 
         # if event.type == pygame.K_ESCAPE:
-            main_menu.main(False)
+            # RETURN TO MAIN MENU
 
     # Fill the screen with black
     screen.fill(BLACK)
