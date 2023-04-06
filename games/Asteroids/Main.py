@@ -33,13 +33,14 @@ SCREEN_HEIGHT = 600
 # Loading Assets
 alienImage = pygame.image.load(os.path.join(assetdirectory, 'alienImage.png'))
 background = pygame.image.load(os.path.join(assetdirectory, 'background.png'))
-gameIcon = pygame.image.load(os.path.join(assetdirectory, 'gameIcon.png'))
+gameIcon = pygame.image.load(os.path.join(assetdirectory, 'paulicon.png'))
+smallAsteroid = pygame.image.load(os.path.join(assetdirectory, 'smallAsteroid.png'))
 largeAsteroid = pygame.image.load(os.path.join(assetdirectory, 'largeAsteroid.png'))
 mediumAsteroid = pygame.image.load(os.path.join(assetdirectory, 'mediumAsteroid.png'))
 playerImage = pygame.image.load(os.path.join(assetdirectory, 'playerImage.png'))
 powerupImage = pygame.image.load(os.path.join(assetdirectory, 'powerupImage.png'))
-smallAsteroid = pygame.image.load(os.path.join(assetdirectory, 'smallAsteroid.py'))
-highscore_txt = os.path.join(assetdirectory, 'highscore_txt')
+smallAsteroid = pygame.image.load(os.path.join(assetdirectory, 'smallAsteroid.png'))
+highscore_txt = os.path.join(assetdirectory, 'highscore.txt')
 
 # Modifying the window and initializing the clock
 pygame.display.set_caption('Asteroids')
