@@ -1,12 +1,13 @@
 import os
 import time
+import json
 import pygame
 import textwrap
 import sys
 from importlib.machinery import SourceFileLoader
 pygame.init()
 maindir = os.path.abspath(os.path.dirname(__file__))
-bkgrddir = os.path.join(maindir, 'assets','backgrounds')
+bkgrddir = os.path.join(maindir, 'assets', 'backgrounds')
 L = SourceFileLoader('Levels', os.path.join(maindir, 'Levels.py')).load_module()
 T = SourceFileLoader('Tile', os.path.join(maindir, 'Tile.py')).load_module()
 P = SourceFileLoader('Player', os.path.join(maindir, 'Player.py')).load_module()
@@ -24,6 +25,7 @@ text_displayed = False
 
 def textbox(text, x=50, y=500, delay=0.05, background_color=(0, 0, 0), text_color=(255, 255, 255), max_width=50):
     global text_displayed
+    global level_global
     text_displayed = True
     wrapped_text = textwrap.wrap(text, max_width)
     displayed_lines = []
@@ -47,6 +49,8 @@ def textbox(text, x=50, y=500, delay=0.05, background_color=(0, 0, 0), text_colo
             pygame.display.update()
             beep.play()
             time.sleep(delay)
+    if level_global == 15 and text == 'My real name is...':
+        quit()
 
     while text_displayed:
         for event in pygame.event.get():
@@ -55,48 +59,57 @@ def textbox(text, x=50, y=500, delay=0.05, background_color=(0, 0, 0), text_colo
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
+                if event.key == pygame.K_c:
                     text_displayed = False
                     break
         time.sleep(0.1)
 
 
 
-def game_loop(level):
+def game_loop(level, coin_counter = 0, death_counter = 0):
+    global text_displayed
+    text_displayed = False
     current_level = L.Level(level)
+    global level_global
+    level_global = level
+    coin_counter = 0
+    death_counter = 0
     level_rects = current_level.get_rect_list()
     level_background = pygame.image.load(os.path.join(bkgrddir, f"{current_level.get_background()}.png")).convert()
     start_x, start_y = current_level.get_start_coords()
     player = P.Player(start_x, start_y)
     arr_list = [] # list of arrow keys being held
-    death_counter = 0
-    coin_counter = 0
     jump_flag = False
+    crouch_flag = False
+    if level == 15: crouch_flag = True
+    break_flag = False
 
     while True:
         read_flag = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                quit()
+                break_flag = True
             if event.type == pygame.MOUSEBUTTONDOWN:
                 print("AHHHHH")
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
+                if event.key in [pygame.K_RIGHT, pygame.K_d]:
                     arr_list.append('right')
-                if event.key == pygame.K_LEFT:
+                if event.key in [pygame.K_LEFT, pygame.K_a]:
                     arr_list.append('left')
                 if event.key == pygame.K_c:
                     read_flag = True
-                if event.key in [pygame.K_UP, pygame.K_SPACE]:
+                if event.key in [pygame.K_LSHIFT, pygame.K_s, pygame.K_DOWN] and level != 15:
+                    crouch_flag = [False, True][crouch_flag == False]
+                if event.key in [pygame.K_UP, pygame.K_w]:
                     jump_flag = True
-                if event.key == pygame.K_RETURN and text_displayed:
+                if event.key == pygame.K_c and text_displayed:
                     text_displayed = False
-
             if event.type == pygame.KEYUP and arr_list:
-                if event.key == pygame.K_RIGHT and 'right' in arr_list:
+                if event.key in [pygame.K_RIGHT, pygame.K_d] and 'right' in arr_list:
                     arr_list.remove('right')
-                if event.key == pygame.K_LEFT and 'left' in arr_list:
+                if event.key in [pygame.K_LEFT, pygame.K_a] and 'left' in arr_list:
                     arr_list.remove('left')
+        if break_flag: break
 
         screen.blit(level_background, (0,0))
         current_level.update_level(screen)
@@ -120,16 +133,57 @@ def game_loop(level):
                     is_won.append(pygame.Rect.colliderect(level_tiles[i][j].img_rect, temp))
                 if level_tiles[i][j].type == 'lava' and dead_collide:
                     is_dead.append(pygame.Rect.colliderect(level_tiles[i][j].img_rect, temp))
+                if level_tiles[i][j].type == 'enemy':
+                    # move enemy
+                    temp_enemy = pygame.Rect(level_tiles[i][j].get_img_rect())
+                    enemy_dir = level_tiles[i][j].direction
+                    temp_enemy[0] += {'right': 1, 'left': -1}[enemy_dir]
+                    enemy_is_colliding = []
+                    for tile in level_rects:
+                        tile_rect = tile[0]
+                        if tile[2]:
+                            enemy_is_colliding.append(pygame.Rect.colliderect(tile_rect, temp_enemy))
+                    if not any(enemy_is_colliding):
+                        level_tiles[i][j].move(enemy_dir, 0.5)
+                    elif int(temp_enemy[0]%40) == {'right': 7, 'left': 39}[enemy_dir]:
+                        level_tiles[i][j].direction = ['right', 'left'][enemy_dir == 'right']
+
+                    # check if player is colliding with enemy
+                    enemy_top = level_tiles[i][j].img_rect
+                    enemy_top.height = 30
+                    jumped_on_enemy = []
+                    jumped_on_enemy.append(pygame.Rect.collidepoint(enemy_top, (temp[0], temp[1]+37)))
+                    jumped_on_enemy.append(pygame.Rect.collidepoint(enemy_top, (temp[0]+33, temp[1]+37)))
+                    if max(jumped_on_enemy):
+                        level_tiles[i][j] = T.Tile(0, i, j)
+                        player.set_gravity(False)
+                        player.jump(800, True)
+                    else:
+                        is_dead.append(pygame.Rect.colliderect(level_tiles[i][j].img_rect, temp))
                 if level_tiles[i][j].type == 'coin':
                     if pygame.Rect.colliderect(level_tiles[i][j].img_rect, temp):
                         coin_counter += 1
                         level_tiles[i][j] = T.Tile(0, i, j)
         if any(is_won):
+            with open(os.path.join(maindir, "currentstats.json"), "r") as rfile:
+                a = json.load(rfile)
+                a["level"] += 1
+                level += 1
+                a["coin_counter"] += coin_counter
+                a["death_counter"] += death_counter
+            with open(os.path.join(maindir, "currentstats.json"), "w") as wfile:
+                json.dump(a, wfile)
+
             print("You win!")
             print(f"Coins: {coin_counter}")
             print(f"Deaths: {death_counter}")
             time.sleep(1.5)
-            game_loop(current_level.get_level_num() + 1)
+            if int(a["level"]) <= 15:
+                game_loop(level, coin_counter, death_counter)
+                quit()
+            else:
+                quit()
+
         if any(is_dead) or temp[1]>600:
             death_counter += 1
             zx, zy = current_level.get_start_coords()
@@ -172,13 +226,13 @@ def game_loop(level):
                     is_colliding.append(pygame.Rect.colliderect(tile_rect, temp))
 
             if not any(is_colliding):
-                player.move(arr_list[0])
+                player.move(arr_list[0], 1.7 - crouch_flag)
             elif temp[0]%40 == {'right': 39, 'left': 1}[arr_list[0]]:
-                player.move(arr_list[0], 1)
+                player.move(arr_list[0], 1 - 0.5*crouch_flag)
 
         player.blit_player(screen)
 
         pygame.display.flip()
 
 if __name__ == '__main__':
-    game_loop(0)
+    game_loop(1)

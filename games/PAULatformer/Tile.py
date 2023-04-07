@@ -1,11 +1,13 @@
 import os
 import pygame
 pygame.init()
+
 maindir = os.path.abspath(os.path.dirname(__file__))
 assetdir = os.path.join(maindir, 'assets')
 
 class Tile:
     def __init__(self, type, x_given, y_given):
+        self.id_num = type
         match type:
             case 0:
                 self.type = None
@@ -23,7 +25,7 @@ class Tile:
                 self.type = 'lava'
                 self.img = pygame.image.load(os.path.join(assetdir, 'lava.png'))
                 self.collision = False
-                self.img_rect = pygame.Rect(5+40*y_given, 5+40*x_given, 30, 30)
+                self.img_rect = pygame.Rect(10+40*y_given, 10+40*x_given, 21, 21)
             case 3:
                 self.type = 'goal'
                 self.img = pygame.image.load(os.path.join(assetdir, 'goal.png'))

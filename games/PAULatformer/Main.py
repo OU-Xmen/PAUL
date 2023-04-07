@@ -1,4 +1,5 @@
 import os
+import json
 import random
 import pygame
 pygame.init()
@@ -6,14 +7,14 @@ from importlib.machinery import SourceFileLoader
 
 maindir = os.path.abspath(os.path.dirname(__file__))
 assetdir = os.path.join(maindir, 'assets')
-game_file = SourceFileLoader('game', os.path.join(maindir, 'game.py')).load_module()
+game_file = SourceFileLoader('game', os.path.join(maindir, 'Game.py')).load_module()
 
 dirt = pygame.image.load(os.path.join(assetdir, 'dirt.png'))
 player = pygame.image.load(os.path.join(assetdir, 'player.png'))
 
 size = width, height = 800, 600
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption('balls')
+pygame.display.set_caption('PAULatformer')
 menu_color = (160, 110, 20)
 
 def mouse_in_box(b, mouse):
@@ -55,8 +56,8 @@ def main():
     
     text_color = (20, 0, 200)
     paul_name = TextObj('comicsansms', 60, 'P.A.U.L. Platformer', text_color, screen_width/2, screen_height/3)
-    slide_text = TextObj('comicsansms', 60, 'Play Game', text_color, screen_width/2, screen_height/2)
-    quit_text = TextObj('comicsansms', 60, 'Quit', text_color, screen_width/2, screen_height/2 + 80)
+    new_game_text = TextObj('comicsansms', 60, 'New Game', text_color, screen_width/2, screen_height/2)
+    load_game_text = TextObj('comicsansms', 60, 'Load Game', text_color, screen_width/2, screen_height/2 + 80)
 
     box_color_list = [(200, 0, 0), (180, 0, 0)]
 
@@ -66,16 +67,37 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT: quit()            
             if event.type == pygame.MOUSEBUTTONUP:
-                if mouse_in_box(quit_text.rect, mouse):
+                if mouse_in_box(load_game_text.rect, mouse):
+                    # load the level from currentstats.json
+                    if os.path.isfile(os.path.join(maindir, "currentstats.json")):
+                        with open(os.path.join(maindir, "currentstats.json"), "r") as infile:
+                            a = json.load(infile)
+                            level = int(a["level"])
+                            coin_counter = int(a["coin_counter"])
+                            death_counter = int(a["death_counter"])
+                    else:
+                        with open(os.path.join(maindir, "currentstats.json"), "w") as outfile:
+                            a = {"level": 1, "coin_counter": 0, "death_counter": 0}
+                            json.dump(a, outfile)
+                        level = 1
+                        coin_counter = 0
+                        death_counter = 0
+                    game_file.game_loop(level)
                     quit()
-                if mouse_in_box(slide_text.rect, mouse):
-                    print("Game starting...")
-                    game_file.game_loop(1)
+                if mouse_in_box(new_game_text.rect, mouse):
+                    with open(os.path.join(maindir, "currentstats.json"), "w") as outfile:
+                        a = {"level": 1, "coin_counter": 0, "death_counter": 0}
+                        json.dump(a, outfile)
+                    level = 1
+                    coin_counter = 0
+                    death_counter = 0
+                    game_file.game_loop(level, coin_counter, death_counter)
+                    quit()
         screen.fill((200, 0, 0))
 
         paul_name.draw(screen)
-        slide_text.draw_button(mouse)
-        quit_text.draw_button(mouse)
+        new_game_text.draw_button(mouse)
+        load_game_text.draw_button(mouse)
 
         pygame.display.flip()
         
