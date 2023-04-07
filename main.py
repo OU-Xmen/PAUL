@@ -203,6 +203,6 @@ def cleanup():
 
 if __name__ == '__main__':
     try: 
-        main(False)
+        main(True)
     except Exception as e:
         cleanup()

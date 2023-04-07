@@ -23,6 +23,23 @@ menu_color = (160, 110, 20)
 background_outside = pygame.image.load(os.path.join(maindir, 'assets','background_outside.png'))
 text_displayed = False
 
+def level_transition(duration=1):
+    fade_surface = pygame.Surface((width, height))
+    fade_surface.fill((0, 0, 0))
+
+    for alpha in range(0, 256, 5):
+        fade_surface.set_alpha(alpha)
+        screen.blit(fade_surface, (0, 0))
+        pygame.display.flip()
+        pygame.time.delay(int(duration * 1000 / 51))  # 51 comes from 256/5
+
+    for alpha in range(255, -1, -5):
+        fade_surface.set_alpha(alpha)
+        screen.blit(fade_surface, (0, 0))
+        pygame.display.flip()
+        pygame.time.delay(int(duration * 1000 / 51))  # 51 comes from 256/5
+
+
 def textbox(text, x=50, y=500, delay=0.05, background_color=(0, 0, 0), text_color=(255, 255, 255), max_width=50):
     global text_displayed
     global level_global
@@ -177,7 +194,7 @@ def game_loop(level, coin_counter = 0, death_counter = 0):
             print("You win!")
             print(f"Coins: {coin_counter}")
             print(f"Deaths: {death_counter}")
-            time.sleep(1.5)
+            level_transition()
             if int(a["level"]) <= 15:
                 game_loop(level, coin_counter, death_counter)
                 quit()
