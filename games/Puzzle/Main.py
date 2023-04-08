@@ -10,7 +10,7 @@ try:
     T = SourceFileLoader('Tile', os.path.join(maindirectory, 'Tile.py')).load_module() # effectively imports Tile as T
     pygame.init()
 
-    with (open(os.path.join(maindirectory, 'assets', 'leaderboard.json'), "r")) as jasonfile:
+    with (open(os.path.join(maindirectory, 'assets', 'scores.json'), "r")) as jasonfile:
         # read from the json file into the variable called jason
         jason = json.load(jasonfile)
 except ImportError:
@@ -109,11 +109,11 @@ def play_again_menu(time_score):
 
         screen.fill('black')
         screen.blit(big_face, big_face_rect)
-        if time_score < jason['slide_puzzle_score']:
+        if time_score < float(jason['slide_puzzle_score']):
             matt = True
             andrew =  float(f"{format(time_score, '.2f')}")
             jason['slide_puzzle_score'] = andrew
-            with (open(os.path.join(maindirectory, 'assets', 'leaderboard.json'), "w")) as jasonfile:
+            with (open(os.path.join(maindirectory, 'assets', 'scores.json'), "w")) as jasonfile:
                 json.dump(jason, jasonfile)
         if matt:
             screen.blit(high_score_rend, high_score_rect)
