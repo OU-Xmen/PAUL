@@ -43,6 +43,7 @@ def level_transition(duration=1):
 def textbox(text, x=50, y=500, delay=0.05, background_color=(0, 0, 0), text_color=(255, 255, 255), max_width=50):
     global text_displayed
     global level_global
+    global coin_counter
     text_displayed = True
     wrapped_text = textwrap.wrap(text, max_width)
     displayed_lines = []
@@ -67,6 +68,14 @@ def textbox(text, x=50, y=500, delay=0.05, background_color=(0, 0, 0), text_colo
             beep.play()
             time.sleep(delay)
     if level_global == 15 and text == 'My real name is...':
+        with open(os.path.join(maindir, 'assets', 'scores.json')) as f:
+            coins = json.load(f)["highscore"]
+        with open(os.path.join(maindir, 'currentstats.json')) as f:
+            possible_coins = json.load(f)["coin_counter"]
+        if possible_coins > coins:
+            with open(os.path.join(maindir, 'assets', 'scores.json'), 'w') as f:
+                json.dump({"highscore": possible_coins}, f)
+        
         quit()
 
     while text_displayed:
@@ -83,13 +92,13 @@ def textbox(text, x=50, y=500, delay=0.05, background_color=(0, 0, 0), text_colo
 
 
 
-def game_loop(level, coin_counter = 0, death_counter = 0):
+def game_loop(level, coin_counter_func = 0, death_counter = 0):
     global text_displayed
     text_displayed = False
     current_level = L.Level(level)
     global level_global
     level_global = level
-    coin_counter = 0
+    coin_counter = coin_counter_func
     death_counter = 0
     level_rects = current_level.get_rect_list()
     level_background = pygame.image.load(os.path.join(bkgrddir, f"{current_level.get_background()}.png")).convert()
@@ -110,9 +119,9 @@ def game_loop(level, coin_counter = 0, death_counter = 0):
                 print("AHHHHH")
             if event.type == pygame.KEYDOWN:
                 if event.key in [pygame.K_RIGHT, pygame.K_d]:
-                    arr_list.append('right')
+                    arr_list.append('right') if 'right' not in arr_list else None
                 if event.key in [pygame.K_LEFT, pygame.K_a]:
-                    arr_list.append('left')
+                    arr_list.append('left') if 'left' not in arr_list else None
                 if event.key == pygame.K_c:
                     read_flag = True
                 if event.key in [pygame.K_LSHIFT, pygame.K_s, pygame.K_DOWN] and level != 15:
@@ -186,7 +195,7 @@ def game_loop(level, coin_counter = 0, death_counter = 0):
                 a = json.load(rfile)
                 a["level"] += 1
                 level += 1
-                a["coin_counter"] += coin_counter
+                a["coin_counter"] = coin_counter
                 a["death_counter"] += death_counter
             with open(os.path.join(maindir, "currentstats.json"), "w") as wfile:
                 json.dump(a, wfile)
