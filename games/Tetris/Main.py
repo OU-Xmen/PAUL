@@ -1,6 +1,7 @@
 import pygame
 import random
 import os
+import json
 from importlib.machinery import SourceFileLoader
 
 main_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -258,19 +259,18 @@ def draw_next_shape(shape, surface):
 def update_score(nscore):
     score = max_score()
 
-    with open(os.path.join(assets_dir, 'scores.txt'), 'w') as f:
-        if int(score) > nscore:
-            f.write(str(score))
+    # open scores.json and update the highscore if necessary
+    with open(os.path.join(assets_dir, 'scores.json'), 'w') as f:
+        if score > nscore:
+            json.dump({'highscore': score}, f)
         else:
-            f.write(str(nscore))
+            json.dump({'highscore': nscore}, f)
 
 
 def max_score():
-    with open(os.path.join(assets_dir, 'scores.txt'), 'r') as f:
-        lines = f.readlines()
-        score = lines[0].strip()
-
-    return score
+    with open(os.path.join(assets_dir, 'scores.json'), 'r') as f:
+        data = json.load(f)
+    return int(data["highscore"])
 
 
 def draw_window(surface, grid, score=0, last_score = 0):
@@ -364,9 +364,9 @@ def main(win):  # *
                     if not(valid_space(current_piece, grid)):
                         current_piece.rotation -= 1
                 if event.key == pygame.K_ESCAPE:
-                    paul_main_menu.main(False)
                     run = False
-                    return
+                    paul_main_menu.main(False)
+                    quit()
 
         shape_pos = convert_shape_format(current_piece)
 
@@ -384,7 +384,7 @@ def main(win):  # *
             change_piece = False
             score += clear_rows(grid, locked_positions) * 10
 
-        draw_window(win, grid, score, last_score)
+        draw_window(win, grid, score, str(last_score))
         draw_next_shape(next_piece, win)
         pygame.display.update()
 
