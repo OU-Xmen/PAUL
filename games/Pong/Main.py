@@ -17,6 +17,10 @@ WIDTH, HEIGHT = 800, 600
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Pong")
 
+song_channel = pygame.mixer.Channel(0)
+song_channel.set_volume(0.5)
+pong_song = pygame.mixer.Sound(os.path.join(assets_dir, 'pong.wav'))
+
 main_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 logger = SourceFileLoader('logger', os.path.join(main_dir, "logger.py"))
 FPS = 60
@@ -143,6 +147,7 @@ def handle_paddle_movement(keys, left_paddle, right_paddle):
 def main():
     run = True
     clock = pygame.time.Clock()
+    song_channel.play(pong_song, -1)
 
     left_paddle = Paddle(10, HEIGHT//2 - PADDLE_HEIGHT//2, PADDLE_WIDTH, PADDLE_HEIGHT)
     right_paddle = Paddle(WIDTH - 10 - PADDLE_WIDTH, HEIGHT//2 - PADDLE_HEIGHT//2, PADDLE_WIDTH, PADDLE_HEIGHT)
@@ -162,6 +167,7 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     run = False
+                    song_channel.stop()
                     main_menu.main(False)
 
         keys = pygame.key.get_pressed()
@@ -196,6 +202,7 @@ def main():
             left_score = 0
             right_score = 0
 
+    song_channel.stop()
     pygame.quit()
 
 if __name__ == '__main__':
