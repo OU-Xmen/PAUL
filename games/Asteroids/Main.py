@@ -16,6 +16,7 @@ import pygame
 import math
 import random
 import os
+import json
 from importlib.machinery import SourceFileLoader
 
 main_dir = os.path.dirname(os.path.abspath(__file__))
@@ -40,7 +41,6 @@ mediumAsteroid = pygame.image.load(os.path.join(assetdirectory, 'mediumAsteroid.
 playerImage = pygame.image.load(os.path.join(assetdirectory, 'playerImage.png'))
 powerupImage = pygame.image.load(os.path.join(assetdirectory, 'powerupImage.png'))
 smallAsteroid = pygame.image.load(os.path.join(assetdirectory, 'smallAsteroid.png'))
-highscore_txt = os.path.join(assetdirectory, 'highscore.txt')
 
 # Modifying the window and initializing the clock
 pygame.display.set_caption('Asteroids')
@@ -313,12 +313,12 @@ def main():
 
         if not game_over: 
            
-            with open(highscore_txt, 'r') as f:
-                highscore = int(f.read())
-                if highscore < score:
-                    highscore = score
-                    with open(highscore_txt, 'w') as f:
-                        f.write(str(highscore))
+            with open(os.path.join(assetdirectory, 'scores.json'), 'r') as f:
+                highscore = json.load(f)['highscore']
+            if score > highscore:
+                highscore = score
+                with open(os.path.join(assetdirectory, 'scores.json'), 'w') as f:
+                    json.dump({'highscore': highscore}, f)
 
 
             if asteroid_count % 50 == 0: # One asteroid every 50 ticks
