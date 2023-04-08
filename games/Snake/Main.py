@@ -2,6 +2,7 @@ import pygame
 import time
 import random
 import os
+import json
 from importlib.machinery import SourceFileLoader
 
 pygame.init()
@@ -34,6 +35,14 @@ score_font = pygame.font.SysFont("comicsansms", 35)
 
 
 def Your_score(score):
+    int_score = int(score)
+    with open(os.path.join(assetdirectory, "scores.json"), "r") as f:
+        data = json.load(f)
+    if int_score > data["apples"]:
+        data["apples"] = int_score
+        with open(os.path.join(assetdirectory, "scores.json"), "w") as f:
+            json.dump(data, f)
+
     value = score_font.render("Score: " + str(score), True, yellow)
     dis.blit(value, [0, 0])
 def our_snake(snake_block, snake_list):
@@ -73,6 +82,7 @@ def gameLoop():
                         game_over = True
                         game_close = False
                         main_menu.main(False)
+                        quit()
 
                     if event.key == pygame.K_c:
                         gameLoop()
@@ -80,6 +90,7 @@ def gameLoop():
             if event.type == pygame.QUIT:
                 game_over = True
                 main_menu.main(False)
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     x1_change = -snake_block
