@@ -73,12 +73,12 @@ def gameLoop():
 
         while game_close == True:
             dis.fill(blue)
-            message("You Suck! Take the L, Press C-Play Again or Q-Quit", red)
+            message("You Suck! Take the L, Press C-Play Again or Esc-Quit", red)
             Your_score(Length_of_snake - 1)
             pygame.display.update()
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_q:
+                    if event.key == pygame.K_ESCAPE:
                         game_over = True
                         game_close = False
                         main_menu.main(False)
