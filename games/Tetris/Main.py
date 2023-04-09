@@ -306,6 +306,35 @@ def draw_window(surface, grid, score=0, last_score = 0):
 
     draw_grid(surface, grid)
 
+haha_funny = pygame.font.SysFont('comicsansms', 50)
+def init_words(text, center_x, center_y, color):
+    temp_rend = pygame.font.Font.render(haha_funny, text, True, color)
+    temp_rect = temp_rend.get_rect(center = (center_x, center_y))
+    return temp_rend, temp_rect
+
+pause_color = (255, 255, 255)
+pause_rend, pause_rect = init_words('Pause', 660, 80, pause_color)
+resume_rend, resume_rect = init_words('Resume', 660, 180, pause_color)
+quit_rend, quit_rect = init_words('Quit', 660, 260, pause_color)
+
+def pause_menu():
+    while True:
+        mouse = pygame.mouse.get_pos()
+        win.fill('black')
+        win.blit(resume_rend, resume_rect)
+        win.blit(quit_rend, quit_rect)
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if resume_rect.collidepoint(mouse):
+                    return False
+                if quit_rect.collidepoint(mouse):
+                    pygame.display.set_mode((800, 600))
+                    paul_main_menu.main(False)
+                    quit()
 
 def main(win):  # *
     last_score = max_score()
@@ -344,6 +373,9 @@ def main(win):  # *
             if event.type == pygame.QUIT:
                 run = False
                 pygame.display.quit()
+            
+            if event.type == pygame.MOUSEBUTTONDOWN and pause_rect.collidepoint(pygame.mouse.get_pos()):
+                pause_menu()
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
@@ -365,6 +397,7 @@ def main(win):  # *
                         current_piece.rotation -= 1
                 if event.key == pygame.K_ESCAPE:
                     run = False
+                    pygame.display.set_mode((800, 600))
                     paul_main_menu.main(False)
                     quit()
 
@@ -386,6 +419,7 @@ def main(win):  # *
 
         draw_window(win, grid, score, str(last_score))
         draw_next_shape(next_piece, win)
+        win.blit(pause_rend, pause_rect)
         pygame.display.update()
 
         if check_lost(locked_positions):
@@ -394,6 +428,9 @@ def main(win):  # *
             pygame.time.delay(1500)
             run = False
             update_score(score)
+            pygame.display.set_mode((800, 600))
+            paul_main_menu.main(False)
+            quit()
 
 
 def main_menu(win):  # *
