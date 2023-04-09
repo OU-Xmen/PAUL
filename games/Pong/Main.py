@@ -34,6 +34,36 @@ BALL_RADIUS = 7
 Score_FONT = pygame.font.SysFont("comicsans", 50)
 WINNING_SCORE = 10
 
+pause_color = (255, 255, 255)
+haha_funny = pygame.font.SysFont('comicsansms', 50)
+def init_words(text, center_x, center_y, color):
+    temp_rend = pygame.font.Font.render(haha_funny, text, True, color)
+    temp_rect = temp_rend.get_rect(center = (center_x, center_y))
+    return temp_rend, temp_rect
+
+pause_rend, pause_rect = init_words('Pause', 660, 520, pause_color)
+resume_rend, resume_rect = init_words('Resume', 660, 180, pause_color)
+quit_rend, quit_rect = init_words('Quit', 660, 260, pause_color)
+
+def pause_menu():
+    while True:
+        mouse = pygame.mouse.get_pos()
+        WIN.fill('black')
+        WIN.blit(resume_rend, resume_rect)
+        WIN.blit(quit_rend, quit_rect)
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if resume_rect.collidepoint(mouse):
+                    return False
+                if quit_rect.collidepoint(mouse):
+                    run = False
+                    main_menu.main(False)
+                    quit()
+
 class Paddle:
     color = WHITE
     VEL = 4
@@ -102,6 +132,7 @@ def draw(win, paddles, ball, left_score, right_score):
         pygame.draw.rect(win, WHITE, (WIDTH//2 - 5, i, 10, HEIGHT//20))
     
     ball.draw(win)
+    win.blit(pause_rend, pause_rect)
     pygame.display.update()
 
 def handle_collision(ball, left_paddle, right_paddle):
@@ -164,6 +195,8 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
                 break
+            if event.type == pygame.MOUSEBUTTONDOWN and pause_rect.collidepoint(pygame.mouse.get_pos()):
+                pause_menu()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     run = False
