@@ -86,6 +86,7 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     main_menu.main(False)
+                    quit()
 
 
             # check for mouse clicks
