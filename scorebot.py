@@ -49,4 +49,4 @@ async def ast(ctx):
 async def Tet(ctx):
     await ctx.send("Tetris game scoreboard")
 
-paul.run(token)
+paul.run(BOT_TOKEN)
