@@ -90,6 +90,9 @@ def change_page(pagenum, change):
         errorHandler(e)
     return pagenum
 
+def set_page_return_current_page(pagenum):
+    # current_games = current_page(pagenum)
+    return pagenum
 
 def game_runner(i, games, game_dir):
     game_to_run = games[i]
