@@ -28,6 +28,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Definitely real test
+    - name: Test main
       run: |
-        echo "This test should pass please help me"
+        pytest
