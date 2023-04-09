@@ -1,5 +1,6 @@
 #Scoreboard 
 #is going to list games and then the top 5 scores for each game in a python window, Right now with how Json works, it only stores the top score, so it will only show the top score for each game
+# wowza 
 
 #make window
 import pygame
