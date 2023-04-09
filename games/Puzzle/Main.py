@@ -112,7 +112,7 @@ def play_again_menu(time_score):
         if time_score < float(jason['slide_puzzle_score']):
             matt = True
             andrew =  float(f"{format(time_score, '.2f')}")
-            jason['slide_puzzle_score'] = andrew
+            jason['highscore'] = andrew
             with (open(os.path.join(maindirectory, 'assets', 'scores.json'), "w")) as jasonfile:
                 json.dump(jason, jasonfile)
         if matt:
