@@ -38,7 +38,7 @@ logger.log("Images loaded", 1)
 
 # Load sounds
 paul_sound = pygame.mixer.Sound("assets/sounds/paul.wav")
-music = pygame.mixer.Sound("assets/sounds/fallen_down.wav")
+music = pygame.mixer.Sound("assets/sounds/Menu_Music.wav")
 logger.log("Sounds loaded", 1)
 
 

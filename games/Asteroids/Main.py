@@ -41,6 +41,8 @@ mediumAsteroid = pygame.image.load(os.path.join(assetdirectory, 'mediumAsteroid.
 playerImage = pygame.image.load(os.path.join(assetdirectory, 'playerImage.png'))
 powerupImage = pygame.image.load(os.path.join(assetdirectory, 'powerupImage.png'))
 smallAsteroid = pygame.image.load(os.path.join(assetdirectory, 'smallAsteroid.png'))
+asteroidsTheme = pygame.mixer.Sound(os.path.join(assetdirectory, 'Asteroids.wav'))
+song_channel = pygame.mixer.Channel(1)
 
 # Modifying the window and initializing the clock
 pygame.display.set_caption('Asteroids')
@@ -291,6 +293,7 @@ def pause_menu():
                     return False
                 if quit_rect.collidepoint(mouse):
                     logger.log("Returning to main menu.")
+                    song_channel.stop()
                     main_menu.main(False)
                     pygame.quit()
                 
@@ -303,6 +306,8 @@ def main():
     rapidFire  = False
     rapid_start = -1
     asteroid_count = 0
+
+    song_channel.play(asteroidsTheme, loops = -1)
 
     running = True # Main game loop
     while running:
@@ -455,6 +460,7 @@ def main():
                 if event.key == pygame.K_ESCAPE:
                     logger.log("Returning to main menu.")
                     running = False
+                    song_channel.stop()
                     main_menu.main(False)
                     
 
