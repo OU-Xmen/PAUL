@@ -11,20 +11,26 @@ main = SourceFileLoader('main', os.path.join(main_dir, ("main.py"))).load_module
 # Initialize Pygame
 pygame.init()
 
+# Load assets
+gameIcon = pygame.image.load(os.path.join(assets_dir, 'paulicon.png')) 
+background = pygame.image.load(os.path.join(assets_dir, 'background.png'))
+
 # Define some colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
-# Set the window size
+# Set the window size and properties
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Guess the Number")
+pygame.display.set_icon(gameIcon)
 
 # Set the font and font size
 font = pygame.font.SysFont(None, 48)
 
 # Set the random number to guess
-number = random.randint(1, 100)
+number = random.randint(1, 1000)
 
 # Set the initial number of guesses to 0
 num_guesses = 0
@@ -40,12 +46,20 @@ input_box_y = (SCREEN_HEIGHT - input_box_height) // 2 - 100
 input_box = pygame.Rect(input_box_x, input_box_y, input_box_width, input_box_height)
 input_text = ""
 
-# Create a button
+def init_words(text, size, center_x, center_y, text_color):
+    font = pygame.font.SysFont('comicsansms', size)
+    temp_rend = pygame.font.Font.render(font, text, True, text_color)
+    temp_rect = temp_rend.get_rect(center = (center_x, center_y))
+    return temp_rend, temp_rect
+
+# Create buttons
 button_width = 100
 button_height = 50
 button_x = (SCREEN_WIDTH - button_width) // 2
 button_y = (SCREEN_HEIGHT - button_height) // 2
 button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
+
+quit_rend, quit_rect = init_words('QUIT', 30, 50, 50, (200, 0, 0))
 
 # The game loop
 running = True
@@ -62,37 +76,49 @@ while running:
 
             # Check if the mouse click was on the button
             if button_rect.collidepoint(mouse_pos):
-                # Increment the number of guesses
-                num_guesses += 1
-
-                # Get the user's guess
-                guess = int(input_text)
-
-                # Check if the guess is correct
-                if guess == number:
-                    message = "You win!"
-                elif guess < number:
-                    message = "Too low!"
+                if input_text == '':
+                    message = "Pathetic..."
                 else:
-                    message = "Too high!"
+                    num_guesses += 1
+                    guess = int(input_text)
+                    if guess == number:
+                        message = "You win!"
+                    elif guess < number:
+                        message = "Too low..."
+                    else:
+                        message = "Too high..."
+            if quit_rect.collidepoint(mouse_pos):
+                running = False
+                main.main(False)
+                quit()
 
         # Check for key presses
         if event.type == pygame.KEYDOWN:
-            # Check if the key is a number
+            if event.key == pygame.K_RETURN:
+                if input_text == '':
+                    message = "Pathetic..."
+                else:
+                    num_guesses += 1
+                    guess = int(input_text)
+                    if guess == number:
+                        message = "You win!"
+                    elif guess < number:
+                        message = "Too low..."
+                    else:
+                        message = "Too high..."
             if event.unicode.isdigit():
-                # Add the digit to the input text
+                pygame.key.set_repeat(250, 50)
                 input_text += event.unicode
-            # Check if the key is the backspace key
             elif event.key == pygame.K_BACKSPACE:
-                # Remove the last character from the input text
+                pygame.key.set_repeat(250, 50)
                 input_text = input_text[:-1]
             elif event.key == pygame.K_ESCAPE:
                 running = False
                 main.main(False)
-                break
+                quit()
 
-    # Fill the screen with white
-    screen.fill(WHITE)
+    # apply background
+    screen.blit(background, (0, 0))
 
     # Draw the input box
     pygame.draw.rect(screen, BLACK, input_box, 2)
@@ -107,6 +133,8 @@ while running:
     button_text_x = button_rect.x + (button_width - button_text.get_width()) // 2
     button_text_y = button_rect.y + (button_height - button_text.get_height()) // 2
     screen.blit(button_text, (button_text_x, button_text_y))
+
+    screen.blit(quit_rend, quit_rect)
 
     # Draw the message
     message_surface = font.render(message, True, BLACK)
