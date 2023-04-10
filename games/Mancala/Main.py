@@ -31,22 +31,18 @@ HOLECOLOR = (118, 91, 13)
 
 # game variables
 binAmount = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0]
-
 playerOne = True
-
-messageCode = 0
-
 giveawayPile = -1
-
 lastRecipient = -1
-
-chosenBin = -1
+chosenBin = -2
 
 running = True
 while running: # game loop
+    chosenBin = -2
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            main_menu.main(False)
+            quit()
         # check for mouse clicks
         if event.type == pygame.MOUSEBUTTONDOWN:
             # get mouse position
@@ -77,67 +73,62 @@ while running: # game loop
                 chosenBin = 8
             elif not(playerOne) and f2_rect.collidepoint(mouse_pos):
                 chosenBin = 7
-            else:
-                chosenBin = -2
-                messageCode = -2 # invalid input
-
-            if int(chosenBin) >= 0:
-                giveawayPile = binAmount[chosenBin]
-                binAmount[chosenBin] = 0
-                if int(giveawayPile) <= 0:
-                    messageCode = -1 # empty bin was chosen
-
-            recipient = chosenBin + 1
-            while int(giveawayPile) > 0:
-                if playerOne and int(recipient) == 13:
-                    recipient = 0
-                if (not playerOne) and (int(recipient) == 6):
-                    recipient = 7
-
-                binAmount[recipient] = int(binAmount[recipient]) + 1
-                giveawayPile = int(giveawayPile) - 1
-
-                if int(giveawayPile) == 0:
-                    lastRecipient = recipient
-                else:
-                    recipient = int(recipient) + 1
-                    if int(recipient) > 13:
+            if chosenBin != -2:
+                if int(chosenBin) >= 0:
+                    giveawayPile = binAmount[chosenBin]
+                    binAmount[chosenBin] = 0
+                recipient = chosenBin + 1
+                while int(giveawayPile) > 0:
+                    if playerOne and int(recipient) == 13:
                         recipient = 0
+                    if (not playerOne) and (int(recipient) == 6):
+                        recipient = 7
 
-            if playerOne and int(lastRecipient) == 6:
-                playerOne = True
-            elif playerOne and int(binAmount[lastRecipient]) == 1 and int(lastRecipient < 6):
-                binAmount[6] = int(binAmount[6]) + int(binAmount[lastRecipient]) + int(binAmount[12 - int(lastRecipient)])
-                binAmount[lastRecipient] = 0
-                binAmount[12 - int(lastRecipient)] = 0
-                playerOne = not playerOne
-            elif (not playerOne) and int(lastRecipient) == 13:
-                playerOne = False
-            elif not playerOne and int(binAmount[lastRecipient]) == 1 and int(lastRecipient > 6):
-                binAmount[13] = int(binAmount[13]) + int(binAmount[lastRecipient]) + int(binAmount[12 - int(lastRecipient)])
-                binAmount[lastRecipient] = 0
-                binAmount[12 - int(lastRecipient)] = 0
-                playerOne = not playerOne
-            elif int(messageCode) >= 0:
-                playerOne = not playerOne
+                    binAmount[recipient] = int(binAmount[recipient]) + 1
+                    giveawayPile = int(giveawayPile) - 1
 
-            # checking for the end of the game
-            sideOne = 0
-            sideTwo = 0
-            for j in range(6):
-                sideOne = int(sideOne) + int(binAmount[j])
-                sideTwo = int(sideTwo) + int(binAmount[j + 7])
-    
-            if int(sideOne) == 0 or int(sideTwo) == 0:
-                running = False
-                binAmount[6] = int(binAmount[6]) + int(sideOne)
-                binAmount[13] = int(binAmount[13]) + int(sideTwo)
-                for k in range(6):
-                    binAmount[k] = 0
-                    binAmount[k + 7] = 0
+                    if int(giveawayPile) == 0:
+                        lastRecipient = recipient
+                    else:
+                        recipient = int(recipient) + 1
+                        if int(recipient) > 13:
+                            recipient = 0
 
-        # if event.type == pygame.K_ESCAPE:
-            # RETURN TO MAIN MENU
+                if playerOne and int(lastRecipient) == 6:
+                    playerOne = True
+                elif playerOne and int(binAmount[lastRecipient]) == 1 and int(lastRecipient < 6):
+                    binAmount[6] = int(binAmount[6]) + int(binAmount[lastRecipient]) + int(binAmount[12 - int(lastRecipient)])
+                    binAmount[lastRecipient] = 0
+                    binAmount[12 - int(lastRecipient)] = 0
+                    playerOne = not playerOne
+                elif (not playerOne) and int(lastRecipient) == 13:
+                    playerOne = False
+                elif not playerOne and int(binAmount[lastRecipient]) == 1 and int(lastRecipient > 6):
+                    binAmount[13] = int(binAmount[13]) + int(binAmount[lastRecipient]) + int(binAmount[12 - int(lastRecipient)])
+                    binAmount[lastRecipient] = 0
+                    binAmount[12 - int(lastRecipient)] = 0
+                    playerOne = not playerOne
+                else:
+                    playerOne = not playerOne
+                # checking for the end of the game
+                sideOne = 0
+                sideTwo = 0
+                for j in range(6):
+                    sideOne = int(sideOne) + int(binAmount[j])
+                    sideTwo = int(sideTwo) + int(binAmount[j + 7])
+        
+                if int(sideOne) == 0 or int(sideTwo) == 0:
+                    running = False
+                    binAmount[6] = int(binAmount[6]) + int(sideOne)
+                    binAmount[13] = int(binAmount[13]) + int(sideTwo)
+                    for k in range(6):
+                        binAmount[k] = 0
+                        binAmount[k + 7] = 0
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                main_menu.main(False)
+                quit()
 
     # Fill the screen with black
     screen.fill(BLACK)
@@ -241,18 +232,10 @@ while running: # game loop
     screen.blit(f2_text, f2_rect.center)
     
     # draw the message
-    if playerOne and messageCode == 0:
+    if playerOne:
         message = "Player One's Turn..."
-    elif not playerOne and messageCode == 0:
+    elif not playerOne:
         message = "Player Two's Turn..."
-    elif playerOne and messageCode == -2:
-        message = "Invalid input. Try again, Player One."
-    elif not playerOne and messageCode == -2:
-        message = "Invalid input. Try again, Player Two."    
-    elif playerOne and messageCode == -1:
-        message = "You must choose a non-empty bin, Player One."
-    elif not playerOne and messageCode == -1:
-        message = "You must choose a non-empty bin, Player Two."
 
     message_text = font.render(message, True, WHITE)
     screen.blit(message_text, (screen_width // 6, screen_height // 6))
@@ -270,6 +253,7 @@ else:
 
 win_text = font.render(win_message, True, WHITE)
 screen.blit(win_text, (screen_width // 6, screen_height * 5 // 6))
-
+pygame.display.update()
 time.sleep(5)
 main_menu.main(False)
+quit()
