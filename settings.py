@@ -2,6 +2,7 @@ import pygame
 import themes as t
 from importlib.machinery import SourceFileLoader
 import random
+import json
 
 # Initialize Pygame
 pygame.init()
@@ -50,17 +51,19 @@ save_button_text = font.render("Save", True, BLACK)
 
 def save_text(text):
     discriminator = random.randint(1000, 9999)
-    with open("name.txt", "w") as file:
-        file.write(f"{text}#{discriminator}")
+    data = {"name": text, "discriminator": discriminator}
+
+    with open("name.json", "w") as file:
+        json.dump(data, file)
+
 
 def load_text():
     try:
-        with open("name.txt", "r") as file:
-            content = file.read()
-            name, _, _ = content.rpartition("#")
-            return name
-    except Exception as e:
-        print(e)
+        with open("name.json", "r") as file:
+            data = json.load(file)
+            return data["name"]
+    except (FileNotFoundError, json.JSONDecodeError):
+        return ""
 
 text = load_text()
 
