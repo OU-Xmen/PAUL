@@ -55,12 +55,16 @@ def pause_menu():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                run = False
+                song_channel.stop()
+                main_menu.main(False)
                 quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if resume_rect.collidepoint(mouse):
                     return False
                 if quit_rect.collidepoint(mouse):
                     run = False
+                    song_channel.stop()
                     main_menu.main(False)
                     quit()
 
