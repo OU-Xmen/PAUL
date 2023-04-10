@@ -8,11 +8,28 @@ from importlib.machinery import SourceFileLoader
 pygame.init()
 maindir = os.path.abspath(os.path.dirname(__file__))
 bkgrddir = os.path.join(maindir, 'assets', 'backgrounds')
+sounddir = os.path.join(maindir, 'assets', 'sounds')
+
 L = SourceFileLoader('Levels', os.path.join(maindir, 'Levels.py')).load_module()
 T = SourceFileLoader('Tile', os.path.join(maindir, 'Tile.py')).load_module()
 P = SourceFileLoader('Player', os.path.join(maindir, 'Player.py')).load_module()
-beep = pygame.mixer.Sound(os.path.join(maindir, 'assets', 'beep.wav'))
-beep.set_volume(.15)
+main_menu = SourceFileLoader("main", os.path.join(maindir, '..', '..', 'main.py')).load_module()
+
+beep = pygame.mixer.Sound(os.path.join(sounddir, 'beep.wav'))
+beep.set_volume(.1)
+coin_sound = pygame.mixer.Sound(os.path.join(sounddir, 'coin.wav'))
+coin_sound.set_volume(.25)
+goal_sound = pygame.mixer.Sound(os.path.join(sounddir, 'goal.wav'))
+goal_sound.set_volume(.4)
+death_sound = pygame.mixer.Sound(os.path.join(sounddir, 'death.wav'))
+death_sound.set_volume(.3)
+jump_sound = pygame.mixer.Sound(os.path.join(sounddir, 'jump.wav'))
+jump_sound.set_volume(.2)
+overworld_song = pygame.mixer.Sound(os.path.join(sounddir, "Overworld.wav"))
+him = pygame.mixer.Sound(os.path.join(sounddir, "HIM.wav"))
+
+song_channel = pygame.mixer.Channel(1)
+song_channel.set_volume(.5)
 
 font = pygame.font.SysFont("comicsansms", 30)
 
@@ -70,6 +87,7 @@ def textbox(text, x=50, y=500, delay=0.05, background_color=(0, 0, 0), text_colo
             if text in ['My real name is...',
                     'You are not supposed to be here.',
                     'Get out of here now.']:
+                song_channel.stop()
                 time.sleep(delay)
     if level_global == 15 and text == 'My real name is...':
         with open(os.path.join(maindir, 'assets', 'scores.json')) as f:
@@ -79,7 +97,6 @@ def textbox(text, x=50, y=500, delay=0.05, background_color=(0, 0, 0), text_colo
         if possible_coins > coins:
             with open(os.path.join(maindir, 'assets', 'scores.json'), 'w') as f:
                 json.dump({"highscore": possible_coins}, f)
-        
         quit()
 
     while text_displayed:
@@ -113,14 +130,25 @@ def game_loop(level, coin_counter_func = 0, death_counter = 0):
     crouch_flag = True if level == 15 else False
     break_flag = False
 
+    if not song_channel.get_busy() and level < 14:
+        song_channel.play(overworld_song, -1)
+    if level == 14:
+        song_channel.stop()
+    if level == 15:
+        song_channel.play(him, -1)
+
     while True:
         read_flag = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                break_flag = True
+                quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 print("AHHHHH")
             if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    song_channel.stop()
+                    main_menu.main(False)
+                    quit()
                 if event.key in [pygame.K_RIGHT, pygame.K_d]:
                     arr_list.append('right') if 'right' not in arr_list else None
                 if event.key in [pygame.K_LEFT, pygame.K_a]:
@@ -129,7 +157,8 @@ def game_loop(level, coin_counter_func = 0, death_counter = 0):
                     read_flag = True
                 if event.key in [pygame.K_LSHIFT, pygame.K_s, pygame.K_DOWN] and level != 15:
                     crouch_flag = [False, True][crouch_flag == False]
-                if event.key in [pygame.K_UP, pygame.K_w]:
+                if event.key in [pygame.K_UP, pygame.K_w, pygame.K_SPACE]:
+                    if not jump_flag: jump_sound.play()
                     jump_flag = True
                 if event.key == pygame.K_c and text_displayed:
                     text_displayed = False
@@ -184,6 +213,7 @@ def game_loop(level, coin_counter_func = 0, death_counter = 0):
                     jumped_on_enemy.append(pygame.Rect.collidepoint(enemy_top, (temp[0], temp[1]+37)))
                     jumped_on_enemy.append(pygame.Rect.collidepoint(enemy_top, (temp[0]+33, temp[1]+37)))
                     if max(jumped_on_enemy):
+                        death_sound.play()
                         level_tiles[i][j] = T.Tile(0, i, j)
                         player.set_gravity(False)
                         player.jump(800, True)
@@ -191,9 +221,15 @@ def game_loop(level, coin_counter_func = 0, death_counter = 0):
                         is_dead.append(pygame.Rect.colliderect(level_tiles[i][j].img_rect, temp))
                 if level_tiles[i][j].type == 'coin':
                     if pygame.Rect.colliderect(level_tiles[i][j].img_rect, temp):
+                        coin_sound.play()
                         coin_counter += 1
                         level_tiles[i][j] = T.Tile(0, i, j)
         if any(is_won):
+            if level == 14 or not song_channel.get_busy():
+                death_sound.play()
+            else:
+                goal_sound.play()
+            time.sleep(1)
             with open(os.path.join(maindir, "currentstats.json"), "r") as rfile:
                 a = json.load(rfile)
                 a["level"] += 1
@@ -214,6 +250,7 @@ def game_loop(level, coin_counter_func = 0, death_counter = 0):
                 quit()
 
         if any(is_dead) or temp[1]>600:
+            death_sound.play()
             death_counter += 1
             zx, zy = current_level.get_start_coords()
             player = P.Player(zx, zy)
