@@ -21,7 +21,7 @@ credits_list = [
     "P.A.U.L.",
     "Team Leader: Valerie Neilson",
     "Developers: Eli Sepulveda, Logan Pizzurro",
-    "Matthew Robinson, Eshan Rajam",
+    "Matthew Robertson, Eshan Rajam",
     "Music: Eli Sepulveda, Matthew Robertson",
     "Testing Engineer: Freddie Warren",
     "[Other stuff to credit here]",
