@@ -102,7 +102,7 @@ def game_runner(i, games, game_dir):
 
     logger.log(f"Preparing to run {games[i]}.")
     try:
-        game = SourceFileLoader('game', os.path.join(game_dir, f'{games[i]}', 'main.py')).load_module()
+        game = SourceFileLoader('game', os.path.join(game_dir, f'{games[i]}', 'Main.py')).load_module()
         game.main()
     except Exception as e:
         errorHandler(e)
