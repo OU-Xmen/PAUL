@@ -19,10 +19,10 @@ def main():
     pygame.init()
 
     # set window size
-    window_size = (800, 600)
+    window_size = width, height = 800, 600
 
     # initialize the window
-    screen = pygame.display.set_mode(window_size)
+    screen = pygame.display.set_mode((window_size))
 
     # set title
     pygame.display.set_caption("Hangman Game")
@@ -52,6 +52,26 @@ def main():
     guessed_letters = []
     word_to_guess = ["_"] * len(word)
 
+    def results(status):
+        running = True
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                    main_menu.main(False)
+                    quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        running = False
+                        main_menu.main(False)
+                        quit()
+            
+            screen.fill(white)
+            word_text = font.render(word, True, black)
+            screen.blit(word_text, (width // 2, height // 2))
+            pygame.display.update()
+
+            
     # main game loop
     running = True
     while running:
@@ -59,6 +79,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
                 main_menu.main(False)
+                quit()
 
             if event.type == pygame.KEYDOWN:
                 # check if the key pressed is a letter
@@ -78,6 +99,7 @@ def main():
                 if event.key == pygame.K_ESCAPE:
                     running = False
                     main_menu.main(False)
+                    quit()
 
         screen.fill(white)
 
@@ -95,12 +117,15 @@ def main():
         pygame.display.update()
 
         # check if the game is over
-        if "_" not in word_to_guess or hangman_status == 6:
+        if "_" not in word_to_guess:
+            status = True
+            running = False
+        elif hangman_status == 6:
+            status = False
             running = False
 
     # deinitialize pygame
-    main_menu.main(False)
-    return
+    results(status)
 
 if __name__ == "__main__":
     main()
