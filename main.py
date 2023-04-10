@@ -102,7 +102,7 @@ def game_runner(i, games, game_dir):
 
     logger.log(f"Preparing to run {games[i]}.")
     try:
-        game = SourceFileLoader('game', os.path.join(game_dir, f'{games[i]}', 'Main.py')).load_module()
+        game = SourceFileLoader('game', os.path.join(game_dir, f'{games[i]}', 'main.py')).load_module()
         game.main()
     except Exception as e:
         errorHandler(e)
@@ -121,6 +121,7 @@ def main(splash):
     next_page_rect = pygame.Rect(500, 500, 150, 75)
     previous_page_rect = pygame.Rect(150, 500, 150, 75)
     settings_rect = pygame.Rect(500, 25, 150, 75)
+    credits_rect = pygame.Rect(150, 25, 150, 75)
 
 
 
@@ -145,6 +146,11 @@ def main(splash):
                 if settings_rect.collidepoint(event.pos):
                     music.stop()
                     settings = SourceFileLoader('settings', 'settings.py').load_module()
+                
+                if credits_rect.collidepoint(event.pos):
+                    music.stop()
+                    creditss = SourceFileLoader('credits', 'credits.py').load_module()
+                    creditss.main()
 
         show_next = False
         show_previous = False
@@ -190,8 +196,11 @@ def main(splash):
                 screen.blit(button_text, (previous_page_rect.x-10, previous_page_rect.y + 75))
 
             pygame.draw.rect(screen, t.PAGE_BUTTONS, settings_rect)
-            button_text = font.render("Settings", True, t.TEXT)
-            screen.blit(button_text, (settings_rect.x, settings_rect.y + 75))
+            pygame.draw.rect(screen, t.PAGE_BUTTONS, credits_rect)
+            setting_button_text = font.render("Settings", True, t.TEXT)
+            screen.blit(setting_button_text, (settings_rect.x, settings_rect.y + 75))
+            credits_button_text = font.render("Credits", True, t.TEXT)
+            screen.blit(credits_button_text, (credits_rect.x, credits_rect.y + 75))
 
             
             
