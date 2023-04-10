@@ -94,7 +94,7 @@ def results_screen(text):
         screen.fill(gray)
         pygame.draw.rect(screen, red, quit_box)
         screen.blit(quit_rend, quit_rect)
-        drawText(screen, text, black, (100, 50, 600, 400), font)
+        drawText(screen, text, black, (100, 50, 600, 500), font)
         pygame.display.flip()
 
         for event in pygame.event.get():
