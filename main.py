@@ -170,6 +170,7 @@ def main(splash):
             logger.log("Running splash screen")
             pygame.time.wait(3000)  # Show splash screen for 3 seconds
             splash = False
+            pygame.event.clear()
             logger.log("Running main menu")
         elif tunes: 
             music.play(loops=-1) # loop music forever
