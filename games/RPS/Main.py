@@ -7,7 +7,6 @@ try:
     maindirectory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     currentdirectory = os.path.dirname(os.path.abspath(__file__))
     assetdirectory = os.path.join(currentdirectory, "assets")
-
     main_menu = SourceFileLoader('main', os.path.join(maindirectory, 'main.py')).load_module()
 except ImportError:
     print("One or more required modules could not be imported. Please try again.")
@@ -42,18 +41,27 @@ def compare_choices(player_choice, paul_choice):
             return "tie"        
     
 
+def init_words(text, size, center_x, center_y, text_color):
+    font = pygame.font.SysFont('comicsansms', size)
+    temp_rend = pygame.font.Font.render(font, text, True, text_color)
+    temp_rect = temp_rend.get_rect(center = (center_x, center_y))
+    return temp_rend, temp_rect
+
+
 def main():
     # create window, set size, caption, and icon
     size = WIDTH, HEIGHT = 800, 600
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption("Rock Paper Scissors")
     icon = pygame.image.load(os.path.join(assetdirectory, "paulicon.png"))
+    background = pygame.image.load(os.path.join(assetdirectory, "background.png"))
     pygame.display.set_icon(icon)
 
     # define important variables
     player = ""
     paul = paul_choice()
     message = ""
+    message_color = 'black'
 
     # define basic colors
     BLACK = (0, 0, 0)
@@ -63,17 +71,19 @@ def main():
     font = pygame.font.SysFont("comicsans", 30)
 
     # create the buttons
-    rock_button_size = rock_button_width, rock_button_height = 200, 200
-    rock_button_pos = rock_button_x, rock_button_y = 50, 200
+    rock_button_size = rock_button_width, rock_button_height = 150, 100
+    rock_button_pos = rock_button_x, rock_button_y = 75, 250
     rock_button_rect = pygame.Rect(rock_button_pos, rock_button_size)
 
-    paper_button_size = paper_button_width, paper_button_height = 200, 200
-    paper_button_pos = paper_button_x, paper_button_y = 300, 200
+    paper_button_size = paper_button_width, paper_button_height = 150, 100
+    paper_button_pos = paper_button_x, paper_button_y = 325, 250
     paper_button_rect = pygame.Rect(paper_button_pos, paper_button_size)
 
-    scissors_button_size = scissors_button_width, scissors_button_height = 200, 200
-    scissors_button_pos = scissors_button_x, scissors_button_y = 550, 200
+    scissors_button_size = scissors_button_width, scissors_button_height = 150, 100
+    scissors_button_pos = scissors_button_x, scissors_button_y = 575, 250
     scissors_button_rect = pygame.Rect(scissors_button_pos, scissors_button_size)
+
+    quit_rend, quit_rect = init_words('QUIT', 30, 50, 50, (200, 0, 0))
 
     # Game loop
     running = True
@@ -82,55 +92,65 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
                 main_menu.main(False)
-
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
+                    running = False
                     main_menu.main(False)
                     quit()
 
 
             # check for mouse clicks
             if event.type == pygame.MOUSEBUTTONDOWN:
-                # get mouse pos
                 mouse_pos = pygame.mouse.get_pos()
-            
-            
-
-                # check if mouse is over rock button
                 if rock_button_rect.collidepoint(mouse_pos):
                     player = "rock"
                     comparison = compare_choices(player, paul)
                     if comparison == "player":
                         message = "You Win!"
+                        message_color = 'green'
                     elif comparison == "paul":
                         message ="P.A.U.L. Wins!"
+                        message_color = 'red'
                     elif comparison == "tie":
                         message = "It's a tie!"
+                        message_color = "orange"
 
                 elif paper_button_rect.collidepoint(mouse_pos):
                     player = "paper"
                     comparison = compare_choices(player, paul)
                     if comparison == "player":
                         message = "You Win!"
+                        message_color = 'green'
                     elif comparison == "paul":
                         message ="P.A.U.L. Wins!"
+                        message_color = 'red'
                     elif comparison == "tie":
                         message = "It's a tie!"
+                        message_color = "orange"
                     
                 elif scissors_button_rect.collidepoint(mouse_pos):
                     player = "scissors"
                     comparison = compare_choices(player, paul)
                     if comparison == "player":
                         message = "You Win!"
+                        message_color = 'green'
                     elif comparison == "paul":
                         message ="P.A.U.L. Wins!"
+                        message_color = 'red'
                     elif comparison == "tie":
                         message = "It's a tie!"
-                        
+                        message_color = "orange"
+                
+                elif quit_rect.collidepoint(mouse_pos):
+                    running = False
+                    main_menu.main(False)
+                    quit()
+                    
                 paul = paul_choice()
                     
 
-        screen.fill(WHITE)
+        screen.blit(background, (0, 0))
 
         # draw buttons
         pygame.draw.rect(screen, BLACK, rock_button_rect, 0)
@@ -151,10 +171,12 @@ def main():
         scissors_button_text_y = scissors_button_y + (scissors_button_height - scissors_button_text.get_height()) // 2
         screen.blit(scissors_button_text, (scissors_button_text_x, scissors_button_text_y))
 
+        screen.blit(quit_rend, quit_rect)
+
         # draw message
-        message_text = font.render(message, True, BLACK)
+        message_text = font.render(message, True, message_color)
         message_text_x = (WIDTH - message_text.get_width()) // 2
-        message_text_y = (HEIGHT - message_text.get_height()) // 4
+        message_text_y = (HEIGHT - message_text.get_height()) // 3
         screen.blit(message_text, (message_text_x, message_text_y))
 
         pygame.display.update()
