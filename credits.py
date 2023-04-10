@@ -19,7 +19,7 @@ font = pygame.font.SysFont('comicsansms', 30)
 
 credits_list = [
     "P.A.U.L.",
-    "Team Leader: Valerie Neilson",
+    "Team Leader: Valerie Nielson",
     "Developers: Eli Sepulveda, Logan Pizzurro",
     "Matthew Robertson, Eshan Rajam",
     "Music: Eli Sepulveda, Matthew Robertson",
