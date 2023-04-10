@@ -2,7 +2,7 @@ import pygame
 from importlib.machinery import SourceFileLoader
 from tkinter import messagebox
 import os
-
+import sys
 
 main_dir = os.path.dirname(os.path.abspath(__file__))
 game_dir = os.path.join(main_dir, 'games')
@@ -99,20 +99,14 @@ def game_runner(i, games, game_dir):
     print(game_to_run)
     music.stop()
     print(f"{games[i]} was clicked")
+
     logger.log(f"Preparing to run {games[i]}.")
     try:
-        game = SourceFileLoader('game', os.path.join(game_dir, f'{games[i]}', 'main.py')).load_module()
+        game = SourceFileLoader('game', os.path.join(game_dir, f'{games[i]}', 'Main.py')).load_module()
         game.main()
     except Exception as e:
         errorHandler(e)
 
-def show_splash_screen():
-    screen.blit(splash_image, (0, 0))
-    pygame.display.update()
-    paul_sound.play()
-    logger.log("Running splash screen")
-    pygame.time.wait(3000)  # Show splash screen for 3 seconds
-    logger.log("Running main menu")
 
 
 # Splash screen flag
@@ -128,37 +122,35 @@ def main(splash):
     previous_page_rect = pygame.Rect(150, 500, 150, 75)
     settings_rect = pygame.Rect(500, 25, 150, 75)
     credits_rect = pygame.Rect(150, 25, 150, 75)
-    skip_mouse_events = splash
+
+
 
     while running:
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-                quit()
-            if not skip_mouse_events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                # Check if any button was clicked
+                for i, rect in enumerate(button_rects):
+                    if rect.collidepoint(event.pos):
+                        game_runner(i, games, game_dir)
 
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    # Check if any button was clicked
-                    for i, rect in enumerate(button_rects):
-                        if rect.collidepoint(event.pos):
-                            game_runner(i, games, game_dir)
+                if next_page_rect.collidepoint(event.pos):
+                    if show_next is True:
+                        page = change_page(page, 1)
+                if previous_page_rect.collidepoint(event.pos):
+                    if show_previous is True:
+                        page = change_page(page, -1)
 
-                    if next_page_rect.collidepoint(event.pos):
-                        if show_next is True:
-                            page = change_page(page, 1)
-                    if previous_page_rect.collidepoint(event.pos):
-                        if show_previous is True:
-                            page = change_page(page, -1)
-
-                    if settings_rect.collidepoint(event.pos):
-                        music.stop()
-                        settings = SourceFileLoader('settings', 'settings.py').load_module()
-                    
-                    if credits_rect.collidepoint(event.pos):
-                        music.stop()
-                        creditss = SourceFileLoader('credits', 'credits.py').load_module()
-                        creditss.main()
+                if settings_rect.collidepoint(event.pos):
+                    music.stop()
+                    settings = SourceFileLoader('settings', 'settings.py').load_module()
+                
+                if credits_rect.collidepoint(event.pos):
+                    music.stop()
+                    creditss = SourceFileLoader('credits', 'credits.py').load_module()
+                    creditss.main()
 
         show_next = False
         show_previous = False
@@ -171,9 +163,15 @@ def main(splash):
             logger.log(e, 3)
 
         if splash:
-            show_splash_screen()
-            splash=False
-
+            # Draw splash screen
+            screen.blit(splash_image, (0, 0))
+            pygame.display.update()
+            paul_sound.play()
+            logger.log("Running splash screen")
+            pygame.time.wait(3000)  # Show splash screen for 3 seconds
+            splash = False
+            pygame.event.clear()
+            logger.log("Running main menu")
         elif tunes: 
             music.play(loops=-1) # loop music forever
             tunes = False
