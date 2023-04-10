@@ -1,6 +1,7 @@
 import pygame
 import themes as t
 from importlib.machinery import SourceFileLoader
+import random
 
 # Initialize Pygame
 pygame.init()
@@ -39,6 +40,30 @@ menu_y = 200
 button_x = menu_x
 button_y = 100
 
+# Textbox creation
+text_box = pygame.Rect(100, 100, 200, 50)
+is_active = False
+
+# Save button
+save_button = pygame.Rect(100, 200, 200, 50)
+save_button_text = font.render("Save", True, BLACK)
+
+def save_text(text):
+    discriminator = random.randint(1000, 9999)
+    with open("name.txt", "w") as file:
+        file.write(f"{text}#{discriminator}")
+
+def load_text():
+    try:
+        with open("name.txt", "r") as file:
+            content = file.read()
+            name, _, _ = content.rpartition("#")
+            return name
+    except Exception as e:
+        print(e)
+
+text = load_text()
+
 f = open("current.theme", "r")
 current_theme = f.readline()
 f.close()
@@ -46,6 +71,8 @@ selected_option = themes.index(current_theme.capitalize())
 
 # Set the initial dropdown menu state
 menu_open = False
+
+
 
 # Define the function to draw the dropdown menu
 def draw_menu():
@@ -66,13 +93,18 @@ while running:
             main = SourceFileLoader("main", "main.py").load_module()
             main.main(False)
             quit()
-        elif event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == pygame.MOUSEBUTTONDOWN:
             if back_rect.collidepoint(event.pos):
                 main = SourceFileLoader("main", "main.py").load_module()
                 main.main(False)
                 quit()
-
-                
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if text_box.collidepoint(event.pos):
+                is_active = not is_active
+            else:
+                is_active = False
+            if save_button.collidepoint(event.pos):
+                save_text(text)
 
             if event.button == 1:
                 if menu_open:
@@ -101,6 +133,15 @@ while running:
                 print("Selected option:", themes[selected_option])
                 fw = open("current.theme", "w")
                 fw.write(themes[selected_option].lower())
+
+        if event.type == pygame.KEYDOWN:
+            if is_active:
+                if event.key == pygame.K_RETURN:
+                    save_text(text)
+                elif event.key == pygame.K_BACKSPACE:
+                    text = text[:-1]
+                else:
+                    text += event.unicode
     # Draw the button
     button_surface = pygame.Surface((BUTTON_WIDTH, BUTTON_HEIGHT))
     if menu_open:
@@ -123,6 +164,20 @@ while running:
     pygame.draw.rect(screen, t.PAGE_BUTTONS, back_rect)
     button_text = font.render("Back", True, t.TEXT)
     screen.blit(button_text, (back_rect.x+45, back_rect.y + 75))
+
+    if is_active:
+        pygame.draw.rect(screen, (255, 0, 0), text_box, 2)
+    else:
+        pygame.draw.rect(screen, WHITE, text_box, 2)
+
+    text_surface = font.render(text, True, WHITE)
+    screen.blit(text_surface, (text_box.x+5, text_box.y+15))
+    screen.blit(font.render("Name:", True, WHITE),(text_box.x+5, text_box.y-30))
+
+
+    pygame.draw.rect(screen, WHITE, save_button)
+    screen.blit(save_button_text, (save_button.x+70, save_button.y+15))
+
     # Update the display
     pygame.display.update()
 

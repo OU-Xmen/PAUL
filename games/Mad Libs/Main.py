@@ -3,8 +3,9 @@ try:
     pygame.init()
     import os
     from importlib.machinery import SourceFileLoader
-    maindirectory = os.path.dirname(os.path.abspath(__file__))
-    assetdirectory = os.path.join(maindirectory, 'assets')
+    maindirectory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    currentdirectory = os.path.dirname(os.path.abspath(__file__))
+    assetdirectory = os.path.join(currentdirectory, 'assets')
     main_menu = SourceFileLoader('main', os.path.join(os.path.dirname(maindirectory), 'main.py')).load_module()
     story1 = os.path.join(assetdirectory, 'madlibs_story1.txt')
     story2 = os.path.join(assetdirectory, 'madlibs_story2.txt')
