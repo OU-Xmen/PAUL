@@ -1,6 +1,8 @@
 import pygame
 import random
 import os
+import requests
+response = requests.get("https://www.mit.edu/~ecprice/wordlist.10000")
 from importlib.machinery import SourceFileLoader
 
 main_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -40,7 +42,7 @@ def main():
         images.append(image)
 
     # list of words
-    words = ["python", "apple", "orange", "computer", "science"]
+    words = response.text.splitlines()
 
     # select a random word
     word = random.choice(words)
