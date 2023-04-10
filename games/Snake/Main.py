@@ -33,6 +33,8 @@ snake_speed = 15
 font_style = pygame.font.SysFont("comicsansms", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
 
+snake_song = pygame.mixer.Sound(os.path.join(assetdirectory, "Snake.wav"))
+song_channel = pygame.mixer.Channel(1)
 
 def Your_score(score):
     int_score = int(score)
@@ -69,6 +71,7 @@ def gameLoop():
     Up = False
     Down = False
 
+
     while not game_over:
 
         while game_close == True:
@@ -81,6 +84,7 @@ def gameLoop():
                     if event.key == pygame.K_ESCAPE:
                         game_over = True
                         game_close = False
+                        song_channel.stop()
                         main_menu.main(False)
                         quit()
 
@@ -89,6 +93,7 @@ def gameLoop():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_over = True
+                song_channel.stop()
                 main_menu.main(False)
                 quit()
             if event.type == pygame.KEYDOWN:
@@ -158,4 +163,5 @@ def gameLoop():
             Length_of_snake += 1
         clock.tick(snake_speed)
     pygame.quit()
+song_channel.play(snake_song, loops=-1)
 gameLoop()
