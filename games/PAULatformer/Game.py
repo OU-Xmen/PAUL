@@ -12,7 +12,7 @@ L = SourceFileLoader('Levels', os.path.join(maindir, 'Levels.py')).load_module()
 T = SourceFileLoader('Tile', os.path.join(maindir, 'Tile.py')).load_module()
 P = SourceFileLoader('Player', os.path.join(maindir, 'Player.py')).load_module()
 beep = pygame.mixer.Sound(os.path.join(maindir, 'assets', 'beep.wav'))
-beep.set_volume(.25)
+beep.set_volume(.15)
 
 font = pygame.font.SysFont("comicsansms", 30)
 
@@ -67,6 +67,10 @@ def textbox(text, x=50, y=500, delay=0.05, background_color=(0, 0, 0), text_colo
             pygame.display.update()
             beep.play()
             time.sleep(delay)
+            if text in ['My real name is...',
+                    'You are not supposed to be here.',
+                    'Get out of here now.']:
+                time.sleep(delay)
     if level_global == 15 and text == 'My real name is...':
         with open(os.path.join(maindir, 'assets', 'scores.json')) as f:
             coins = json.load(f)["highscore"]
@@ -106,8 +110,7 @@ def game_loop(level, coin_counter_func = 0, death_counter = 0):
     player = P.Player(start_x, start_y)
     arr_list = [] # list of arrow keys being held
     jump_flag = False
-    crouch_flag = False
-    if level == 15: crouch_flag = True
+    crouch_flag = True if level == 15 else False
     break_flag = False
 
     while True:
