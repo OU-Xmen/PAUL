@@ -4,15 +4,16 @@ from discord.ext import tasks
 import requests
 import json
 
+
+
 description = '''A bot to show you the leaderboards of PAUL'''
 
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
-txt = open('PAULTOken.txt','r')
+txt = open('PAUL.txt','r')
 token = txt.read()
 txt.close()
-
 
 paul = commands.Bot(command_prefix='!', description=description, intents=intents)
 @paul.event
@@ -49,4 +50,4 @@ async def ast(ctx):
 async def Tet(ctx):
     await ctx.send("Tetris game scoreboard")
 
-paul.run(BOT_TOKEN)
+paul.run(token)
