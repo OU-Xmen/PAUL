@@ -8,10 +8,10 @@ from importlib.machinery import SourceFileLoader
 pygame.init()
 
 white = (255, 255, 255)
-yellow = (255, 255, 102)
+gray = (200, 200, 200)
 black = (0, 0, 0)
 red = (210, 50, 100)
-blue = (50, 255, 100)
+blue = (50, 125, 255)
 
 dis_width = 800
 dis_height = 600
@@ -43,7 +43,7 @@ def Your_score(score):
         with open(os.path.join(assetdirectory, "scores.json"), "w") as f:
             json.dump(data, f)
 
-    value = score_font.render("Score: " + str(score), True, yellow)
+    value = score_font.render("Score: " + str(score), True, gray)
     dis.blit(value, [0, 0])
 def our_snake(snake_block, snake_list):
     for x in snake_list:
@@ -92,47 +92,55 @@ def gameLoop():
                 main_menu.main(False)
                 quit()
             if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    game_over = True
+                    main_menu.main(False)
+                    quit()
                 if event.key == pygame.K_LEFT:
                     x1_change = -snake_block
                     y1_change = 0
                     if Right:
                         x1_change = snake_block
                         y1_change = 0
-                    Left = True
-                    Up = False
-                    Down = False
-                    Right = False
-                elif event.key == pygame.K_RIGHT:
+                    else:
+                        Left = True
+                        Up = False
+                        Down = False
+                        Right = False
+                if event.key == pygame.K_RIGHT:
                     x1_change = snake_block
                     y1_change = 0
                     if Left:
                         x1_change = -snake_block
                         y1_change = 0
-                    Left = False
-                    Up = False
-                    Down = False
-                    Right = True
+                    else:
+                        Left = False
+                        Up = False
+                        Down = False
+                        Right = True
                     
-                elif event.key == pygame.K_UP:
+                if event.key == pygame.K_UP:
                     y1_change = -snake_block
                     x1_change = 0
                     if Down:
                         x1_change = 0
                         y1_change = snake_block
-                    Left = False
-                    Up = True
-                    Down = False
-                    Right = False
-                elif event.key == pygame.K_DOWN:
+                    else:
+                        Left = False
+                        Up = True
+                        Down = False
+                        Right = False
+                if event.key == pygame.K_DOWN:
                     y1_change = snake_block
                     x1_change = 0
                     if Up:
                         x1_change = 0
                         y1_change = -snake_block
-                    Left = False
-                    Up = False
-                    Down = True
-                    Right = False
+                    else:
+                        Left = False
+                        Up = False
+                        Down = True
+                        Right = False
         if x1 >= dis_width or x1 < 0 or y1 >= dis_height or y1 < 0:
             game_close = True
         x1 += x1_change
