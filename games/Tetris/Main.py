@@ -17,7 +17,7 @@ pygame.font.init()
 
 # GLOBALS VARS
 s_width = 800
-s_height = 700
+s_height = 600
 play_width = 300  # meaning 300 // 10 = 30 width per block
 play_height = 600  # meaning 600 // 20 = 20 height per block
 block_size = 30
@@ -278,9 +278,6 @@ def draw_window(surface, grid, score=0, last_score = 0):
 
     pygame.font.init()
     font = pygame.font.SysFont('comicsans', 60)
-    label = font.render('Tetris', 1, (255, 255, 255))
-
-    surface.blit(label, (top_left_x + play_width / 2 - (label.get_width() / 2), 30))
 
     # current score
     font = pygame.font.SysFont('comicsans', 30)
@@ -302,7 +299,7 @@ def draw_window(surface, grid, score=0, last_score = 0):
         for j in range(len(grid[i])):
             pygame.draw.rect(surface, grid[i][j], (top_left_x + j*block_size, top_left_y + i*block_size, block_size, block_size), 0)
 
-    pygame.draw.rect(surface, (255, 0, 0), (top_left_x, top_left_y, play_width, play_height), 5)
+    pygame.draw.rect(surface, (0, 200, 200), (top_left_x, top_left_y, play_width, play_height), 5)
 
     draw_grid(surface, grid)
 
