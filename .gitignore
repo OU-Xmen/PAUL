@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 # hide discord token
-config.json
+!PAUL.txt
 
