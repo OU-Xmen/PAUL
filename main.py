@@ -25,7 +25,7 @@ screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("P.A.U.L. - Main Menu")
 
 # Load font
-font = pygame.font.Font(None, 36)
+font = pygame.font.SysFont('comicsansms', 26)
 
 # Load image
 # TODO change to comply with #13
@@ -102,7 +102,7 @@ def game_runner(i, games, game_dir):
 
     logger.log(f"Preparing to run {games[i]}.")
     try:
-        game = SourceFileLoader('game', os.path.join(game_dir, f'{games[i]}', 'Main.py')).load_module()
+        game = SourceFileLoader('game', os.path.join(game_dir, f'{games[i]}', 'main.py')).load_module()
         game.main()
     except Exception as e:
         errorHandler(e)
@@ -170,7 +170,6 @@ def main(splash):
             logger.log("Running splash screen")
             pygame.time.wait(3000)  # Show splash screen for 3 seconds
             splash = False
-            pygame.event.clear()
             logger.log("Running main menu")
         elif tunes: 
             music.play(loops=-1) # loop music forever
@@ -183,18 +182,18 @@ def main(splash):
                 if games[i] is not None:
                     pygame.draw.rect(screen, t.GAME_BUTTONS, rect)
                     button_text = font.render(games[i], True, t.TEXT)
-                    screen.blit(button_text, (rect.x + 25, rect.y + 75))
+                    screen.blit(button_text, (rect.x + 10, rect.y + 65))
 
             if page < 3:
                 show_next = True
                 pygame.draw.rect(screen, t.PAGE_BUTTONS, next_page_rect)
                 button_text = font.render("Next Page", True, t.TEXT)
-                screen.blit(button_text, (next_page_rect.x + 25, next_page_rect.y + 75))
+                screen.blit(button_text, (next_page_rect.x + 20, next_page_rect.y + 65))
             if page > 1:
                 show_previous = True
                 pygame.draw.rect(screen, t.PAGE_BUTTONS, previous_page_rect)
                 button_text = font.render("Previous Page", True, t.TEXT)
-                screen.blit(button_text, (previous_page_rect.x-10, previous_page_rect.y + 75))
+                screen.blit(button_text, (previous_page_rect.x-10, previous_page_rect.y + 65))
 
             pygame.draw.rect(screen, t.PAGE_BUTTONS, settings_rect)
             pygame.draw.rect(screen, t.PAGE_BUTTONS, credits_rect)

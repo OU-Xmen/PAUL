@@ -20,7 +20,7 @@ SCREEN_HEIGHT = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 # Create a font object
-font = pygame.font.Font(None, 36)
+font = pygame.font.SysFont('comicsansms', 26)
 
 # Define the dropdown options
 themes = ["Dark", "Light", "Midnight"]
@@ -166,7 +166,7 @@ while running:
     
     pygame.draw.rect(screen, t.PAGE_BUTTONS, back_rect)
     button_text = font.render("Back", True, t.TEXT)
-    screen.blit(button_text, (back_rect.x+45, back_rect.y + 75))
+    screen.blit(button_text, (back_rect.x+45, back_rect.y + 70))
 
     if is_active:
         pygame.draw.rect(screen, (255, 0, 0), text_box, 2)
@@ -174,12 +174,12 @@ while running:
         pygame.draw.rect(screen, WHITE, text_box, 2)
 
     text_surface = font.render(text, True, WHITE)
-    screen.blit(text_surface, (text_box.x+5, text_box.y+15))
+    screen.blit(text_surface, (text_box.x+5, text_box.y+7))
     screen.blit(font.render("Name:", True, WHITE),(text_box.x+5, text_box.y-30))
 
 
     pygame.draw.rect(screen, WHITE, save_button)
-    screen.blit(save_button_text, (save_button.x+70, save_button.y+15))
+    screen.blit(save_button_text, (save_button.x+70, save_button.y+10))
 
     # Update the display
     pygame.display.update()
