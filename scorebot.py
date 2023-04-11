@@ -9,6 +9,9 @@ intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 
+
+
+
 valid_games = ['Puzzle', 'Snake', 'Asteroids', 'PAULatformer', 'Tetris']
 
 paul = commands.Bot(command_prefix='!', description=description, intents=intents)
