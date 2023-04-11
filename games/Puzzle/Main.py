@@ -1,5 +1,6 @@
 try:
     import pygame
+    pygame.init()
     import json
     import os
     import sys
@@ -7,8 +8,8 @@ try:
     import random
     from importlib.machinery import SourceFileLoader
     maindirectory = os.path.dirname(os.path.abspath(__file__))
+    main_menu = SourceFileLoader("main", "main.py").load_module()
     T = SourceFileLoader('Tile', os.path.join(maindirectory, 'Tile.py')).load_module() # effectively imports Tile as T
-    pygame.init()
 
     with (open(os.path.join(maindirectory, 'assets', 'scores.json'), "r")) as jasonfile:
         # read from the json file into the variable called jason
@@ -192,7 +193,9 @@ def main():
                 val_float += time.time() - pause_time
         
         if break_flag:
-            break
+            song_channel.stop()
+            main_menu.main(False)
+            quit()
 
         screen.fill('black')
         screen.blit(pause_rend, pause_rect)
@@ -235,8 +238,6 @@ def main():
         a = play_again_menu(val_time)
     if a:
         main()
-
-song_channel.stop()
 
 if __name__ == '__main__':
     main()
