@@ -8,6 +8,8 @@ from importlib.machinery import SourceFileLoader
 maindir = os.path.abspath(os.path.dirname(__file__))
 assetdir = os.path.join(maindir, 'assets')
 game_file = SourceFileLoader('game', os.path.join(maindir, 'Game.py')).load_module()
+main_menu_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+main_menu = SourceFileLoader('main', os.path.join(os.path.dirname(main_menu_dir), 'main.py')).load_module()
 
 dirt = pygame.image.load(os.path.join(assetdir, 'dirt.png'))
 player = pygame.image.load(os.path.join(assetdir, 'player.png'))
@@ -65,7 +67,13 @@ def main():
         mouse = pygame.mouse.get_pos()
         
         for event in pygame.event.get():
-            if event.type == pygame.QUIT: quit()            
+            if event.type == pygame.QUIT: 
+                main_menu.main(False)
+                quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    main_menu.main(False)
+                    quit()
             if event.type == pygame.MOUSEBUTTONUP:
                 if mouse_in_box(load_game_text.rect, mouse):
                     # load the level from currentstats.json
