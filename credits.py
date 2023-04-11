@@ -16,6 +16,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Credits")
 clock = pygame.time.Clock()
 font = pygame.font.SysFont('comicsansms', 30)
+main_menu = SourceFileLoader('main', 'main.py').load_module()
 
 credits_list = [
     "P.A.U.L.",
@@ -32,6 +33,7 @@ credits_list = [
 ]
 
 def scroll_credits():
+                
     text_height = len(credits_list) * (FONT_SIZE + 10)
     scroll_y = SCREEN_HEIGHT
 
@@ -40,7 +42,10 @@ def scroll_credits():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    main_menu.main(False)
+                    quit()
         screen.fill(BACKGROUND_COLOR)
 
         for i, line in enumerate(credits_list):
@@ -65,7 +70,6 @@ def main():
         if not scroll_credits():  # Break the loop and quit when the credits are done
             break
 
-    main_menu = SourceFileLoader('main', 'main.py').load_module()
     main_menu.main(False)
 
 if __name__ == "__main__":
