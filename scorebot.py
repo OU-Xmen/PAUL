@@ -132,4 +132,4 @@ async def tet(ctx):
                 scores_str += f"{formatted_score}\n"
             await ctx.send(f"=== Tetris Scoreboard ===\n{scores_str}")
 
-paul.run('MTA4NjY1NzE1NzM2NzM1MzQ0Nw.GU-OBu.64MXE9ImHTbZCChiajTGXnPdLJ9wlaThFaT3Zg')
+paul.run(token)
