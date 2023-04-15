@@ -10,6 +10,26 @@ maindir = os.path.abspath(os.path.dirname(__file__))
 bkgrddir = os.path.join(maindir, 'assets', 'backgrounds')
 sounddir = os.path.join(maindir, 'assets', 'sounds')
 
+# PAUL """API"""
+def post_highscore(posted_score, posted_game="None", paul_endpoint="https://web.physcorp.com/paul/endpoint.php", maindir_int=maindir):
+    # Import requests if not already imported
+    try:
+        requests
+    except NameError:
+        import requests
+    # Get maindir_internal
+    maindir_internal = os.path.join(maindir_int, "..", "..")
+    # Post the score to the leaderboard using the """API"""
+    # Get posted name from name.json in maindir
+    with open(os.path.join(maindir_internal, "name.json"), "r") as rfile:
+        posted_name = json.load(rfile)["name"]
+    # If if name is blank, use "Anonymous"
+    if posted_name == "":
+        posted_name = "Anonymous"
+    r = requests.post(paul_endpoint, data = {'name': posted_name, 'score': posted_score, 'game': posted_game})
+    # Print the response
+    print(r.text)
+
 L = SourceFileLoader('Levels', os.path.join(maindir, 'Levels.py')).load_module()
 T = SourceFileLoader('Tile', os.path.join(maindir, 'Tile.py')).load_module()
 P = SourceFileLoader('Player', os.path.join(maindir, 'Player.py')).load_module()
@@ -97,6 +117,7 @@ def textbox(text, x=50, y=500, delay=0.05, background_color=(0, 0, 0), text_colo
         if possible_coins > coins:
             with open(os.path.join(maindir, 'assets', 'scores.json'), 'w') as f:
                 json.dump({"highscore": possible_coins}, f)
+        post_highscore(int(possible_coins), posted_game="PAULatformer", maindir_int=maindir)
         quit()
 
     while text_displayed:

@@ -128,4 +128,15 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Personal info
+name.json
+games/PAULatformer/currentstats.json
+games/Asteroids/assets/scores.json
+games/Snake/assets/scores.json
+games/Tetris/assets/scores.json
+games/Tetris/assets/scores.txt
+games/Puzzle/assets/scores.json
+internal.py
 
+# Remove all .pyc files
+*.pyc
