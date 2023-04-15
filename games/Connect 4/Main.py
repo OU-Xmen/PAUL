@@ -10,7 +10,8 @@ assets_dir = os.path.join(current_dir, 'assets')
 
 print(main_dir)
 main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
-
+theme = pygame.mixer.Sound(os.path.join(current_dir, 'Connect 4.wav'))
+song_channel = pygame.mixer.Channel(1)
  
 BLUE = (0,0,255)
 BLACK = (0,0,0)
@@ -103,7 +104,9 @@ draw_board(board)
 pygame.display.update()
  
 myfont = pygame.font.SysFont("monospace", 75)
- 
+
+song_channel.play(theme, loops = -1)
+
 while not game_over:
  
     mouse = pygame.mouse.get_pos()
@@ -111,7 +114,15 @@ while not game_over:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game_over = True
+            song_channel.stop()
             main_menu.main(False)
+            quit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                game_over = True
+                song_channel.stop()
+                main_menu.main(False)
+                quit()
         if event.type == pygame.MOUSEMOTION:
             pygame.draw.rect(screen, BLACK, (0,0, width, SQUARESIZE))
             posx = event.pos[0]
@@ -162,4 +173,7 @@ while not game_over:
  
             if game_over:
                 pygame.time.wait(3000)
-                main_menu.main(False)  # Returns to main menu after game is over
+                song_channel.stop()
+                main_menu.main(False)
+                quit()
+                  # Returns to main menu after game is over

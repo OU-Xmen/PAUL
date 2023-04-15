@@ -10,6 +10,8 @@ try:
     story1 = os.path.join(assetdirectory, 'madlibs_story1.txt')
     story2 = os.path.join(assetdirectory, 'madlibs_story2.txt')
     story3 = os.path.join(assetdirectory, 'madlibs_story3.txt')
+    theme = pygame.mixer.Sound(os.path.join(assetdirectory, 'Mad Libs.wav'))
+    song_channel = pygame.mixer.Channel(1)
 except ImportError:
     print('One or more modules failed to import. Please try again.')
     quit()
@@ -100,16 +102,19 @@ def results_screen(text):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+                song_channel.stop()
                 main_menu.main(False)
                 break
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if quit_rect.collidepoint(mouse):
                     running = False
+                    song_channel.stop()
                     main_menu.main(False)
                     break
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
+                    song_channel.stop()
                     main_menu.main(False)
                     break
         
@@ -166,11 +171,13 @@ def play_screen(story):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+                song_channel.stop()
                 main_menu.main(False)
                 break
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if quit_rect.collidepoint(mouse):
                     running = False
+                    song_channel.stop()
                     main_menu.main(False)
                     break
                 if button_rect.collidepoint(mouse):
@@ -194,6 +201,7 @@ def play_screen(story):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
+                    song_channel.stop()
                     main_menu.main(False)
                     break
                 elif event.key == pygame.K_BACKSPACE:
@@ -253,6 +261,7 @@ def select_screen():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+                song_channel.stop()
                 main_menu.main(False)
                 break
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -264,11 +273,13 @@ def select_screen():
                     play_screen(story3)
                 if quit_rect.collidepoint(mouse):
                     running = False
+                    song_channel.stop()
                     main_menu.main(False)
                     break
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
+                    song_channel.stop()
                     main_menu.main(False)
                     break
         
@@ -276,6 +287,9 @@ def select_screen():
     pygame.quit()
 
 def main():
+
+    song_channel.play(theme, loops = -1)
+
     running = True
     while running:
         mouse = pygame.mouse.get_pos()
@@ -289,6 +303,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+                song_channel.stop()
                 main_menu.main(False)
                 break
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -296,11 +311,13 @@ def main():
                     select_screen()
                 if quit_rect.collidepoint(mouse):
                     running = False
+                    song_channel.stop()
                     main_menu.main(False)
                     break
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
+                    song_channel.stop()
                     main_menu.main(False)
                     
 

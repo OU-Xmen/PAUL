@@ -28,7 +28,8 @@ FONT = pygame.font.Font(None, 40)
 
 x_sound = pygame.mixer.Sound(os.path.join(assets_dir, "x.wav"))
 o_sound = pygame.mixer.Sound(os.path.join(assets_dir, "o.wav"))
-music = pygame.mixer.Sound(os.path.join(assets_dir, "3am.wav"))
+music = pygame.mixer.Sound(os.path.join(assets_dir, "Tic Tac Toe.wav"))
+song_channel = pygame.mixer.Channel(1)
 
 def display_text(text, x, y, color=BLACK, bg_color=WHITE):
     rendered_text = FONT.render(text, True, color)
@@ -86,14 +87,21 @@ def main():
     winner = None
     DISPLAY.fill(WHITE)
 
+    song_channel.play(music, loops = -1)
 
     while not game_over:
         draw_board()
 
         for event in pygame.event.get():
             if event.type == QUIT:
+                song_channel.stop()
+                main_menu.main(False)
                 pygame.quit()
-                sys.exit()
+            elif event.type == KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    song_channel.stop()
+                    main_menu.main(False)
+                    pygame.quit()
             elif event.type == MOUSEBUTTONDOWN and not game_over:
                 x, y = event.pos
                 row, col = y // (HEIGHT // 3), x // (WIDTH // 3)
@@ -121,9 +129,11 @@ def main():
 
         pygame.display.update()
         fpsClock.tick(FPS)
+
+    song_channel.stop()
     main_menu.main(False)
+    quit()
 
 
 if __name__ == "__main__":
-    music.play(loops=-1)
     main()

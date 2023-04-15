@@ -12,6 +12,8 @@ print(main_dir)
 logger = SourceFileLoader('logger', os.path.join(main_dir, "logger.py")).load_module()
 paul_main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
 
+theme = pygame.mixer.Sound(os.path.join(assets_dir, 'Tetris.wav'))
+song_channel = pygame.mixer.Channel(1)
 
 pygame.font.init()
 
@@ -330,6 +332,7 @@ def pause_menu():
                     return False
                 if quit_rect.collidepoint(mouse):
                     pygame.display.set_mode((800, 600))
+                    song_channel.stop()
                     paul_main_menu.main(False)
                     quit()
 
@@ -347,6 +350,8 @@ def main(win):  # *
     fall_speed = 0.27
     level_time = 0
     score = 0
+
+    song_channel.play(theme, loops = -1)
 
     while run:
         grid = create_grid(locked_positions)
@@ -395,6 +400,7 @@ def main(win):  # *
                 if event.key == pygame.K_ESCAPE:
                     run = False
                     pygame.display.set_mode((800, 600))
+                    song_channel.stop()
                     paul_main_menu.main(False)
                     quit()
 
@@ -426,6 +432,7 @@ def main(win):  # *
             run = False
             update_score(score)
             pygame.display.set_mode((800, 600))
+            song_channel.stop()
             paul_main_menu.main(False)
             quit()
 
@@ -439,6 +446,9 @@ def main_menu(win):  # *
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+                song_channel.stop()
+                paul_main_menu.main(False)
+                quit()
             if event.type == pygame.KEYDOWN:
                 main(win)
 

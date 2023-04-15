@@ -26,6 +26,9 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Guess the Number")
 pygame.display.set_icon(gameIcon)
 
+theme = pygame.mixer.Sound(os.path.join(assets_dir, 'Guess the Number.wav'))
+song_channel = pygame.mixer.Channel(1)
+
 # Set the font and font size
 font = pygame.font.SysFont(None, 48)
 
@@ -61,13 +64,17 @@ button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
 
 quit_rend, quit_rect = init_words('QUIT', 30, 50, 50, (200, 0, 0))
 
+song_channel.play(theme, loops = -1)
+
 # The game loop
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-            break
+            song_channel.stop()
+            main.main(False)
+            quit()
 
         # Check for mouse clicks
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -89,6 +96,7 @@ while running:
                         message = "Too high..."
             if quit_rect.collidepoint(mouse_pos):
                 running = False
+                song_channel.stop()
                 main.main(False)
                 quit()
 
@@ -114,6 +122,7 @@ while running:
                 input_text = input_text[:-1]
             elif event.key == pygame.K_ESCAPE:
                 running = False
+                song_channel.stop()
                 main.main(False)
                 quit()
 

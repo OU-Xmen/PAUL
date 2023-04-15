@@ -8,6 +8,8 @@ try:
     currentdirectory = os.path.dirname(os.path.abspath(__file__))
     assetdirectory = os.path.join(currentdirectory, "assets")
     main_menu = SourceFileLoader('main', os.path.join(maindirectory, 'main.py')).load_module()
+    theme = pygame.mixer.Sound(os.path.join(assetdirectory, 'RPS.wav'))
+    song_channel = pygame.mixer.Channel(1)
 except ImportError:
     print("One or more required modules could not be imported. Please try again.")
     quit()
@@ -85,17 +87,21 @@ def main():
 
     quit_rend, quit_rect = init_words('QUIT', 30, 50, 50, (200, 0, 0))
 
+    song_channel.play(theme, loops = -1)
+
     # Game loop
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+                song_channel.stop()
                 main_menu.main(False)
                 quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
+                    song_channel.stop()
                     main_menu.main(False)
                     quit()
 
@@ -144,6 +150,7 @@ def main():
                 
                 elif quit_rect.collidepoint(mouse_pos):
                     running = False
+                    song_channel.stop()
                     main_menu.main(False)
                     quit()
                     

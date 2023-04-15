@@ -12,7 +12,8 @@ assets_dir = os.path.join(current_dir, 'assets')
 
 logger = SourceFileLoader('logger', os.path.join(main_dir, "logger.py")).load_module()
 main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
-
+theme = pygame.mixer.Sound(os.path.join(current_dir, 'Hangman.wav'))
+song_channel = pygame.mixer.Channel(1)
 
 def main():
     # initialize pygame
@@ -52,17 +53,21 @@ def main():
     guessed_letters = []
     word_to_guess = ["_"] * len(word)
 
+    song_channel.play(theme, loops = -1)
+    
     def results(status):
         running = True
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+                    song_channel.stop()
                     main_menu.main(False)
                     quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         running = False
+                        song_channel.stop()
                         main_menu.main(False)
                         quit()
             
@@ -78,6 +83,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+                song_channel.stop()
                 main_menu.main(False)
                 quit()
 
@@ -98,6 +104,7 @@ def main():
                         
                 if event.key == pygame.K_ESCAPE:
                     running = False
+                    song_channel.stop()
                     main_menu.main(False)
                     quit()
 

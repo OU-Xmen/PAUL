@@ -462,6 +462,7 @@ def main():
                     running = False
                     song_channel.stop()
                     main_menu.main(False)
+                    quit()
                     
 
 
