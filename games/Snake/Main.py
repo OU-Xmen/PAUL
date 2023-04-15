@@ -23,6 +23,26 @@ maindirectory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 currentdirectory = os.path.dirname(os.path.abspath(__file__))
 assetdirectory = os.path.join(currentdirectory, "assets")
 
+# PAUL """API"""
+def post_highscore(posted_score, posted_game="None", paul_endpoint="https://web.physcorp.com/paul/endpoint.php", maindir_int=maindirectory):
+    # Import requests if not already imported
+    try:
+        requests
+    except NameError:
+        import requests
+    # Get maindir_internal
+    maindir_internal = os.path.join(maindir_int)
+    # Post the score to the leaderboard using the """API"""
+    # Get posted name from name.json in maindir
+    with open(os.path.join(maindir_internal, "name.json"), "r") as rfile:
+        posted_name = json.load(rfile)["name"]
+    # If if name is blank, use "Anonymous"
+    if posted_name == "":
+        posted_name = "Anonymous"
+    r = requests.post(paul_endpoint, data = {'name': posted_name, 'score': posted_score, 'game': posted_game})
+    # Print the response
+    print(r.text)
+
 main_menu = SourceFileLoader('main', os.path.join(maindirectory, 'main.py')).load_module()
 
 clock = pygame.time.Clock()
@@ -55,7 +75,7 @@ def our_snake(snake_block, snake_list):
 def message(msg, color):
     mesg = font_style.render(msg, True, color)
     dis.blit(mesg, [dis_width / 6, dis_height / 3])
-def gameLoop():
+def gameLoop(saved_score=False):
     game_over = False
     game_close = False
     x1 = dis_width / 2
@@ -78,6 +98,9 @@ def gameLoop():
             dis.fill(blue)
             message("You Suck! Take the L, Press C-Play Again or Esc-Quit", red)
             Your_score(Length_of_snake - 1)
+            if not saved_score:
+                post_highscore(int(Length_of_snake - 1), posted_game="Snake")
+                saved_score = True
             pygame.display.update()
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:

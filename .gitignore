@@ -136,7 +136,6 @@ games/Snake/assets/scores.json
 games/Tetris/assets/scores.json
 games/Tetris/assets/scores.txt
 games/Puzzle/assets/scores.json
-internal.py
 
 # Remove all pycache
 __pycache__

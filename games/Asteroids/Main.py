@@ -24,6 +24,26 @@ assetdirectory = os.path.join(main_dir, 'assets')
 logger = SourceFileLoader('logger', "logger.py").load_module()
 main_menu = SourceFileLoader('main', "main.py").load_module()
 
+# PAUL """API"""
+def post_highscore(posted_score, posted_game="None", paul_endpoint="https://web.physcorp.com/paul/endpoint.php", maindir_int=main_dir):
+    # Import requests if not already imported
+    try:
+        requests
+    except NameError:
+        import requests
+    # Get maindir_internal
+    maindir_internal = os.path.join(maindir_int, "..", "..")
+    # Post the score to the leaderboard using the """API"""
+    # Get posted name from name.json in maindir
+    with open(os.path.join(maindir_internal, "name.json"), "r") as rfile:
+        posted_name = json.load(rfile)["name"]
+    # If if name is blank, use "Anonymous"
+    if posted_name == "":
+        posted_name = "Anonymous"
+    r = requests.post(paul_endpoint, data = {'name': posted_name, 'score': posted_score, 'game': posted_game})
+    # Print the response
+    print(r.text)
+
 # Initializing PyGame
 pygame.init()
 
@@ -297,7 +317,7 @@ def pause_menu():
                     main_menu.main(False)
                     pygame.quit()
                 
-def main():
+def main(saved_score=False):
     global asteroid_count, rapid_start, game_over, lives, score, highscore, rapidFire
     game_over = False
     lives = 3
@@ -317,7 +337,6 @@ def main():
         asteroid_count += 1 # Internal timer
 
         if not game_over: 
-           
             with open(os.path.join(assetdirectory, 'scores.json'), 'r') as f:
                 highscore = json.load(f)['highscore']
             if score > highscore:
@@ -420,6 +439,9 @@ def main():
 
             if lives <= 0: # Starts the game over sequence
                 game_over = True
+                if not saved_score:
+                    post_highscore(highscore, posted_game="Asteroids")
+                    saved_score = True
 
             if rapid_start != -1: # Handles the timer of the power-up
                 if asteroid_count - rapid_start > 500:

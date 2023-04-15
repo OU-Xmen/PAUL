@@ -20,6 +20,27 @@ except ImportError:
 
 tiledirectory = os.path.join(maindirectory, 'assets')
 
+
+# PAUL """API"""
+def post_highscore(posted_score, posted_game="None", paul_endpoint="https://web.physcorp.com/paul/endpoint.php", maindir_int=maindirectory):
+    # Import requests if not already imported
+    try:
+        requests
+    except NameError:
+        import requests
+    # Get maindir_internal
+    maindir_internal = os.path.join(maindir_int, "..", "..")
+    # Post the score to the leaderboard using the """API"""
+    # Get posted name from name.json in maindir
+    with open(os.path.join(maindir_internal, "name.json"), "r") as rfile:
+        posted_name = json.load(rfile)["name"]
+    # If if name is blank, use "Anonymous"
+    if posted_name == "":
+        posted_name = "Anonymous"
+    r = requests.post(paul_endpoint, data = {'name': posted_name, 'score': posted_score, 'game': posted_game})
+    # Print the response
+    print(r.text)
+
 # create 800x600 window
 size = width, height = 800, 600
 screen = pygame.display.set_mode(size)
@@ -108,19 +129,23 @@ def pause_menu():
                     song_channel.stop()
                     return True
 
-def play_again_menu(time_score):
+def play_again_menu(time_score, saved_score=False):
     matt = False
     while True:
         mouse = pygame.mouse.get_pos()
 
         screen.fill('black')
         screen.blit(big_face, big_face_rect)
-        if time_score < float(jason['slide_puzzle_score']):
+        if time_score < float(jason['highscore']):
             matt = True
             andrew =  float(f"{format(time_score, '.2f')}")
             jason['highscore'] = andrew
             with (open(os.path.join(maindirectory, 'assets', 'scores.json'), "w")) as jasonfile:
                 json.dump(jason, jasonfile)
+            # Save the highscore
+            if not saved_score:
+                post_highscore(int(andrew), posted_game="Puzzle")
+                saved_score = True
         if matt:
             screen.blit(high_score_rend, high_score_rect)
         else:
@@ -137,6 +162,7 @@ def play_again_menu(time_score):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if play_again_rect.collidepoint(mouse):
                     # restart the game
+                    saved_score = False
                     return True
                 if quit_rect.collidepoint(mouse):
                     song_channel.stop()

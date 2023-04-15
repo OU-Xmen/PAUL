@@ -117,7 +117,7 @@ def textbox(text, x=50, y=500, delay=0.05, background_color=(0, 0, 0), text_colo
         if possible_coins > coins:
             with open(os.path.join(maindir, 'assets', 'scores.json'), 'w') as f:
                 json.dump({"highscore": possible_coins}, f)
-        post_highscore(int(possible_coins), posted_game="PAULatformer", maindir_int=maindir)
+        post_highscore(int(possible_coins), posted_game="PAULatformer")
         quit()
 
     while text_displayed:

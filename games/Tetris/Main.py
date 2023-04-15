@@ -15,6 +15,25 @@ paul_main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).loa
 theme = pygame.mixer.Sound(os.path.join(assets_dir, 'Tetris.wav'))
 song_channel = pygame.mixer.Channel(1)
 
+# PAUL """API"""
+def post_highscore(posted_score, posted_game="None", paul_endpoint="https://web.physcorp.com/paul/endpoint.php", maindir_int=main_dir):
+    # Import requests if not already imported
+    try:
+        requests
+    except NameError:
+        import requests
+    # Get maindir_internal
+    maindir_internal = os.path.join(maindir_int, "..", "..")
+    # Post the score to the leaderboard using the """API"""
+    # Get posted name from name.json in maindir
+    with open(os.path.join(maindir_internal, "name.json"), "r") as rfile:
+        posted_name = json.load(rfile)["name"]
+    # If if name is blank, use "Anonymous"
+    if posted_name == "":
+        posted_name = "Anonymous"
+    r = requests.post(paul_endpoint, data = {'name': posted_name, 'score': posted_score, 'game': posted_game})
+    # Print the response
+    print(r.text)
 pygame.font.init()
 
 # GLOBALS VARS
@@ -336,7 +355,7 @@ def pause_menu():
                     paul_main_menu.main(False)
                     quit()
 
-def main(win):  # *
+def main(win, saved_score=False):  # *
     last_score = max_score()
     locked_positions = {}
     grid = create_grid(locked_positions)
@@ -434,6 +453,9 @@ def main(win):  # *
             pygame.display.set_mode((800, 600))
             song_channel.stop()
             paul_main_menu.main(False)
+            if not saved_score:
+                post_highscore(score, posted_game="Tetris")
+                saved_score = True
             quit()
 
 
