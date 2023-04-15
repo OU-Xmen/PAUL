@@ -4,6 +4,9 @@ from tkinter import messagebox
 import os
 import sys
 
+
+#testing now please?
+
 main_dir = os.path.dirname(os.path.abspath(__file__))
 game_dir = os.path.join(main_dir, 'games')
 
