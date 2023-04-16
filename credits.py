@@ -15,7 +15,7 @@ SPEED = 2
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Credits")
 clock = pygame.time.Clock()
-font = pygame.font.SysFont('comicsansms', 30)
+font = pygame.font.SysFont('comicsansms', 24)
 main_menu = SourceFileLoader('main', 'main.py').load_module()
 
 credits_list = [
@@ -25,13 +25,31 @@ credits_list = [
     "Matthew Robertson, Eshan Rajam",
     "Music: Eli Sepulveda, Matthew Robertson",
     "Testing Engineer: Freddie Warren",
-    "[Other stuff to credit here]",
     "",
     "Resources Used:",
-    "link",
-    "link",
+    "Asteroids Tutorial Using Pygame and Python: ","https://youtu.be/XKMjMGbdrpY","",
+    "Chat.openai.com:", "https://chat.openai.com/","",
+    "Connect Four Python Game Tutorial with Pygame:","https://www.youtube.com/watch?v=XpYz-q1lxu8","",
+    "Creating Tetris:","https://youtu.be/uoR4ilCWwKA","",
+    "Make Pong With Python!:","https://www.youtube.com/watch?v=vVGTZlnnX3U","",
+    "Pygame Tutorial - Creating Tetris.","https://www.youtube.com/watch?v=uoR4ilCWwKA","",
+    "Python Hangman Tutorial #1 - Learn to Make Games with Pygame:","https://youtu.be/UEO1B_llDnc","",
+    "Python Pygame Tutorial - Creating a Snake Game:","https://youtu.be/8dfePlONtls","",
+    "A Simple Game Loop for Testing Pygame Code:","https://gist.github.com/MarquisLP/b534c95e4a11efaf376e.","",
+    "Textwrap - Wiki:","https://www.pygame.org/wiki/TextWrap. ","",
 ]
+#a work cited I guess sorry guys lol 
 
+#“Asteroids Tutorial Using Pygame and Python.” YouTube, YouTube, https://youtube.com/playlist?list=PLxZI4CJBTZmBqhtbf2WioiBjUqSpGRlam. Accessed 15 Apr. 2023. 
+# Chat.openai.com. https://chat.openai.com/. 
+# “Connect Four Python Game Tutorial with Pygame.” YouTube, YouTube, 2 Nov. 2018, https://www.youtube.com/watch?v=XpYz-q1lxu8. Accessed 15 Apr. 2023. 
+# “Creating Tetris.” YouTube, 23 Nov. 2018, https://youtu.be/uoR4ilCWwKA. Accessed 15 Apr. 2023. 
+# “Make Pong With Python!” YouTube, YouTube, 15 Feb. 2022, https://www.youtube.com/watch?v=vVGTZlnnX3U. Accessed 15 Apr. 2023. 
+# “Pygame Tutorial - Creating Tetris.” YouTube, YouTube, 23 Nov. 2018, https://www.youtube.com/watch?v=uoR4ilCWwKA. Accessed 15 Apr. 2023. 
+# “Python Hangman Tutorial #1 - Learn to Make Games with Pygame.” YouTube, 21 June 2020, https://youtu.be/UEO1B_llDnc. Accessed 15 Apr. 2023. 
+# “A Simple Game Loop for Testing Pygame Code.” Gist, https://gist.github.com/MarquisLP/b534c95e4a11efaf376e. 
+# “Snake Game in Python | Snake Game Program Using Pygame | Edureka.” Edureka, 13 Dec. 2022, https://www.edureka.co/blog/snake-game-with-pygame/. Accessed 15 Apr. 2023. 
+# “Textwrap - Wiki.” TextWrap - Pygame Wiki, https://www.pygame.org/wiki/TextWrap. 
 def scroll_credits():
                 
     text_height = len(credits_list) * (FONT_SIZE + 10)
