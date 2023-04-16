@@ -3,7 +3,7 @@ from discord.ext import commands
 import requests
 
 description = '''A bot to show you the leaderboards of PAUL'''
-paul_endpoint = "https://web.physcorp.com/paul/endpoint.php"
+paul_endpoint = "https://paulis.online/endpoint"
 
 intents = discord.Intents.default()
 intents.members = True
