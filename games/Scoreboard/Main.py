@@ -38,7 +38,7 @@ FONT_COLOR = (255, 255, 255)
 FONT_SIZE = 24
 SPEED = 0.5
 
-# paul_main_menu = SourceFileLoader('main', os.path.join(main_dir, "main.py")).load_module()
+main_menu = SourceFileLoader('main', os.path.join(main_dir, "..", "..", "main.py")).load_module()
 
 # [LOCAL SCORES - OLD]
 #asteroids_score = SourceFileLoader("scores", os.path.join(asset_dir, "scores.json")).load_module()
@@ -142,7 +142,7 @@ def scroll_credits():
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    # paul_main_menu.main(False)
+                    main_menu.main(False)
                     quit()
         screen.fill(BACKGROUND_COLOR)
 
@@ -169,6 +169,8 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 running = False
+                main_menu.main(False)
+                quit()
         pygame.display.update()
 
         if not scroll_credits():  # Break the loop and quit when the credits are done
