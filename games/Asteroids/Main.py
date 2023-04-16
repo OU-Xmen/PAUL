@@ -473,6 +473,7 @@ def main(saved_score=False):
                         game_over = False
                         lives = 3
                         score = 0
+                        saved_score = False
                         asteroids.clear()
                         aliens.clear()
                         alien_bullets.clear()
