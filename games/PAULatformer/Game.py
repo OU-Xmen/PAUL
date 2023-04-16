@@ -11,7 +11,7 @@ bkgrddir = os.path.join(maindir, 'assets', 'backgrounds')
 sounddir = os.path.join(maindir, 'assets', 'sounds')
 
 # PAUL """API"""
-def post_highscore(posted_score, posted_game="None", paul_endpoint="https://web.physcorp.com/paul/endpoint.php", maindir_int=maindir):
+def post_highscore(posted_score, posted_game="None", paul_endpoint="https://paulis.online/endpoint", maindir_int=maindir):
     # Import requests if not already imported
     try:
         requests
