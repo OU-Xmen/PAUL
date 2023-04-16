@@ -96,7 +96,7 @@ main_menu = SourceFileLoader('main', os.path.join(main_dir, "..", "..", "main.py
 #     placement += 50
 
 # Reach out to PAUL endpoint for highscores
-def get_highscores(game_names=["Asteroids", "Snake", "PAULatformer", "Puzzle", "Tetris"], paul_endpoint="https://web.physcorp.com/paul/endpoint.php"):
+def get_highscores(game_names=["Asteroids", "Snake", "PAULatformer", "Puzzle", "Tetris"], paul_endpoint="https://paulis.online/endpoint"):
     r = requests.get(paul_endpoint)
     if r.status_code != 200:
         return f"[I have died, rip me. Error code {r.status_code}] {r.text}"
