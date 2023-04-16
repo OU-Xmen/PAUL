@@ -29,6 +29,10 @@ WHITE = (255, 255, 255)
 BOARDCOLOR = (128, 101, 23)
 HOLECOLOR = (118, 91, 13)
 
+# define sound channel
+sound_channel = pygame.mixer.Channel(1)
+mancala_song = pygame.mixer.Sound(os.path.join(assetdirectory, 'Mancala.wav'))
+
 # game variables
 binAmount = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0]
 playerOne = True
@@ -37,10 +41,12 @@ lastRecipient = -1
 chosenBin = -2
 
 running = True
+sound_channel.play(mancala_song, loops=-1)
 while running: # game loop
     chosenBin = -2
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            sound_channel.stop()
             main_menu.main(False)
             quit()
         # check for mouse clicks
@@ -127,6 +133,7 @@ while running: # game loop
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
+                sound_channel.stop()
                 main_menu.main(False)
                 quit()
 
@@ -255,5 +262,6 @@ win_text = font.render(win_message, True, WHITE)
 screen.blit(win_text, (screen_width // 6, screen_height * 5 // 6))
 pygame.display.update()
 time.sleep(5)
+sound_channel.stop()
 main_menu.main(False)
 quit()
