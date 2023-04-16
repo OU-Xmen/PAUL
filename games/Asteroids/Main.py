@@ -25,7 +25,7 @@ logger = SourceFileLoader('logger', "logger.py").load_module()
 main_menu = SourceFileLoader('main', "main.py").load_module()
 
 # PAUL """API"""
-def post_highscore(posted_score, posted_game="None", paul_endpoint="https://web.physcorp.com/paul/endpoint.php", maindir_int=main_dir):
+def post_highscore(posted_score, posted_game="None", paul_endpoint="https://paulis.online/endpoint", maindir_int=main_dir):
     # Import requests if not already imported
     try:
         requests
