@@ -36,7 +36,7 @@ PAUL features 15 different games. Here's a list of all the games:
 Each game has its own unique controls. You can find these once again in our PAUL manual (https://github.com/OU-Xmen/PAUL/blob/main/PAULUser_Manual.pdf)
 
 ### Support: 
-If you encounter any issues while playing our games, please let us know. Please feel free to join the PAUL official discord to report bugs and to join the PAUL community. You can also report the issue, using the GitHub issue button(https://github.com/OU-Xmen/PAUL/issues)
+If you encounter any issues while playing our games, please let us know. Please feel free to join the PAUL official discord to report bugs and to join the PAUL community (join here: https://discord.gg/Fj4ZDtkSDB) . You can also report the issue, using the GitHub issue button(https://github.com/OU-Xmen/PAUL/issues)
 
 ### Conclusion:
 We hope that you enjoy PAUL. For any further information please look in our user-manual. Have fun and good luck!
