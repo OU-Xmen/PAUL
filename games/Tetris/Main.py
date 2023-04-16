@@ -23,7 +23,7 @@ def post_highscore(posted_score, posted_game="None", paul_endpoint="https://web.
     except NameError:
         import requests
     # Get maindir_internal
-    maindir_internal = os.path.join(maindir_int, "..", "..")
+    maindir_internal = os.path.join(maindir_int)
     # Post the score to the leaderboard using the """API"""
     # Get posted name from name.json in maindir
     with open(os.path.join(maindir_internal, "name.json"), "r") as rfile:
@@ -452,10 +452,11 @@ def main(win, saved_score=False):  # *
             update_score(score)
             pygame.display.set_mode((800, 600))
             song_channel.stop()
-            paul_main_menu.main(False)
             if not saved_score:
                 post_highscore(score, posted_game="Tetris")
+                print("Score posted")
                 saved_score = True
+            paul_main_menu.main(False)
             quit()
 
 
