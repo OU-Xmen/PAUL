@@ -37,6 +37,7 @@ credits_list = [
     "Python Pygame Tutorial - Creating a Snake Game:","https://youtu.be/8dfePlONtls","",
     "A Simple Game Loop for Testing Pygame Code:","https://gist.github.com/MarquisLP/b534c95e4a11efaf376e.","",
     "Textwrap - Wiki:","https://www.pygame.org/wiki/TextWrap. ","",
+    "API generation:","https://github.com/PhysCorp/Pydoctor-Plus", "",
 ]
 #a work cited I guess sorry guys lol 
 
