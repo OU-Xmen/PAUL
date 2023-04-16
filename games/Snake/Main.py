@@ -103,6 +103,11 @@ def gameLoop(saved_score=False):
                 saved_score = True
             pygame.display.update()
             for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    game_over = True
+                    song_channel.stop()
+                    main_menu.main(False)
+                    quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         game_over = True
@@ -122,6 +127,7 @@ def gameLoop(saved_score=False):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     game_over = True
+                    song_channel.stop()
                     main_menu.main(False)
                     quit()
                 if event.key == pygame.K_LEFT:
