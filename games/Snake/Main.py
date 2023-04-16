@@ -24,7 +24,7 @@ currentdirectory = os.path.dirname(os.path.abspath(__file__))
 assetdirectory = os.path.join(currentdirectory, "assets")
 
 # PAUL """API"""
-def post_highscore(posted_score, posted_game="None", paul_endpoint="https://web.physcorp.com/paul/endpoint.php", maindir_int=maindirectory):
+def post_highscore(posted_score, posted_game="None", paul_endpoint="https://paulis.online/endpoint", maindir_int=maindirectory):
     # Import requests if not already imported
     try:
         requests
@@ -39,7 +39,7 @@ def post_highscore(posted_score, posted_game="None", paul_endpoint="https://web.
     # If if name is blank, use "Anonymous"
     if posted_name == "":
         posted_name = "Anonymous"
-    r = requests.post(paul_endpoint, data = {'name': posted_name, 'score': posted_score, 'game': posted_game})
+    r = requests.get(paul_endpoint, params={'task':'put', 'name': posted_name, 'score': posted_score, 'game': posted_game})
     # Print the response
     print(r.text)
 
