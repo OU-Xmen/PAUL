@@ -440,7 +440,7 @@ def main(saved_score=False):
             if lives <= 0: # Starts the game over sequence
                 game_over = True
                 if not saved_score:
-                    post_highscore(highscore, posted_game="Asteroids")
+                    post_highscore(score, posted_game="Asteroids")
                     saved_score = True
 
             if rapid_start != -1: # Handles the timer of the power-up
