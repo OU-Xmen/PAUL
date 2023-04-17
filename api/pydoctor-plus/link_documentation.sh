@@ -1,10 +1,15 @@
 #!/bin/bash
 
-# Define the directory to search for HTML files
-search_dir="./docs"
+# Get the absolute path of the current directory
+DIRECTORY_NAME=$(realpath "$(dirname "$0")")
+# Move up two directories
+DIRECTORY_NAME=$(realpath "$DIRECTORY_NAME/../..")
 
-# Define the name of the output HTML file
-output_file="./docs/index.html"
+# Define the directory to search for HTML files (DIRECTORY_NAME plus /docs)
+search_dir="$DIRECTORY_NAME/docs"
+
+# Define the name of the output HTML file (DIRECTORY_NAME plus /docs/index.html)
+output_file="$DIRECTORY_NAME/docs/index.html"
 
 # Remove output_file if it exists
 if [ -f "$output_file" ]; then

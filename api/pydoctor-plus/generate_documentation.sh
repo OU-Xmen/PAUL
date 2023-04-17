@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Get the absolute path of the current directory
-DIRECTORY_NAME=$(realpath "$1")
+DIRECTORY_NAME=$(realpath "$(dirname "$0")")
+# Move up two directories
+DIRECTORY_NAME=$(realpath "$DIRECTORY_NAME/../..")
 
 # Print the directory name
 echo "Attempting to generate documentation for $DIRECTORY_NAME"
