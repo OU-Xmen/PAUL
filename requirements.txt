@@ -1,5 +1,6 @@
 numpy
 pygame
+pydoctor
 keyboard
 pyautogui
 requests
