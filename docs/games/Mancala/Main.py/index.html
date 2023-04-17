@@ -1,0 +1,4460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>Main</title>
+    <meta name="generator" content="pydoctor 22.9.1"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default mainnavbar">
+      
+  
+  <div class="container-fluid">
+
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          Main <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <div id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
+            <span class="input-group-btn">
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        
+        <div id="search-buttons">
+          <span class="label label-default" id="search-docstrings-button">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
+        </div>
+        
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
+
+                  <p>
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+        <div id="search-status"> </div>
+
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
+
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code class="thisobject"><a href="index.html" class="internal-link" title="This module"><wbr></wbr>Main</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        
+         
+
+        
+         
+
+        <div class="childrenKindTitle">Variables</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#BLACK" class="internal-link" title="Main.BLACK">BLACK</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#BOARDCOLOR" class="internal-link" title="Main.BOARDCOLOR">BOARDCOLOR</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#HOLECOLOR" class="internal-link" title="Main.HOLECOLOR">HOLECOLOR</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#WHITE" class="internal-link" title="Main.WHITE">WHITE</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#a1_center" class="internal-link" title="Main.a1_center">a1<wbr></wbr>_center</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#a1_rect" class="internal-link" title="Main.a1_rect">a1<wbr></wbr>_rect</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#a1_text" class="internal-link" title="Main.a1_text">a1<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#a1_x" class="internal-link" title="Main.a1_x">a1<wbr></wbr>_x</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#a1_y" class="internal-link" title="Main.a1_y">a1<wbr></wbr>_y</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#a2_center" class="internal-link" title="Main.a2_center">a2<wbr></wbr>_center</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#a2_rect" class="internal-link" title="Main.a2_rect">a2<wbr></wbr>_rect</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#a2_text" class="internal-link" title="Main.a2_text">a2<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#a2_x" class="internal-link" title="Main.a2_x">a2<wbr></wbr>_x</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#a2_y" class="internal-link" title="Main.a2_y">a2<wbr></wbr>_y</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#assetdirectory" class="internal-link" title="Main.assetdirectory">assetdirectory</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#b1_center" class="internal-link" title="Main.b1_center">b1<wbr></wbr>_center</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#b1_rect" class="internal-link" title="Main.b1_rect">b1<wbr></wbr>_rect</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#b1_text" class="internal-link" title="Main.b1_text">b1<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#b1_x" class="internal-link" title="Main.b1_x">b1<wbr></wbr>_x</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#b1_y" class="internal-link" title="Main.b1_y">b1<wbr></wbr>_y</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#b2_center" class="internal-link" title="Main.b2_center">b2<wbr></wbr>_center</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#b2_rect" class="internal-link" title="Main.b2_rect">b2<wbr></wbr>_rect</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#b2_text" class="internal-link" title="Main.b2_text">b2<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#b2_x" class="internal-link" title="Main.b2_x">b2<wbr></wbr>_x</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#b2_y" class="internal-link" title="Main.b2_y">b2<wbr></wbr>_y</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#binAmount" class="internal-link" title="Main.binAmount">bin<wbr></wbr>Amount</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#board_height" class="internal-link" title="Main.board_height">board<wbr></wbr>_height</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#board_rect" class="internal-link" title="Main.board_rect">board<wbr></wbr>_rect</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#board_width" class="internal-link" title="Main.board_width">board<wbr></wbr>_width</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#board_x" class="internal-link" title="Main.board_x">board<wbr></wbr>_x</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#board_y" class="internal-link" title="Main.board_y">board<wbr></wbr>_y</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#c1_center" class="internal-link" title="Main.c1_center">c1<wbr></wbr>_center</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#c1_rect" class="internal-link" title="Main.c1_rect">c1<wbr></wbr>_rect</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#c1_text" class="internal-link" title="Main.c1_text">c1<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#c1_x" class="internal-link" title="Main.c1_x">c1<wbr></wbr>_x</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#c1_y" class="internal-link" title="Main.c1_y">c1<wbr></wbr>_y</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#c2_center" class="internal-link" title="Main.c2_center">c2<wbr></wbr>_center</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#c2_rect" class="internal-link" title="Main.c2_rect">c2<wbr></wbr>_rect</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#c2_text" class="internal-link" title="Main.c2_text">c2<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#c2_x" class="internal-link" title="Main.c2_x">c2<wbr></wbr>_x</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#c2_y" class="internal-link" title="Main.c2_y">c2<wbr></wbr>_y</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#chosenBin" class="internal-link" title="Main.chosenBin">chosen<wbr></wbr>Bin</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#currentdirectory" class="internal-link" title="Main.currentdirectory">currentdirectory</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#d1_center" class="internal-link" title="Main.d1_center">d1<wbr></wbr>_center</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#d1_rect" class="internal-link" title="Main.d1_rect">d1<wbr></wbr>_rect</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#d1_text" class="internal-link" title="Main.d1_text">d1<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#d1_x" class="internal-link" title="Main.d1_x">d1<wbr></wbr>_x</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#d1_y" class="internal-link" title="Main.d1_y">d1<wbr></wbr>_y</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#d2_center" class="internal-link" title="Main.d2_center">d2<wbr></wbr>_center</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#d2_rect" class="internal-link" title="Main.d2_rect">d2<wbr></wbr>_rect</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#d2_text" class="internal-link" title="Main.d2_text">d2<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#d2_x" class="internal-link" title="Main.d2_x">d2<wbr></wbr>_x</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#d2_y" class="internal-link" title="Main.d2_y">d2<wbr></wbr>_y</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#e1_center" class="internal-link" title="Main.e1_center">e1<wbr></wbr>_center</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#e1_rect" class="internal-link" title="Main.e1_rect">e1<wbr></wbr>_rect</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#e1_text" class="internal-link" title="Main.e1_text">e1<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#e1_x" class="internal-link" title="Main.e1_x">e1<wbr></wbr>_x</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#e1_y" class="internal-link" title="Main.e1_y">e1<wbr></wbr>_y</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#e2_center" class="internal-link" title="Main.e2_center">e2<wbr></wbr>_center</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#e2_rect" class="internal-link" title="Main.e2_rect">e2<wbr></wbr>_rect</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#e2_text" class="internal-link" title="Main.e2_text">e2<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#e2_x" class="internal-link" title="Main.e2_x">e2<wbr></wbr>_x</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#e2_y" class="internal-link" title="Main.e2_y">e2<wbr></wbr>_y</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#f1_center" class="internal-link" title="Main.f1_center">f1<wbr></wbr>_center</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#f1_rect" class="internal-link" title="Main.f1_rect">f1<wbr></wbr>_rect</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#f1_text" class="internal-link" title="Main.f1_text">f1<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#f1_x" class="internal-link" title="Main.f1_x">f1<wbr></wbr>_x</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#f1_y" class="internal-link" title="Main.f1_y">f1<wbr></wbr>_y</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#f2_center" class="internal-link" title="Main.f2_center">f2<wbr></wbr>_center</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#f2_rect" class="internal-link" title="Main.f2_rect">f2<wbr></wbr>_rect</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#f2_text" class="internal-link" title="Main.f2_text">f2<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#f2_x" class="internal-link" title="Main.f2_x">f2<wbr></wbr>_x</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#f2_y" class="internal-link" title="Main.f2_y">f2<wbr></wbr>_y</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#font" class="internal-link" title="Main.font">font</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#giveawayPile" class="internal-link" title="Main.giveawayPile">giveaway<wbr></wbr>Pile</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#icon" class="internal-link" title="Main.icon">icon</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#lastRecipient" class="internal-link" title="Main.lastRecipient">last<wbr></wbr>Recipient</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#main_menu" class="internal-link" title="Main.main_menu">main<wbr></wbr>_menu</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#maindirectory" class="internal-link" title="Main.maindirectory">maindirectory</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#mancala_h" class="internal-link" title="Main.mancala_h">mancala<wbr></wbr>_h</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#mancala_song" class="internal-link" title="Main.mancala_song">mancala<wbr></wbr>_song</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#mancala_w" class="internal-link" title="Main.mancala_w">mancala<wbr></wbr>_w</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#message" class="internal-link" title="Main.message">message</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#message_text" class="internal-link" title="Main.message_text">message<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#mouse_pos" class="internal-link" title="Main.mouse_pos">mouse<wbr></wbr>_pos</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#pit_h" class="internal-link" title="Main.pit_h">pit<wbr></wbr>_h</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#pit_radius" class="internal-link" title="Main.pit_radius">pit<wbr></wbr>_radius</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#pit_w" class="internal-link" title="Main.pit_w">pit<wbr></wbr>_w</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#player_one_mancala_rect" class="internal-link" title="Main.player_one_mancala_rect">player<wbr></wbr>_one<wbr></wbr>_mancala<wbr></wbr>_rect</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#player_one_mancala_text" class="internal-link" title="Main.player_one_mancala_text">player<wbr></wbr>_one<wbr></wbr>_mancala<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#player_one_mancala_x" class="internal-link" title="Main.player_one_mancala_x">player<wbr></wbr>_one<wbr></wbr>_mancala<wbr></wbr>_x</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#player_one_mancala_y" class="internal-link" title="Main.player_one_mancala_y">player<wbr></wbr>_one<wbr></wbr>_mancala<wbr></wbr>_y</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#player_two_mancala_rect" class="internal-link" title="Main.player_two_mancala_rect">player<wbr></wbr>_two<wbr></wbr>_mancala<wbr></wbr>_rect</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#player_two_mancala_text" class="internal-link" title="Main.player_two_mancala_text">player<wbr></wbr>_two<wbr></wbr>_mancala<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#player_two_mancala_x" class="internal-link" title="Main.player_two_mancala_x">player<wbr></wbr>_two<wbr></wbr>_mancala<wbr></wbr>_x</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#player_two_mancala_y" class="internal-link" title="Main.player_two_mancala_y">player<wbr></wbr>_two<wbr></wbr>_mancala<wbr></wbr>_y</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#playerOne" class="internal-link" title="Main.playerOne">player<wbr></wbr>One</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#recipient" class="internal-link" title="Main.recipient">recipient</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#running" class="internal-link" title="Main.running">running</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#screen" class="internal-link" title="Main.screen">screen</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#screen_height" class="internal-link" title="Main.screen_height">screen<wbr></wbr>_height</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#screen_width" class="internal-link" title="Main.screen_width">screen<wbr></wbr>_width</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#sideOne" class="internal-link" title="Main.sideOne">side<wbr></wbr>One</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#sideTwo" class="internal-link" title="Main.sideTwo">side<wbr></wbr>Two</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#size" class="internal-link" title="Main.size">size</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#sound_channel" class="internal-link" title="Main.sound_channel">sound<wbr></wbr>_channel</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#win_message" class="internal-link" title="Main.win_message">win<wbr></wbr>_message</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#win_text" class="internal-link" title="Main.win_text">win<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div>
+
+</nav>
+        </div>
+        <div id="collapseSideBar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
+      </div>
+
+      <div id="main" class="">
+        
+
+        
+
+        <div class="page-header">
+          <h1 class="module"><code><code><a href="index.html" class="internal-link">Main</a></code></code></h1>
+          <div id="showPrivate">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
+
+        <div class="categoryHeader">
+          module documentation
+        </div>
+
+        <div class="extrasDocstring">
+          
+          <p></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p class="undocumented">Undocumented</p></div>
+        </div>
+
+        <div id="splitTables">
+          <table class="children sortable" id="id1">
+  
+  
+  <tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#BLACK" class="internal-link" title="Main.BLACK">BLACK</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#BOARDCOLOR" class="internal-link" title="Main.BOARDCOLOR">BOARDCOLOR</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#HOLECOLOR" class="internal-link" title="Main.HOLECOLOR">HOLECOLOR</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#WHITE" class="internal-link" title="Main.WHITE">WHITE</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#a1_center" class="internal-link" title="Main.a1_center">a1<wbr></wbr>_center</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#a1_rect" class="internal-link" title="Main.a1_rect">a1<wbr></wbr>_rect</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#a1_text" class="internal-link" title="Main.a1_text">a1<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#a1_x" class="internal-link" title="Main.a1_x">a1<wbr></wbr>_x</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#a1_y" class="internal-link" title="Main.a1_y">a1<wbr></wbr>_y</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#a2_center" class="internal-link" title="Main.a2_center">a2<wbr></wbr>_center</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#a2_rect" class="internal-link" title="Main.a2_rect">a2<wbr></wbr>_rect</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#a2_text" class="internal-link" title="Main.a2_text">a2<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#a2_x" class="internal-link" title="Main.a2_x">a2<wbr></wbr>_x</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#a2_y" class="internal-link" title="Main.a2_y">a2<wbr></wbr>_y</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#assetdirectory" class="internal-link" title="Main.assetdirectory">assetdirectory</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#b1_center" class="internal-link" title="Main.b1_center">b1<wbr></wbr>_center</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#b1_rect" class="internal-link" title="Main.b1_rect">b1<wbr></wbr>_rect</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#b1_text" class="internal-link" title="Main.b1_text">b1<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#b1_x" class="internal-link" title="Main.b1_x">b1<wbr></wbr>_x</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#b1_y" class="internal-link" title="Main.b1_y">b1<wbr></wbr>_y</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#b2_center" class="internal-link" title="Main.b2_center">b2<wbr></wbr>_center</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#b2_rect" class="internal-link" title="Main.b2_rect">b2<wbr></wbr>_rect</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#b2_text" class="internal-link" title="Main.b2_text">b2<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#b2_x" class="internal-link" title="Main.b2_x">b2<wbr></wbr>_x</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#b2_y" class="internal-link" title="Main.b2_y">b2<wbr></wbr>_y</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#binAmount" class="internal-link" title="Main.binAmount">bin<wbr></wbr>Amount</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#board_height" class="internal-link" title="Main.board_height">board<wbr></wbr>_height</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#board_rect" class="internal-link" title="Main.board_rect">board<wbr></wbr>_rect</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#board_width" class="internal-link" title="Main.board_width">board<wbr></wbr>_width</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#board_x" class="internal-link" title="Main.board_x">board<wbr></wbr>_x</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#board_y" class="internal-link" title="Main.board_y">board<wbr></wbr>_y</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#c1_center" class="internal-link" title="Main.c1_center">c1<wbr></wbr>_center</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#c1_rect" class="internal-link" title="Main.c1_rect">c1<wbr></wbr>_rect</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#c1_text" class="internal-link" title="Main.c1_text">c1<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#c1_x" class="internal-link" title="Main.c1_x">c1<wbr></wbr>_x</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#c1_y" class="internal-link" title="Main.c1_y">c1<wbr></wbr>_y</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#c2_center" class="internal-link" title="Main.c2_center">c2<wbr></wbr>_center</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#c2_rect" class="internal-link" title="Main.c2_rect">c2<wbr></wbr>_rect</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#c2_text" class="internal-link" title="Main.c2_text">c2<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#c2_x" class="internal-link" title="Main.c2_x">c2<wbr></wbr>_x</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#c2_y" class="internal-link" title="Main.c2_y">c2<wbr></wbr>_y</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#chosenBin" class="internal-link" title="Main.chosenBin">chosen<wbr></wbr>Bin</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#currentdirectory" class="internal-link" title="Main.currentdirectory">currentdirectory</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#d1_center" class="internal-link" title="Main.d1_center">d1<wbr></wbr>_center</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#d1_rect" class="internal-link" title="Main.d1_rect">d1<wbr></wbr>_rect</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#d1_text" class="internal-link" title="Main.d1_text">d1<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#d1_x" class="internal-link" title="Main.d1_x">d1<wbr></wbr>_x</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#d1_y" class="internal-link" title="Main.d1_y">d1<wbr></wbr>_y</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#d2_center" class="internal-link" title="Main.d2_center">d2<wbr></wbr>_center</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#d2_rect" class="internal-link" title="Main.d2_rect">d2<wbr></wbr>_rect</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#d2_text" class="internal-link" title="Main.d2_text">d2<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#d2_x" class="internal-link" title="Main.d2_x">d2<wbr></wbr>_x</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#d2_y" class="internal-link" title="Main.d2_y">d2<wbr></wbr>_y</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#e1_center" class="internal-link" title="Main.e1_center">e1<wbr></wbr>_center</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#e1_rect" class="internal-link" title="Main.e1_rect">e1<wbr></wbr>_rect</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#e1_text" class="internal-link" title="Main.e1_text">e1<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#e1_x" class="internal-link" title="Main.e1_x">e1<wbr></wbr>_x</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#e1_y" class="internal-link" title="Main.e1_y">e1<wbr></wbr>_y</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#e2_center" class="internal-link" title="Main.e2_center">e2<wbr></wbr>_center</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#e2_rect" class="internal-link" title="Main.e2_rect">e2<wbr></wbr>_rect</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#e2_text" class="internal-link" title="Main.e2_text">e2<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#e2_x" class="internal-link" title="Main.e2_x">e2<wbr></wbr>_x</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#e2_y" class="internal-link" title="Main.e2_y">e2<wbr></wbr>_y</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#f1_center" class="internal-link" title="Main.f1_center">f1<wbr></wbr>_center</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#f1_rect" class="internal-link" title="Main.f1_rect">f1<wbr></wbr>_rect</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#f1_text" class="internal-link" title="Main.f1_text">f1<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#f1_x" class="internal-link" title="Main.f1_x">f1<wbr></wbr>_x</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#f1_y" class="internal-link" title="Main.f1_y">f1<wbr></wbr>_y</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#f2_center" class="internal-link" title="Main.f2_center">f2<wbr></wbr>_center</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#f2_rect" class="internal-link" title="Main.f2_rect">f2<wbr></wbr>_rect</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#f2_text" class="internal-link" title="Main.f2_text">f2<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#f2_x" class="internal-link" title="Main.f2_x">f2<wbr></wbr>_x</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#f2_y" class="internal-link" title="Main.f2_y">f2<wbr></wbr>_y</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#font" class="internal-link" title="Main.font">font</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#giveawayPile" class="internal-link" title="Main.giveawayPile">giveaway<wbr></wbr>Pile</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#icon" class="internal-link" title="Main.icon">icon</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#lastRecipient" class="internal-link" title="Main.lastRecipient">last<wbr></wbr>Recipient</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#main_menu" class="internal-link" title="Main.main_menu">main<wbr></wbr>_menu</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#maindirectory" class="internal-link" title="Main.maindirectory">maindirectory</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#mancala_h" class="internal-link" title="Main.mancala_h">mancala<wbr></wbr>_h</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#mancala_song" class="internal-link" title="Main.mancala_song">mancala<wbr></wbr>_song</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#mancala_w" class="internal-link" title="Main.mancala_w">mancala<wbr></wbr>_w</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#message" class="internal-link" title="Main.message">message</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#message_text" class="internal-link" title="Main.message_text">message<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#mouse_pos" class="internal-link" title="Main.mouse_pos">mouse<wbr></wbr>_pos</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#pit_h" class="internal-link" title="Main.pit_h">pit<wbr></wbr>_h</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#pit_radius" class="internal-link" title="Main.pit_radius">pit<wbr></wbr>_radius</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#pit_w" class="internal-link" title="Main.pit_w">pit<wbr></wbr>_w</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#player_one_mancala_rect" class="internal-link" title="Main.player_one_mancala_rect">player<wbr></wbr>_one<wbr></wbr>_mancala<wbr></wbr>_rect</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#player_one_mancala_text" class="internal-link" title="Main.player_one_mancala_text">player<wbr></wbr>_one<wbr></wbr>_mancala<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#player_one_mancala_x" class="internal-link" title="Main.player_one_mancala_x">player<wbr></wbr>_one<wbr></wbr>_mancala<wbr></wbr>_x</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#player_one_mancala_y" class="internal-link" title="Main.player_one_mancala_y">player<wbr></wbr>_one<wbr></wbr>_mancala<wbr></wbr>_y</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#player_two_mancala_rect" class="internal-link" title="Main.player_two_mancala_rect">player<wbr></wbr>_two<wbr></wbr>_mancala<wbr></wbr>_rect</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#player_two_mancala_text" class="internal-link" title="Main.player_two_mancala_text">player<wbr></wbr>_two<wbr></wbr>_mancala<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#player_two_mancala_x" class="internal-link" title="Main.player_two_mancala_x">player<wbr></wbr>_two<wbr></wbr>_mancala<wbr></wbr>_x</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#player_two_mancala_y" class="internal-link" title="Main.player_two_mancala_y">player<wbr></wbr>_two<wbr></wbr>_mancala<wbr></wbr>_y</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#playerOne" class="internal-link" title="Main.playerOne">player<wbr></wbr>One</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#recipient" class="internal-link" title="Main.recipient">recipient</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#running" class="internal-link" title="Main.running">running</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#screen" class="internal-link" title="Main.screen">screen</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#screen_height" class="internal-link" title="Main.screen_height">screen<wbr></wbr>_height</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#screen_width" class="internal-link" title="Main.screen_width">screen<wbr></wbr>_width</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#sideOne" class="internal-link" title="Main.sideOne">side<wbr></wbr>One</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#sideTwo" class="internal-link" title="Main.sideTwo">side<wbr></wbr>Two</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#size" class="internal-link" title="Main.size">size</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#sound_channel" class="internal-link" title="Main.sound_channel">sound<wbr></wbr>_channel</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#win_message" class="internal-link" title="Main.win_message">win<wbr></wbr>_message</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#win_text" class="internal-link" title="Main.win_text">win<wbr></wbr>_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+
+            
+        </div>
+
+        <div id="childList">
+          <div class="baseconstant">
+  
+  
+  <a name="Main.BLACK">
+    
+  </a>
+  <a name="BLACK">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">BLACK</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#BLACK" title="Main.BLACK">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>(<wbr></wbr>0, <wbr></wbr>0, <wbr></wbr>0)</code></pre></td></tr></table>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="Main.BOARDCOLOR">
+    
+  </a>
+  <a name="BOARDCOLOR">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">BOARDCOLOR</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#BOARDCOLOR" title="Main.BOARDCOLOR">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>(<wbr></wbr>128, <wbr></wbr>101, <wbr></wbr>23)</code></pre></td></tr></table>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="Main.HOLECOLOR">
+    
+  </a>
+  <a name="HOLECOLOR">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">HOLECOLOR</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#HOLECOLOR" title="Main.HOLECOLOR">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>(<wbr></wbr>118, <wbr></wbr>91, <wbr></wbr>13)</code></pre></td></tr></table>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="Main.WHITE">
+    
+  </a>
+  <a name="WHITE">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">WHITE</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#WHITE" title="Main.WHITE">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>(<wbr></wbr>255, <wbr></wbr>255, <wbr></wbr>255)</code></pre></td></tr></table>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.a1_center">
+    
+  </a>
+  <a name="a1_center">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">a1_center</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#a1_center" title="Main.a1_center">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.a1_rect">
+    
+  </a>
+  <a name="a1_rect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">a1_rect</span> =
+    
+    <a class="headerLink" href="#a1_rect" title="Main.a1_rect">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.a1_text">
+    
+  </a>
+  <a name="a1_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">a1_text</span> =
+    
+    <a class="headerLink" href="#a1_text" title="Main.a1_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.a1_x">
+    
+  </a>
+  <a name="a1_x">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">a1_x</span> =
+    
+    <a class="headerLink" href="#a1_x" title="Main.a1_x">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.a1_y">
+    
+  </a>
+  <a name="a1_y">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">a1_y</span> =
+    
+    <a class="headerLink" href="#a1_y" title="Main.a1_y">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.a2_center">
+    
+  </a>
+  <a name="a2_center">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">a2_center</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#a2_center" title="Main.a2_center">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.a2_rect">
+    
+  </a>
+  <a name="a2_rect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">a2_rect</span> =
+    
+    <a class="headerLink" href="#a2_rect" title="Main.a2_rect">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.a2_text">
+    
+  </a>
+  <a name="a2_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">a2_text</span> =
+    
+    <a class="headerLink" href="#a2_text" title="Main.a2_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.a2_x">
+    
+  </a>
+  <a name="a2_x">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">a2_x</span> =
+    
+    <a class="headerLink" href="#a2_x" title="Main.a2_x">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.a2_y">
+    
+  </a>
+  <a name="a2_y">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">a2_y</span> =
+    
+    <a class="headerLink" href="#a2_y" title="Main.a2_y">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.assetdirectory">
+    
+  </a>
+  <a name="assetdirectory">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">assetdirectory</span> =
+    
+    <a class="headerLink" href="#assetdirectory" title="Main.assetdirectory">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.b1_center">
+    
+  </a>
+  <a name="b1_center">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">b1_center</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#b1_center" title="Main.b1_center">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.b1_rect">
+    
+  </a>
+  <a name="b1_rect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">b1_rect</span> =
+    
+    <a class="headerLink" href="#b1_rect" title="Main.b1_rect">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.b1_text">
+    
+  </a>
+  <a name="b1_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">b1_text</span> =
+    
+    <a class="headerLink" href="#b1_text" title="Main.b1_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.b1_x">
+    
+  </a>
+  <a name="b1_x">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">b1_x</span> =
+    
+    <a class="headerLink" href="#b1_x" title="Main.b1_x">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.b1_y">
+    
+  </a>
+  <a name="b1_y">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">b1_y</span> =
+    
+    <a class="headerLink" href="#b1_y" title="Main.b1_y">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.b2_center">
+    
+  </a>
+  <a name="b2_center">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">b2_center</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#b2_center" title="Main.b2_center">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.b2_rect">
+    
+  </a>
+  <a name="b2_rect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">b2_rect</span> =
+    
+    <a class="headerLink" href="#b2_rect" title="Main.b2_rect">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.b2_text">
+    
+  </a>
+  <a name="b2_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">b2_text</span> =
+    
+    <a class="headerLink" href="#b2_text" title="Main.b2_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.b2_x">
+    
+  </a>
+  <a name="b2_x">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">b2_x</span> =
+    
+    <a class="headerLink" href="#b2_x" title="Main.b2_x">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.b2_y">
+    
+  </a>
+  <a name="b2_y">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">b2_y</span> =
+    
+    <a class="headerLink" href="#b2_y" title="Main.b2_y">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.binAmount">
+    
+  </a>
+  <a name="binAmount">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">binAmount</span>: <code>list[<wbr></wbr>int]</code> =
+    
+    <a class="headerLink" href="#binAmount" title="Main.binAmount">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.board_height">
+    
+  </a>
+  <a name="board_height">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">board_height</span> =
+    
+    <a class="headerLink" href="#board_height" title="Main.board_height">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.board_rect">
+    
+  </a>
+  <a name="board_rect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">board_rect</span> =
+    
+    <a class="headerLink" href="#board_rect" title="Main.board_rect">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.board_width">
+    
+  </a>
+  <a name="board_width">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">board_width</span> =
+    
+    <a class="headerLink" href="#board_width" title="Main.board_width">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.board_x">
+    
+  </a>
+  <a name="board_x">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">board_x</span> =
+    
+    <a class="headerLink" href="#board_x" title="Main.board_x">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.board_y">
+    
+  </a>
+  <a name="board_y">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">board_y</span> =
+    
+    <a class="headerLink" href="#board_y" title="Main.board_y">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.c1_center">
+    
+  </a>
+  <a name="c1_center">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">c1_center</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#c1_center" title="Main.c1_center">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.c1_rect">
+    
+  </a>
+  <a name="c1_rect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">c1_rect</span> =
+    
+    <a class="headerLink" href="#c1_rect" title="Main.c1_rect">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.c1_text">
+    
+  </a>
+  <a name="c1_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">c1_text</span> =
+    
+    <a class="headerLink" href="#c1_text" title="Main.c1_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.c1_x">
+    
+  </a>
+  <a name="c1_x">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">c1_x</span> =
+    
+    <a class="headerLink" href="#c1_x" title="Main.c1_x">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.c1_y">
+    
+  </a>
+  <a name="c1_y">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">c1_y</span> =
+    
+    <a class="headerLink" href="#c1_y" title="Main.c1_y">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.c2_center">
+    
+  </a>
+  <a name="c2_center">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">c2_center</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#c2_center" title="Main.c2_center">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.c2_rect">
+    
+  </a>
+  <a name="c2_rect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">c2_rect</span> =
+    
+    <a class="headerLink" href="#c2_rect" title="Main.c2_rect">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.c2_text">
+    
+  </a>
+  <a name="c2_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">c2_text</span> =
+    
+    <a class="headerLink" href="#c2_text" title="Main.c2_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.c2_x">
+    
+  </a>
+  <a name="c2_x">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">c2_x</span> =
+    
+    <a class="headerLink" href="#c2_x" title="Main.c2_x">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.c2_y">
+    
+  </a>
+  <a name="c2_y">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">c2_y</span> =
+    
+    <a class="headerLink" href="#c2_y" title="Main.c2_y">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.chosenBin">
+    
+  </a>
+  <a name="chosenBin">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">chosenBin</span>: <code>int</code> =
+    
+    <a class="headerLink" href="#chosenBin" title="Main.chosenBin">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.currentdirectory">
+    
+  </a>
+  <a name="currentdirectory">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">currentdirectory</span> =
+    
+    <a class="headerLink" href="#currentdirectory" title="Main.currentdirectory">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.d1_center">
+    
+  </a>
+  <a name="d1_center">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">d1_center</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#d1_center" title="Main.d1_center">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.d1_rect">
+    
+  </a>
+  <a name="d1_rect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">d1_rect</span> =
+    
+    <a class="headerLink" href="#d1_rect" title="Main.d1_rect">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.d1_text">
+    
+  </a>
+  <a name="d1_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">d1_text</span> =
+    
+    <a class="headerLink" href="#d1_text" title="Main.d1_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.d1_x">
+    
+  </a>
+  <a name="d1_x">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">d1_x</span> =
+    
+    <a class="headerLink" href="#d1_x" title="Main.d1_x">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.d1_y">
+    
+  </a>
+  <a name="d1_y">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">d1_y</span> =
+    
+    <a class="headerLink" href="#d1_y" title="Main.d1_y">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.d2_center">
+    
+  </a>
+  <a name="d2_center">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">d2_center</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#d2_center" title="Main.d2_center">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.d2_rect">
+    
+  </a>
+  <a name="d2_rect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">d2_rect</span> =
+    
+    <a class="headerLink" href="#d2_rect" title="Main.d2_rect">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.d2_text">
+    
+  </a>
+  <a name="d2_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">d2_text</span> =
+    
+    <a class="headerLink" href="#d2_text" title="Main.d2_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.d2_x">
+    
+  </a>
+  <a name="d2_x">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">d2_x</span> =
+    
+    <a class="headerLink" href="#d2_x" title="Main.d2_x">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.d2_y">
+    
+  </a>
+  <a name="d2_y">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">d2_y</span> =
+    
+    <a class="headerLink" href="#d2_y" title="Main.d2_y">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.e1_center">
+    
+  </a>
+  <a name="e1_center">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">e1_center</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#e1_center" title="Main.e1_center">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.e1_rect">
+    
+  </a>
+  <a name="e1_rect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">e1_rect</span> =
+    
+    <a class="headerLink" href="#e1_rect" title="Main.e1_rect">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.e1_text">
+    
+  </a>
+  <a name="e1_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">e1_text</span> =
+    
+    <a class="headerLink" href="#e1_text" title="Main.e1_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.e1_x">
+    
+  </a>
+  <a name="e1_x">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">e1_x</span> =
+    
+    <a class="headerLink" href="#e1_x" title="Main.e1_x">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.e1_y">
+    
+  </a>
+  <a name="e1_y">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">e1_y</span> =
+    
+    <a class="headerLink" href="#e1_y" title="Main.e1_y">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.e2_center">
+    
+  </a>
+  <a name="e2_center">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">e2_center</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#e2_center" title="Main.e2_center">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.e2_rect">
+    
+  </a>
+  <a name="e2_rect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">e2_rect</span> =
+    
+    <a class="headerLink" href="#e2_rect" title="Main.e2_rect">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.e2_text">
+    
+  </a>
+  <a name="e2_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">e2_text</span> =
+    
+    <a class="headerLink" href="#e2_text" title="Main.e2_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.e2_x">
+    
+  </a>
+  <a name="e2_x">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">e2_x</span> =
+    
+    <a class="headerLink" href="#e2_x" title="Main.e2_x">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.e2_y">
+    
+  </a>
+  <a name="e2_y">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">e2_y</span> =
+    
+    <a class="headerLink" href="#e2_y" title="Main.e2_y">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.f1_center">
+    
+  </a>
+  <a name="f1_center">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">f1_center</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#f1_center" title="Main.f1_center">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.f1_rect">
+    
+  </a>
+  <a name="f1_rect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">f1_rect</span> =
+    
+    <a class="headerLink" href="#f1_rect" title="Main.f1_rect">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.f1_text">
+    
+  </a>
+  <a name="f1_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">f1_text</span> =
+    
+    <a class="headerLink" href="#f1_text" title="Main.f1_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.f1_x">
+    
+  </a>
+  <a name="f1_x">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">f1_x</span> =
+    
+    <a class="headerLink" href="#f1_x" title="Main.f1_x">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.f1_y">
+    
+  </a>
+  <a name="f1_y">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">f1_y</span> =
+    
+    <a class="headerLink" href="#f1_y" title="Main.f1_y">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.f2_center">
+    
+  </a>
+  <a name="f2_center">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">f2_center</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#f2_center" title="Main.f2_center">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.f2_rect">
+    
+  </a>
+  <a name="f2_rect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">f2_rect</span> =
+    
+    <a class="headerLink" href="#f2_rect" title="Main.f2_rect">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.f2_text">
+    
+  </a>
+  <a name="f2_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">f2_text</span> =
+    
+    <a class="headerLink" href="#f2_text" title="Main.f2_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.f2_x">
+    
+  </a>
+  <a name="f2_x">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">f2_x</span> =
+    
+    <a class="headerLink" href="#f2_x" title="Main.f2_x">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.f2_y">
+    
+  </a>
+  <a name="f2_y">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">f2_y</span> =
+    
+    <a class="headerLink" href="#f2_y" title="Main.f2_y">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.font">
+    
+  </a>
+  <a name="font">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">font</span> =
+    
+    <a class="headerLink" href="#font" title="Main.font">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.giveawayPile">
+    
+  </a>
+  <a name="giveawayPile">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">giveawayPile</span> =
+    
+    <a class="headerLink" href="#giveawayPile" title="Main.giveawayPile">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.icon">
+    
+  </a>
+  <a name="icon">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">icon</span> =
+    
+    <a class="headerLink" href="#icon" title="Main.icon">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.lastRecipient">
+    
+  </a>
+  <a name="lastRecipient">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">lastRecipient</span> =
+    
+    <a class="headerLink" href="#lastRecipient" title="Main.lastRecipient">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.main_menu">
+    
+  </a>
+  <a name="main_menu">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">main_menu</span> =
+    
+    <a class="headerLink" href="#main_menu" title="Main.main_menu">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.maindirectory">
+    
+  </a>
+  <a name="maindirectory">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">maindirectory</span> =
+    
+    <a class="headerLink" href="#maindirectory" title="Main.maindirectory">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.mancala_h">
+    
+  </a>
+  <a name="mancala_h">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">mancala_h</span> =
+    
+    <a class="headerLink" href="#mancala_h" title="Main.mancala_h">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.mancala_song">
+    
+  </a>
+  <a name="mancala_song">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">mancala_song</span> =
+    
+    <a class="headerLink" href="#mancala_song" title="Main.mancala_song">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.mancala_w">
+    
+  </a>
+  <a name="mancala_w">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">mancala_w</span> =
+    
+    <a class="headerLink" href="#mancala_w" title="Main.mancala_w">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.message">
+    
+  </a>
+  <a name="message">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">message</span>: <code>str</code> =
+    
+    <a class="headerLink" href="#message" title="Main.message">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.message_text">
+    
+  </a>
+  <a name="message_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">message_text</span> =
+    
+    <a class="headerLink" href="#message_text" title="Main.message_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.mouse_pos">
+    
+  </a>
+  <a name="mouse_pos">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">mouse_pos</span> =
+    
+    <a class="headerLink" href="#mouse_pos" title="Main.mouse_pos">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.pit_h">
+    
+  </a>
+  <a name="pit_h">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">pit_h</span>: <code>int</code> =
+    
+    <a class="headerLink" href="#pit_h" title="Main.pit_h">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.pit_radius">
+    
+  </a>
+  <a name="pit_radius">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">pit_radius</span> =
+    
+    <a class="headerLink" href="#pit_radius" title="Main.pit_radius">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.pit_w">
+    
+  </a>
+  <a name="pit_w">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">pit_w</span>: <code>int</code> =
+    
+    <a class="headerLink" href="#pit_w" title="Main.pit_w">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.player_one_mancala_rect">
+    
+  </a>
+  <a name="player_one_mancala_rect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">player_one_mancala_rect</span> =
+    
+    <a class="headerLink" href="#player_one_mancala_rect" title="Main.player_one_mancala_rect">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.player_one_mancala_text">
+    
+  </a>
+  <a name="player_one_mancala_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">player_one_mancala_text</span> =
+    
+    <a class="headerLink" href="#player_one_mancala_text" title="Main.player_one_mancala_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.player_one_mancala_x">
+    
+  </a>
+  <a name="player_one_mancala_x">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">player_one_mancala_x</span> =
+    
+    <a class="headerLink" href="#player_one_mancala_x" title="Main.player_one_mancala_x">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.player_one_mancala_y">
+    
+  </a>
+  <a name="player_one_mancala_y">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">player_one_mancala_y</span> =
+    
+    <a class="headerLink" href="#player_one_mancala_y" title="Main.player_one_mancala_y">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.player_two_mancala_rect">
+    
+  </a>
+  <a name="player_two_mancala_rect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">player_two_mancala_rect</span> =
+    
+    <a class="headerLink" href="#player_two_mancala_rect" title="Main.player_two_mancala_rect">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.player_two_mancala_text">
+    
+  </a>
+  <a name="player_two_mancala_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">player_two_mancala_text</span> =
+    
+    <a class="headerLink" href="#player_two_mancala_text" title="Main.player_two_mancala_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.player_two_mancala_x">
+    
+  </a>
+  <a name="player_two_mancala_x">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">player_two_mancala_x</span> =
+    
+    <a class="headerLink" href="#player_two_mancala_x" title="Main.player_two_mancala_x">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.player_two_mancala_y">
+    
+  </a>
+  <a name="player_two_mancala_y">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">player_two_mancala_y</span> =
+    
+    <a class="headerLink" href="#player_two_mancala_y" title="Main.player_two_mancala_y">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.playerOne">
+    
+  </a>
+  <a name="playerOne">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">playerOne</span>: <code>bool</code> =
+    
+    <a class="headerLink" href="#playerOne" title="Main.playerOne">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.recipient">
+    
+  </a>
+  <a name="recipient">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">recipient</span>: <code>int</code> =
+    
+    <a class="headerLink" href="#recipient" title="Main.recipient">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.running">
+    
+  </a>
+  <a name="running">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">running</span>: <code>bool</code> =
+    
+    <a class="headerLink" href="#running" title="Main.running">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.screen">
+    
+  </a>
+  <a name="screen">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">screen</span> =
+    
+    <a class="headerLink" href="#screen" title="Main.screen">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.screen_height">
+    
+  </a>
+  <a name="screen_height">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">screen_height</span> =
+    
+    <a class="headerLink" href="#screen_height" title="Main.screen_height">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.screen_width">
+    
+  </a>
+  <a name="screen_width">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">screen_width</span> =
+    
+    <a class="headerLink" href="#screen_width" title="Main.screen_width">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.sideOne">
+    
+  </a>
+  <a name="sideOne">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">sideOne</span> =
+    
+    <a class="headerLink" href="#sideOne" title="Main.sideOne">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.sideTwo">
+    
+  </a>
+  <a name="sideTwo">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">sideTwo</span> =
+    
+    <a class="headerLink" href="#sideTwo" title="Main.sideTwo">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.size">
+    
+  </a>
+  <a name="size">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">size</span>: <code>tuple[<wbr></wbr>int, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    
+    <a class="headerLink" href="#size" title="Main.size">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.sound_channel">
+    
+  </a>
+  <a name="sound_channel">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">sound_channel</span> =
+    
+    <a class="headerLink" href="#sound_channel" title="Main.sound_channel">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.win_message">
+    
+  </a>
+  <a name="win_message">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">win_message</span>: <code>str</code> =
+    
+    <a class="headerLink" href="#win_message" title="Main.win_message">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="Main.win_text">
+    
+  </a>
+  <a name="win_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">win_text</span> =
+    
+    <a class="headerLink" href="#win_text" title="Main.win_text">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div>
+        </div>
+      
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for Main,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    22.9.1 at 2023-04-16 20:03:25.
+  </div>
+
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

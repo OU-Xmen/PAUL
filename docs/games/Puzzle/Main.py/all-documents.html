@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+  <head>
+    
+    <title>All Documents</title>
+    <meta name="generator" content="pydoctor 22.9.1"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+  <body>
+    
+
+    
+  
+  <div class="container-fluid">
+
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          Main <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <div id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
+            <span class="input-group-btn">
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        
+        <div id="search-buttons">
+          <span class="label label-default" id="search-docstrings-button">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
+        </div>
+        
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
+
+                  <p>
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+        <div id="search-status"> </div>
+
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
+
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+    
+    
+    <div class="container">
+      <h1>All Documents</h1>
+
+       <ul>
+          <li id="Main">
+            
+            <div class="fullName"><wbr></wbr>Main</div>
+            <div class="url">index.html</div>
+            <div class="type">Module</div>
+            <div class="kind">Module</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.maindirectory">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.maindirectory</div>
+            <div class="url">index.html#maindirectory</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.main_menu">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.main<wbr></wbr>_menu</div>
+            <div class="url">index.html#main_menu</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.T">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.T</div>
+            <div class="url">index.html#T</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Constant</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.jason">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.jason</div>
+            <div class="url">index.html#jason</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.tiledirectory">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.tiledirectory</div>
+            <div class="url">index.html#tiledirectory</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.post_highscore">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.post<wbr></wbr>_highscore</div>
+            <div class="url">index.html#post_highscore</div>
+            <div class="type">Function</div>
+            <div class="kind">Function</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.size">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.size</div>
+            <div class="url">index.html#size</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.width">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.width</div>
+            <div class="url">index.html#width</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.height">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.height</div>
+            <div class="url">index.html#height</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.screen">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.screen</div>
+            <div class="url">index.html#screen</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.icon">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.icon</div>
+            <div class="url">index.html#icon</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.slide_puzzle_song">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.slide<wbr></wbr>_puzzle<wbr></wbr>_song</div>
+            <div class="url">index.html#slide_puzzle_song</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.song_channel">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.song<wbr></wbr>_channel</div>
+            <div class="url">index.html#song_channel</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.pause_color">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.pause<wbr></wbr>_color</div>
+            <div class="url">index.html#pause_color</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.haha_funny">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.haha<wbr></wbr>_funny</div>
+            <div class="url">index.html#haha_funny</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.init_words">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.init<wbr></wbr>_words</div>
+            <div class="url">index.html#init_words</div>
+            <div class="type">Function</div>
+            <div class="kind">Function</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.win_rend">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.win<wbr></wbr>_rend</div>
+            <div class="url">index.html#win_rend</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.win_rect">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.win<wbr></wbr>_rect</div>
+            <div class="url">index.html#win_rect</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.pause_rend">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.pause<wbr></wbr>_rend</div>
+            <div class="url">index.html#pause_rend</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.pause_rect">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.pause<wbr></wbr>_rect</div>
+            <div class="url">index.html#pause_rect</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.resume_rend">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.resume<wbr></wbr>_rend</div>
+            <div class="url">index.html#resume_rend</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.resume_rect">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.resume<wbr></wbr>_rect</div>
+            <div class="url">index.html#resume_rect</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.goal_rend">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.goal<wbr></wbr>_rend</div>
+            <div class="url">index.html#goal_rend</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.goal_rect">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.goal<wbr></wbr>_rect</div>
+            <div class="url">index.html#goal_rect</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.quit_rend">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.quit<wbr></wbr>_rend</div>
+            <div class="url">index.html#quit_rend</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.quit_rect">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.quit<wbr></wbr>_rect</div>
+            <div class="url">index.html#quit_rect</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.play_again_rend">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.play<wbr></wbr>_again<wbr></wbr>_rend</div>
+            <div class="url">index.html#play_again_rend</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.play_again_rect">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.play<wbr></wbr>_again<wbr></wbr>_rect</div>
+            <div class="url">index.html#play_again_rect</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.high_score_rend">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.high<wbr></wbr>_score<wbr></wbr>_rend</div>
+            <div class="url">index.html#high_score_rend</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.high_score_rect">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.high<wbr></wbr>_score<wbr></wbr>_rect</div>
+            <div class="url">index.html#high_score_rect</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.time_convert">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.time<wbr></wbr>_convert</div>
+            <div class="url">index.html#time_convert</div>
+            <div class="type">Function</div>
+            <div class="kind">Function</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.mouse_adj_to_empty">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.mouse<wbr></wbr>_adj<wbr></wbr>_to<wbr></wbr>_empty</div>
+            <div class="url">index.html#mouse_adj_to_empty</div>
+            <div class="type">Function</div>
+            <div class="kind">Function</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.mouse_hovering_over">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.mouse<wbr></wbr>_hovering<wbr></wbr>_over</div>
+            <div class="url">index.html#mouse_hovering_over</div>
+            <div class="type">Function</div>
+            <div class="kind">Function</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.better_swap">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.better<wbr></wbr>_swap</div>
+            <div class="url">index.html#better_swap</div>
+            <div class="type">Function</div>
+            <div class="kind">Function</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.pause_menu">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.pause<wbr></wbr>_menu</div>
+            <div class="url">index.html#pause_menu</div>
+            <div class="type">Function</div>
+            <div class="kind">Function</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.play_again_menu">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.play<wbr></wbr>_again<wbr></wbr>_menu</div>
+            <div class="url">index.html#play_again_menu</div>
+            <div class="type">Function</div>
+            <div class="kind">Function</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.big_face">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.big<wbr></wbr>_face</div>
+            <div class="url">index.html#big_face</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.big_face_rect">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.big<wbr></wbr>_face<wbr></wbr>_rect</div>
+            <div class="url">index.html#big_face_rect</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.face0">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.face0</div>
+            <div class="url">index.html#face0</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.face1">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.face1</div>
+            <div class="url">index.html#face1</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.face2">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.face2</div>
+            <div class="url">index.html#face2</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.face3">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.face3</div>
+            <div class="url">index.html#face3</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.face4">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.face4</div>
+            <div class="url">index.html#face4</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.face5">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.face5</div>
+            <div class="url">index.html#face5</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.face6">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.face6</div>
+            <div class="url">index.html#face6</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.face7">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.face7</div>
+            <div class="url">index.html#face7</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.face8">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.face8</div>
+            <div class="url">index.html#face8</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li><li id="Main.main">
+            
+            <div class="fullName"><wbr></wbr>Main<wbr></wbr>.main</div>
+            <div class="url">index.html#main</div>
+            <div class="type">Function</div>
+            <div class="kind">Function</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="undocumented">Undocumented</span></div>
+          </li>
+       </ul>
+    </div>
+  </body>
+</html>

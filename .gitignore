@@ -139,6 +139,3 @@ games/Puzzle/assets/scores.json
 
 # Remove all pycache
 __pycache__
-
-# API stuff
-docs
